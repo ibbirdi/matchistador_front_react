@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/mystyles.css" />
+  </head>
+  <body>
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="/assets/logodegrade.png" />
+        </a>
+        <!-- navbar items, navbar burger... -->
+      </div>
+    </nav>
+    <div class="container is-max-desktop p-6 has-text-centered">
+      <h1 id="main-title" class="title">Bonjour</h1>
+      <script src="./js/app.js"></script>
+      <a
+        id="spotify-login-btn"
+        class="button is-primary m-3 has-text-weight-bold"
+        onclick="app.getMyInfo()"
+      >
+        1/2 Se connecter avec Spotify
+      </a>
+      <div id="info-btn-ctn" class="hide">
+        <button
+          id="sync-btn"
+          class="button is-primary m-3 has-text-weight-bold"
+          onclick="app.getMyTracks()"
+        >
+          2/2 Synchroniser sa musique
+        </button>
+      </div>
+      <div id="infos">
+        <progress
+          id="sync-progress-bar"
+          class="progress is-danger hide"
+          value="0"
+          max="100"
+        ></progress>
+      </div>
+    </div>
+  </body>
+</html>
