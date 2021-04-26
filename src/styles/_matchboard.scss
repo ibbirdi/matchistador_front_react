@@ -1,0 +1,73 @@
+.Matchboard {
+  width: 100%;
+  max-width: 500px;
+  background-color: #d9d9d9;
+  background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+  color: $color-dark-1;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  .title {
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-shadow: 0 0 2px #0000008a;
+  }
+  .item-row {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:nth-child(even) {
+      background: #ffffff27;
+    }
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .logo-m {
+        background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+
+        margin-right: 10px;
+        padding: 5px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        // border: 2px solid #fd4b5d;
+        text-align: center;
+      }
+      img {
+        margin-right: 10px;
+        display: block;
+        width: 100%;
+      }
+      .item-title {
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+    }
+    .item-desc--container {
+      display: flex;
+      flex-direction: column;
+
+      .score {
+        text-align: right;
+        font-weight: bolder;
+        font-style: italic;
+      }
+      .item-desc {
+        font-size: 0.8rem;
+        text-align: right;
+        font-weight: normal;
+        color: $color-1;
+      }
+    }
+    .button {
+      padding: 5px 10px;
+      border-radius: 5px;
+      background: $color-1;
+      color: white;
+    }
+  }
+}

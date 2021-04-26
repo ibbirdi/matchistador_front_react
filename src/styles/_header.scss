@@ -1,0 +1,32 @@
+.Header {
+  width: 100%;
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $color-dark-1;
+    color: white;
+
+    .logo {
+      padding: 10px;
+      img {
+        height: 35px;
+      }
+    }
+
+    .connected-user {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img {
+        display: block;
+        width: 30px;
+        margin: 10px;
+      }
+      .user {
+        font-size: 0.7rem;
+        text-align: right;
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.landing-page {
+  background: $color-dark-1;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  h1 {
+    color: white;
+  }
+  .connexion {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .spotify-connect--img {
+    width: 100px;
+    margin-left: 10px;
+  }
+
+  .spotify-connect--btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    background: $color-1;
+    color: white;
+  }
+}

@@ -1,0 +1,15 @@
+.Home {
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    padding: 20px;
+    align-items: center;
+    background: $color-dark-1;
+    color: white;
+  }
+  h2 {
+    text-shadow: 0px 0px 6px #000000;
+  }
+}

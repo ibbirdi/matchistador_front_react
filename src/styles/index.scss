@@ -1,0 +1,14 @@
+@charset "utf-8";
+@import 'settings';
+@import 'header';
+@import 'landing';
+@import 'home';
+@import 'dashboard';
+@import 'matchboard';
+.hide {
+  display: none;
+}
+
+.shadow {
+  box-shadow: 0 0 8px #0000002f;
+}
