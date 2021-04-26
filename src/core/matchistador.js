@@ -1,6 +1,6 @@
-const front_url = 'http://88.126.89.254:20080';
-const api_url = 'http://88.126.89.254:20081';
-
+require('dotenv').config();
+const front_url = process.env.FRONTURL;
+const api_url = process.env.APIURL;
 const matchistador = {
   clientId: 'cd47067c9a6743619eb7c24d6b1e4c3d',
   clientSecret: '3d65254b4e1d4f06ad6e77471fc7a613',
