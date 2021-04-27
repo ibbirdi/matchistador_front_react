@@ -1,9 +1,10 @@
-require('dotenv').config();
-const front_url = process.env.FRONTURL;
-const api_url = process.env.APIURL;
+// const front_url = 'http://localhost:3000';
+// const api_url = 'http://localhost:4000';
+const front_url = 'http://www.matchistador.com';
+const api_url = 'http://http://51.77.195.22:4000';
 const matchistador = {
-  clientId: process.env.CLIENTID,
-  clientSecret: process.env.CLIENTSECRET,
+  clientId: 'cd47067c9a6743619eb7c24d6b1e4c3d',
+  clientSecret: '3d65254b4e1d4f06ad6e77471fc7a613',
   redirectUri: `${front_url}/home`,
   spotifyAuthCode: '',
   scopes: [
@@ -118,8 +119,43 @@ const matchistador = {
     const matchs = await result.json();
     return matchs;
   },
-  getMyTracks: async () => {
+
+  getMyTopTracks: async () => {
     let result = [];
+    let fetchUrl =
+      'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50';
+    try {
+      let response = await fetch(fetchUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+        },
+      });
+      response = await response.json();
+      console.log(response);
+      response.items.forEach((item) => {
+        result.push({
+          artist: item.artists[0].name,
+          track: item.name,
+          album: item.album.name,
+          popularity: item.popularity,
+          spotify_id: item.id,
+          spotify_url: item.uri,
+          spotify_img_url: '',
+          spotify_preview_url: item.preview_url,
+        });
+      });
+      console.log('top tracks: ', result);
+      return result;
+    } catch (error) {
+      return console.error(error);
+    }
+  },
+  getMyTracks: async () => {
+    //récupère les 50 top tracks de l'user
+    let result = await matchistador.getMyTopTracks();
+    console.log('top tracks RESULT :', result.length);
     let fetchUrl = 'https://api.spotify.com/v1/me/tracks?limit=50';
 
     async function loop(url) {
@@ -139,6 +175,7 @@ const matchistador = {
       console.log(avancement + '%');
 
       response.items.forEach((item) => {
+        //ajoute dans [result] chaque track
         result.push({
           artist: item.track.artists[0].name,
           track: item.track.name,
@@ -154,9 +191,8 @@ const matchistador = {
         loop(response.next);
       } else {
         syncBtn.textContent = 'Terminé !';
-
-        matchistador.syncMyTracks(result);
-        return result;
+        //sync le tout à la bdd via l'api
+        return matchistador.syncMyTracks(result);
       }
     }
     loop(fetchUrl);
@@ -211,4 +247,4 @@ const matchistador = {
 
 document.addEventListener('DOMContentLoaded', matchistador.init);
 
-module.exports = matchistador;
+export default matchistador;

@@ -24,6 +24,7 @@ class Home extends Component {
     }
     const login = localStorage.getItem('connected_user_login');
     console.log('login', login);
+
     const tracks = await matchistador.showMyTracks(login);
     const matchs = await matchistador.showMyMatchs(login);
     this.setState({ username: localStorage.getItem('connected_user_name') });
@@ -32,16 +33,9 @@ class Home extends Component {
     console.log('matchs :', matchs);
   }
 
-  // NE FONCTIONNE PAS (n'attend pas le résultat de getMyTracks)
-  // async test() {
-  //   const tracks = await matchistador.getMyTracks();
-  //   console.log(tracks);
-  // }
-
   render() {
     const syncThenReload = async () => {
       await matchistador.syncAll();
-      this.setState({});
     };
     return (
       <div className="Home">
