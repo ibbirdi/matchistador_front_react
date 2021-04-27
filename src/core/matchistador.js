@@ -159,6 +159,7 @@ const matchistador = {
     let result = [];
     result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
     console.log('top tracks RESULT :', result.length);
+    const topTracksLength = result.length;
     let fetchUrl = 'https://api.spotify.com/v1/me/tracks?limit=50';
 
     async function loop(url) {
@@ -173,7 +174,7 @@ const matchistador = {
 
       let syncBtn = document.getElementById('sync-btn');
       let avancement = Math.floor(
-        (result.length / (response.total + result.length)) * 100
+        (result.length / (response.total + topTracksLength)) * 100
       );
       syncBtn.setAttribute('disabled', 'disabled');
       syncBtn.textContent = avancement + '%';
