@@ -156,7 +156,8 @@ const matchistador = {
     const topTracks_LT = await matchistador.getMyTopTracks('long_term');
     const topTracks_MT = await matchistador.getMyTopTracks('medium_term');
     const topTracks_ST = await matchistador.getMyTopTracks('short_term');
-    let result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
+    let result = [];
+    result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
     console.log('top tracks RESULT :', result.length);
     let fetchUrl = 'https://api.spotify.com/v1/me/tracks?limit=50';
 
