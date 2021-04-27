@@ -172,7 +172,9 @@ const matchistador = {
       response = await response.json();
 
       let syncBtn = document.getElementById('sync-btn');
-      let avancement = Math.floor((result.length / response.total) * 100);
+      let avancement = Math.floor(
+        (result.length / (response.total + result.length)) * 100
+      );
       syncBtn.setAttribute('disabled', 'disabled');
       syncBtn.textContent = avancement + '%';
       console.log(avancement + '%');
