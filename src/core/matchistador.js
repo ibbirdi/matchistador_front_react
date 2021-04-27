@@ -120,10 +120,9 @@ const matchistador = {
     return matchs;
   },
 
-  getMyTopTracks: async () => {
+  getMyTopTracks: async (term) => {
     let result = [];
-    let fetchUrl =
-      'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50';
+    let fetchUrl = `https://api.spotify.com/v1/me/top/tracks?time_range=${term}&limit=50`;
     try {
       let response = await fetch(fetchUrl, {
         method: 'GET',
@@ -154,7 +153,10 @@ const matchistador = {
   },
   getMyTracks: async () => {
     //récupère les 50 top tracks de l'user
-    let result = await matchistador.getMyTopTracks();
+    const topTracks_LT = await matchistador.getMyTopTracks('long_term');
+    const topTracks_MT = await matchistador.getMyTopTracks('medium_term');
+    const topTracks_ST = await matchistador.getMyTopTracks('short_term');
+    let result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
     console.log('top tracks RESULT :', result.length);
     let fetchUrl = 'https://api.spotify.com/v1/me/tracks?limit=50';
 
