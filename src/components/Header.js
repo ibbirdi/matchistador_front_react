@@ -1,5 +1,6 @@
+import ConnectStatus from './ConnectStatus';
+
 function Header(props) {
-  const isLoggedIn = props.name;
   return (
     <div className="Header">
       <nav className="" role="navigation" aria-label="main navigation">
@@ -8,12 +9,11 @@ function Header(props) {
             <img src="/img/logodegrade.png" />
           </a>
         </div>
-        {isLoggedIn ? (
-          <div className="connected-user">
-            <div className="user">{props.name}</div>
-            <img src="/img/profile-user.png" alt="" />
-          </div>
-        ) : null}
+
+        <div className="connected-user">
+          <ConnectStatus connectedUser={props.connectedUser} />
+          <img src="/img/profile-user.png" alt="" />
+        </div>
       </nav>
     </div>
   );

@@ -1,0 +1,43 @@
+.Tracksboard {
+  position: fixed;
+  padding: 10px;
+  top: 20px;
+  overflow-y: auto;
+  border-radius: 10px;
+  max-width: 550px;
+  margin: 20px auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.924);
+  color: white;
+  font-size: 1rem;
+  .closeBtn {
+    display: flex;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    background: $color-2;
+    padding: 10px;
+    font-size: 1.2rem;
+    text-shadow: 0 1px 2px #00000057;
+
+    font-weight: 600;
+  }
+  .track-container {
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    &:nth-child(2n) {
+      background: rgba(255, 255, 255, 0.061);
+    }
+    .artist {
+    }
+    .track {
+      text-align: right;
+    }
+  }
+}

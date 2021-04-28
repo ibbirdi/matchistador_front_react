@@ -4,7 +4,7 @@ import matchistador from '../core/matchistador';
 const Dashboard = (props) => {
   return (
     <div className="Dashboard">
-      <div className="title">Dashboard</div>
+      <h3>Dashboard</h3>
       <div className="item-row">
         <div className="item">
           <img src="/img/play-button.png" alt="" />

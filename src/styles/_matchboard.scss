@@ -8,19 +8,21 @@
   padding: 10px;
   border-radius: 10px;
   font-size: 0.8rem;
-  .title {
-    font-weight: 600;
-    font-size: 1.3rem;
-    text-shadow: 0 0 2px #0000008a;
-  }
+
   .item-row {
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    cursor: pointer;
+    transition: 200ms;
     &:nth-child(even) {
       background: #ffffff27;
+    }
+    &:hover {
+      background: white;
+      box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.623);
+      transform: scale(1.05);
     }
     .item {
       display: flex;

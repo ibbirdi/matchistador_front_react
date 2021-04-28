@@ -2,6 +2,9 @@
 // const api_url = 'http://localhost:4000';
 const front_url = 'https://www.matchistador.com';
 const api_url = 'https://api.matchistador.com';
+//
+//
+
 const matchistador = {
   clientId: 'cd47067c9a6743619eb7c24d6b1e4c3d',
   clientSecret: '3d65254b4e1d4f06ad6e77471fc7a613',
@@ -152,56 +155,63 @@ const matchistador = {
     }
   },
   getMyTracks: async () => {
-    //récupère les 50 top tracks de l'user
-    const topTracks_LT = await matchistador.getMyTopTracks('long_term');
-    const topTracks_MT = await matchistador.getMyTopTracks('medium_term');
-    const topTracks_ST = await matchistador.getMyTopTracks('short_term');
-    let result = [];
-    result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
-    console.log('top tracks RESULT :', result.length);
-    const topTracksLength = result.length;
-    let fetchUrl = 'https://api.spotify.com/v1/me/tracks?limit=50';
+    try {
+      //récupère les 50 top tracks de l'user
+      const topTracks_LT = await matchistador.getMyTopTracks('long_term');
+      const topTracks_MT = await matchistador.getMyTopTracks('medium_term');
+      const topTracks_ST = await matchistador.getMyTopTracks('short_term');
+      let result = [];
+      result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
+      console.log('top tracks RESULT :', result.length);
+      const topTracksLength = result.length;
+      let fetchUrl = 'https://api.spotify.com/v1/me/tracks?limit=50';
 
-    async function loop(url) {
-      let response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-        },
-      });
-      response = await response.json();
-
-      let syncBtn = document.getElementById('sync-btn');
-      let avancement = Math.floor(
-        (result.length / (response.total + topTracksLength)) * 100
-      );
-      syncBtn.setAttribute('disabled', 'disabled');
-      syncBtn.textContent = avancement + '%';
-      console.log(avancement + '%');
-
-      response.items.forEach((item) => {
-        //ajoute dans [result] chaque track
-        result.push({
-          artist: item.track.artists[0].name,
-          track: item.track.name,
-          album: item.track.album.name,
-          popularity: item.track.popularity,
-          spotify_id: item.track.id,
-          spotify_url: item.track.uri,
-          spotify_img_url: '',
-          spotify_preview_url: item.track.preview_url,
+      async function loop(url) {
+        let response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+          },
         });
-      });
-      if (response.next) {
-        loop(response.next);
-      } else {
-        syncBtn.textContent = 'Terminé !';
-        //sync le tout à la bdd via l'api
-        return matchistador.syncMyTracks(result);
+        response = await response.json();
+
+        let syncBtn = document.getElementById('sync-btn');
+        let avancement = Math.floor(
+          (result.length / (response.total + topTracksLength)) * 100
+        );
+        syncBtn.setAttribute('disabled', 'disabled');
+        syncBtn.textContent = avancement + '%';
+        console.log(avancement + '%');
+
+        response.items.forEach((item) => {
+          //ajoute dans [result] chaque track
+          result.push({
+            artist: item.track.artists[0].name,
+            track: item.track.name,
+            album: item.track.album.name,
+            popularity: item.track.popularity,
+            spotify_id: item.track.id,
+            spotify_url: item.track.uri,
+            spotify_img_url: '',
+            spotify_preview_url: item.track.preview_url,
+          });
+        });
+        if (response.next) {
+          loop(response.next);
+        } else {
+          //TODO: Attention syncMyMatch se trouve ici pour l'instant, car impossibilité de le faire exécuter après si à l'exérieur
+          await matchistador.syncMyMatchs();
+
+          syncBtn.textContent = 'Terminé !';
+          //sync le tout à la bdd via l'api
+          return matchistador.syncMyTracks(result);
+        }
       }
+      loop(fetchUrl);
+    } catch (error) {
+      console.error(error);
     }
-    loop(fetchUrl);
   },
   registerMe: async () => {
     const userInfo = await matchistador.getMyInfo();
@@ -244,10 +254,13 @@ const matchistador = {
     let response = await fetch(`${api_url}/user/${spotify_login}/syncmatchs`);
     console.log(await response.json());
   },
-  syncAll: async () => {
-    await matchistador.getMyTracks();
-    await matchistador.syncMyMatchs();
-    await matchistador.showMyMatchs();
+  getMatchedTracks: async (matchuser) => {
+    let matchedTracks = await fetch(
+      `${api_url}/user/${localStorage.getItem(
+        'connected_user_login'
+      )}/matchedtracks/${matchuser}`
+    );
+    return await matchedTracks.json();
   },
 };
 

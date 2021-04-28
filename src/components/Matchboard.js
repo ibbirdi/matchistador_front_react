@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import matchistador from '../core/matchistador';
+import Tracksboard from './Tracksboard';
 
 const Matchboard = (props) => {
+  const [matchedTracks, setMatchedTracks] = useState([]);
+
+  const showMatchedTracks = async (matchuser) => {
+    let tracks = await matchistador.getMatchedTracks(matchuser);
+    const tracksboard = document.getElementById('tracksboard');
+    tracksboard.classList.remove('hidden');
+
+    console.log(tracks);
+    setMatchedTracks(tracks);
+  };
+
   return (
     <div className="Matchboard">
-      <div className="title">Mes Matchs</div>
+      <h3>Mes Matchs</h3>
       {props.matchs.map((match) => {
         return (
-          <div key={match.matchuser.name} className="item-row">
+          <div
+            key={match.matchuser.spotify_login}
+            className="item-row"
+            onClick={() => {
+              showMatchedTracks(match.matchuser.spotify_login);
+            }}
+          >
             <div className="item">
               <span className="logo-m shadow">
                 <img src="/img/logo-m.png" alt="" />
@@ -23,6 +42,7 @@ const Matchboard = (props) => {
           </div>
         );
       })}
+      <Tracksboard matchedTracks={matchedTracks} />
     </div>
   );
 };
