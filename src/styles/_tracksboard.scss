@@ -5,9 +5,14 @@
   left: 0;
   right: 0;
   bottom: 0;
+  background: rgba(0, 0, 0, 0.749);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(5px);
   transition: 1s;
+  .logo-m img {
+    width: 20px;
+    margin-right: 10px;
+  }
   .trackslist {
     position: fixed;
     padding: 10px;
@@ -40,9 +45,11 @@
   }
   .closebtn {
     background: $color-dark-1;
-    padding: 5px;
-    font-size: 1rem;
     border-radius: 5px;
+    text-align: center;
+    padding: 5px 15px;
+
+    font-size: 1rem;
   }
   .track-container {
     display: flex;

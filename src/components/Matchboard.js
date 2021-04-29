@@ -4,14 +4,14 @@ import Tracksboard from './Tracksboard';
 
 const Matchboard = (props) => {
   const [matchedTracks, setMatchedTracks] = useState([]);
+  const [matchName, setMatchName] = useState('');
 
-  const showMatchedTracks = async (matchuser) => {
+  const showMatchedTracks = async (matchname, matchuser) => {
     let tracks = await matchistador.getMatchedTracks(matchuser);
     const tracksboard = document.getElementById('tracksboard');
     tracksboard.classList.remove('hidden');
-
-    console.log(tracks);
     setMatchedTracks(tracks);
+    setMatchName(matchname);
   };
 
   return (
@@ -23,7 +23,10 @@ const Matchboard = (props) => {
             key={match.matchuser.spotify_login}
             className="item-row"
             onClick={() => {
-              showMatchedTracks(match.matchuser.spotify_login);
+              showMatchedTracks(
+                match.matchuser.name,
+                match.matchuser.spotify_login
+              );
             }}
           >
             <div className="item">
@@ -42,7 +45,7 @@ const Matchboard = (props) => {
           </div>
         );
       })}
-      <Tracksboard matchedTracks={matchedTracks} />
+      <Tracksboard matchedTracks={matchedTracks} matchName={matchName} />
     </div>
   );
 };
