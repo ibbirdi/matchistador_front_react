@@ -16,12 +16,13 @@
     align-items: center;
     cursor: pointer;
     transition: 200ms;
+    border-radius: 5px;
     &:nth-child(even) {
       background: #ffffff27;
     }
     &:hover {
       background: white;
-      box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.623);
+      box-shadow: 0 0 30px 10px $color-2;
       transform: scale(1.05);
     }
     .item {
