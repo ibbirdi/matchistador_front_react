@@ -6,8 +6,8 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.749);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition: 1s;
   .logo-m img {
     width: 20px;
@@ -19,7 +19,7 @@
     overflow-y: auto;
     border-radius: 10px;
     max-width: 550px;
-    margin: 20% auto;
+    margin: 10vh auto;
     top: 0;
     left: 0;
     right: 0;
@@ -44,24 +44,32 @@
     font-weight: 600;
   }
   .closebtn {
-    background: $color-dark-1;
-    border-radius: 5px;
-    text-align: center;
-    padding: 5px 15px;
-
-    font-size: 1rem;
+    border-radius: 50%;
+    transition: 200ms;
+    // border: 2px solid $color-dark-1;
+    img {
+      width: 40px;
+      display: block;
+    }
+    &:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 10px 10px $color-1;
+    }
   }
   .track-container {
     display: flex;
+    align-items: center;
     padding: 5px;
     justify-content: space-between;
     &:nth-child(2n) {
-      background: rgba(255, 255, 255, 0.061);
+      background: rgba(28, 75, 71, 0.144);
     }
     .artist {
+      font-weight: 600;
     }
     .track {
       text-align: right;
+      font-size: 0.8rem;
     }
   }
 }

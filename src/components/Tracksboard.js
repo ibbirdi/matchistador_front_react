@@ -15,7 +15,9 @@ const Tracksboard = (props) => {
             </div>
             {props.matchName}
           </div>
-          <div className="closebtn">x</div>
+          <div className="closebtn">
+            <img src="/img/cancel-white.png" alt="" />
+          </div>
         </div>
         {props.matchedTracks.map((track) => {
           return (
