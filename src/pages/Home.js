@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Header from '../components/Header';
 import Matchboard from '../components/Matchboard';
@@ -15,8 +16,12 @@ const Home = () => {
   const syncThenReload = async () => {
     try {
       await matchistador.getMyTracks();
-      setTracks(await matchistador.showMyTracks());
-      setMatchs(await matchistador.showMyMatchs());
+
+      const tracks = await matchistador.showMyTracks();
+      const matchs = await matchistador.showMyMatchs();
+      setTracks(tracks);
+      setMatchs(matchs);
+      console.log('SET EXECUTE');
     } catch (error) {
       console.error(error);
     }

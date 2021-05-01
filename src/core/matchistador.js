@@ -199,17 +199,19 @@ const matchistador = {
           });
         });
         if (response.next) {
-          loop(response.next);
+          return loop(response.next);
         } else {
-          //TODO: Attention syncMyMatch se trouve ici pour l'instant, car impossibilité de le faire exécuter après si à l'exérieur
+          syncBtn.textContent = `${result.length} titres synchronisés`;
+          syncBtn.classList.add('success');
+          await matchistador.syncMyTracks(result);
           await matchistador.syncMyMatchs();
+          return result.length;
+          //TODO: Attention syncMyMatch se trouve ici pour l'instant, car impossibilité de le faire exécuter après si à l'exérieur
 
-          syncBtn.textContent = 'Terminé !';
           //sync le tout à la bdd via l'api
-          return matchistador.syncMyTracks(result);
         }
       }
-      loop(fetchUrl);
+      await loop(fetchUrl);
     } catch (error) {
       console.error(error);
     }
@@ -238,7 +240,6 @@ const matchistador = {
     // s'exécute à la fin de getMyTracks()
     const userInfo = await matchistador.getMyInfo();
     const spotify_login = userInfo.id;
-    console.log(spotify_login);
     let response = await fetch(`${api_url}/user/${spotify_login}/tracks`, {
       method: 'POST',
       headers: {
@@ -246,7 +247,7 @@ const matchistador = {
       },
       body: JSON.stringify(tracks),
     });
-    console.log(await response.json());
+    return console.log(await response.json());
   },
   syncMyMatchs: async () => {
     // s'exécute à la fin de getMyTracks()

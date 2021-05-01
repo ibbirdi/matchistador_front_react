@@ -6,6 +6,7 @@ import matchistador from '../core/matchistador';
 const Landing = () => {
   const spotifyUrl = matchistador.makeSpotifyConnectUrl();
   localStorage.clear();
+  console.log(localStorage);
 
   return (
     <div className="landing-page">
