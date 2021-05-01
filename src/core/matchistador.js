@@ -108,17 +108,18 @@ const matchistador = {
     console.log('Infos: ', response);
     return response;
   },
-  showMyTracks: async (login) => {
-    //getMyTracks (from db)
-    const result = await fetch(`${api_url}/user/${login}/tracks`);
+  showMyTracks: async () => {
+    const result = await fetch(
+      `${api_url}/user/${localStorage.getItem('connected_user_login')}/tracks`
+    );
     const tracks = await result.json();
     return tracks;
   },
-  showMyMatchs: async (login) => {
-    //getMyTracks (from db)
-    // await fetch(`http://localhost:4000/user/${login}/syncmatchs`);
 
-    const result = await fetch(`${api_url}/user/${login}/matchs`);
+  showMyMatchs: async () => {
+    const result = await fetch(
+      `${api_url}/user/${localStorage.getItem('connected_user_login')}/matchs`
+    );
     const matchs = await result.json();
     return matchs;
   },
