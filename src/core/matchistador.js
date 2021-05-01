@@ -183,6 +183,8 @@ const matchistador = {
         );
         syncBtn.setAttribute('disabled', 'disabled');
         syncBtn.textContent = avancement + '%';
+        syncBtn.classList.add('wait');
+
         console.log(avancement + '%');
 
         response.items.forEach((item) => {
@@ -201,8 +203,10 @@ const matchistador = {
         if (response.next) {
           return loop(response.next);
         } else {
-          syncBtn.textContent = `${result.length} titres synchronisés`;
-          syncBtn.classList.add('success');
+          syncBtn.textContent = `Et voilà !`;
+          syncBtn.classList.toggle('wait');
+
+          syncBtn.classList.toggle('success');
           await matchistador.syncMyTracks(result);
           await matchistador.syncMyMatchs();
           return result.length;

@@ -7,7 +7,8 @@ import Tracksboard from '../components/Tracksboard';
 import matchistador from '../core/matchistador';
 
 const Home = () => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('Chargement...');
+  const [title, setTitle] = useState('Chargement...');
   const [tracks, setTracks] = useState([]);
   const [matchs, setMatchs] = useState([]);
   const [matchedTracks, setMatchedTracks] = useState([]);
@@ -47,6 +48,7 @@ const Home = () => {
       setUsername(localStorage.getItem('connected_user_name'));
       setTracks(tracks);
       setMatchs(matchs);
+      setTitle('Hello');
       setRunOnce(false);
     }
   }, []);
@@ -55,7 +57,7 @@ const Home = () => {
     <div className="Home">
       <Header connectedUser={username} />
       <div className="home-container">
-        <h2>Hello</h2>
+        <h2>{title}</h2>
 
         <Dashboard
           tracksCount={tracks.length}

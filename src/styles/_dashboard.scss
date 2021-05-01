@@ -42,11 +42,15 @@
       cursor: pointer;
       padding: 5px 10px;
       font-size: 1rem;
-      border: none;
+      border: 2px solid white;
       border-radius: 5px;
       background: $color-1;
       color: white;
-      box-shadow: 0 0px 2px #000000af;
+      box-shadow: 0 0 8px #0000002f;
+      transition: 1s;
+    }
+    .wait {
+      background: $color-3 !important;
     }
     .success {
       background: $color-2 !important;
