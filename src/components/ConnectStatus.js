@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ConnectStatus = (props) => {
-  return <div> {props.connectedUser}</div>;
+const ConnectStatus = ({ connectedUser }) => {
+  return <div>{connectedUser}</div>;
 };
 
 export default ConnectStatus;

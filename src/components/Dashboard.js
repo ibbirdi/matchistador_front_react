@@ -1,7 +1,6 @@
 import React from 'react';
-import matchistador from '../core/matchistador';
 
-const Dashboard = (props) => {
+const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
   return (
     <div className="Dashboard">
       <h3>Dashboard</h3>
@@ -11,11 +10,11 @@ const Dashboard = (props) => {
           <div className="item-desc--container">
             <div className="item-title">Ma musique</div>
             <div className="item-desc">
-              {`${props.tracksCount} titres` || 'Aucun titre synchronisé'}
+              {`${tracksCount} titres` || 'Aucun titre synchronisé'}
             </div>
           </div>
         </div>
-        <button id="sync-btn" className="button" onClick={props.btnFunction}>
+        <button id="sync-btn" className="button" onClick={btnFunction}>
           Synchroniser
         </button>
       </div>
@@ -24,7 +23,7 @@ const Dashboard = (props) => {
           <img src="/img/match.png" alt="" />
           <div className="item-desc--container">
             <div className="item-title">Mes Matchs</div>
-            <div className="item-desc">{`${props.matchsCount} Matchs`}</div>
+            <div className="item-desc">{`${matchsCount} Matchs`}</div>
           </div>
         </div>
       </div>

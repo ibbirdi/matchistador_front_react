@@ -46,7 +46,7 @@ const matchistador = {
     return url;
   },
 
-  init: async () => {
+  init: () => {
     console.log('Bonjour toi');
   },
   authProcess: async (spotifyAuthCode) => {

@@ -4,7 +4,7 @@ const closeTracksboard = () => {
   const tracksboard = document.getElementById('tracksboard');
   tracksboard.classList.add('hidden');
 };
-const Tracksboard = (props) => {
+const Tracksboard = ({ matchName, matchedTracks }) => {
   return (
     <div className="Tracksboard hidden" id="tracksboard">
       <div className="trackslist">
@@ -13,13 +13,13 @@ const Tracksboard = (props) => {
             <div className="logo-m">
               <img src="/img/logo-m.png" alt="" />
             </div>
-            {props.matchName}
+            {matchName}
           </div>
           <div className="closebtn">
             <img src="/img/cancel-white.png" alt="" />
           </div>
         </div>
-        {props.matchedTracks.map((track) => {
+        {matchedTracks.map((track) => {
           return (
             <div key={track.id} className="track-container">
               <div className="artist">{track.artist}</div>
@@ -29,7 +29,7 @@ const Tracksboard = (props) => {
             </div>
           );
         })}
-        <div>Total : {props.matchedTracks.length}</div>
+        <div>Total : {matchedTracks.length}</div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import ConnectStatus from './ConnectStatus';
 
-function Header(props) {
+function Header({ connectedUser }) {
   return (
     <div className="Header">
       <nav className="" role="navigation" aria-label="main navigation">
@@ -11,7 +11,7 @@ function Header(props) {
         </div>
 
         <div className="connected-user">
-          <ConnectStatus connectedUser={props.connectedUser} />
+          <ConnectStatus connectedUser={connectedUser} />
           <img src="/img/profile-user.png" alt="" />
         </div>
       </nav>

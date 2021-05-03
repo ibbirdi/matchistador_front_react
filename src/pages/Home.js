@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Header from '../components/Header';
 import Matchboard from '../components/Matchboard';
@@ -17,7 +16,6 @@ const Home = () => {
   const syncThenReload = async () => {
     try {
       await matchistador.getMyTracks();
-
       const tracks = await matchistador.showMyTracks();
       const matchs = await matchistador.showMyMatchs();
       setTracks(tracks);
@@ -33,25 +31,28 @@ const Home = () => {
     setMatchedTracks(matchedTracks);
   };
 
-  useEffect(async () => {
-    if (runOnce) {
-      let url = new URL(window.location.href);
-      const spotifyAuthCode = url.searchParams.get('code');
+  useEffect(() => {
+    const signInAndSyncView = async () => {
+      if (runOnce) {
+        let url = new URL(window.location.href);
+        const spotifyAuthCode = url.searchParams.get('code');
 
-      if (spotifyAuthCode && localStorage.getItem('isAuth') != 'true') {
-        await matchistador.authProcess(spotifyAuthCode);
+        if (spotifyAuthCode && localStorage.getItem('isAuth') !== 'true') {
+          await matchistador.authProcess(spotifyAuthCode);
+        }
+
+        const tracks = await matchistador.showMyTracks();
+        const matchs = await matchistador.showMyMatchs();
+
+        setUsername(localStorage.getItem('connected_user_name'));
+        setTracks(tracks);
+        setMatchs(matchs);
+        setTitle('Hello');
+        setRunOnce(false);
       }
-
-      const tracks = await matchistador.showMyTracks();
-      const matchs = await matchistador.showMyMatchs();
-
-      setUsername(localStorage.getItem('connected_user_name'));
-      setTracks(tracks);
-      setMatchs(matchs);
-      setTitle('Hello');
-      setRunOnce(false);
-    }
-  }, []);
+    };
+    signInAndSyncView();
+  }, [runOnce]);
 
   return (
     <div className="Home">

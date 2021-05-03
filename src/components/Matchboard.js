@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import matchistador from '../core/matchistador';
 import Tracksboard from './Tracksboard';
 
-const Matchboard = (props) => {
+const Matchboard = ({ matchs }) => {
   const [matchedTracks, setMatchedTracks] = useState([]);
   const [matchName, setMatchName] = useState('');
+  const [matchsToDisplay, setMatchsToDisplay] = useState([]);
 
   const showMatchedTracks = async (matchname, matchuser) => {
     let tracks = await matchistador.getMatchedTracks(matchuser);
@@ -14,10 +15,32 @@ const Matchboard = (props) => {
     setMatchName(matchname);
   };
 
+  useEffect(() => {
+    setMatchsToDisplay(matchs);
+  }, [matchs]);
+
+  const searchMatch = (e) => {
+    const filteredMatchs = matchs.filter((match) =>
+      match.matchuser.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setMatchsToDisplay(filteredMatchs);
+
+    console.log(filteredMatchs);
+  };
+
   return (
     <div className="Matchboard">
-      <h3>Mes Matchs</h3>
-      {props.matchs.map((match) => {
+      <div className="title-container">
+        <h3>Mes Matchs</h3>
+
+        <input
+          className="searchInput"
+          type="text"
+          placeholder="Rechercher..."
+          onChange={searchMatch}
+        />
+      </div>
+      {matchsToDisplay.map((match) => {
         return (
           <div
             key={match.matchuser.spotify_login}
