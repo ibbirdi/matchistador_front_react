@@ -1,7 +1,7 @@
-const front_url = 'http://localhost:3000';
-const api_url = 'http://localhost:4000';
-// const front_url = 'https://www.matchistador.com';
-// const api_url = 'https://api.matchistador.com';
+// const front_url = 'http://localhost:3000';
+// const api_url = 'http://localhost:4000';
+const front_url = 'https://www.matchistador.com';
+const api_url = 'https://api.matchistador.com';
 //
 //
 
