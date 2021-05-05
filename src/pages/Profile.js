@@ -7,9 +7,11 @@ const Profile = () => {
   const [userInfo, setUserinfo] = useState('Chargement...');
   const [usernameToPost, setUsernameToPost] = useState('');
   const [message, setMessage] = useState('');
+
   const showInfo = async () => {
     setUserinfo(await matchistador.getMyInfo());
   };
+
   const handleSubmit = async () => {
     if (!usernameToPost) {
       setMessage('Username invalide');
@@ -21,6 +23,7 @@ const Profile = () => {
       setMessage(response.message);
     }
   };
+
   useEffect(() => {
     showInfo();
   }, []);

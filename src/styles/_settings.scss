@@ -15,8 +15,13 @@ $color-4: rgb(32, 35, 42);
 body {
   margin: 0rem auto;
   font-family: $font-1;
+  font-size: 16px;
   color: $color-dark-1;
   background: $color-dark-1;
+}
+input,
+select {
+  font-size: 100%;
 }
 li {
   list-style-type: none;
