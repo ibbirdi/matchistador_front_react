@@ -1,16 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.31e10030.chunk.css",
-    "main.js": "/static/js/main.cb033036.chunk.js",
+    "main.css": "/static/css/main.42b891d4.chunk.css",
+    "main.js": "/static/js/main.d27cc0ba.chunk.js",
     "runtime-main.js": "/static/js/runtime-main.65b664e7.js",
     "static/js/2.d7448164.chunk.js": "/static/js/2.d7448164.chunk.js",
     "index.html": "/index.html",
-    "static/js/2.d7448164.chunk.js.LICENSE.txt": "/static/js/2.d7448164.chunk.js.LICENSE.txt"
+    "static/js/2.d7448164.chunk.js.LICENSE.txt": "/static/js/2.d7448164.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/static/media/fond7.8d5fcbe7.jpg",
+    "static/media/logodegrade.4f015992.png": "/static/media/logodegrade.4f015992.png",
+    "static/media/match.08a17514.png": "/static/media/match.08a17514.png",
+    "static/media/play-button.2690d0d4.png": "/static/media/play-button.2690d0d4.png",
+    "static/media/spotifyWhite.f48fb565.png": "/static/media/spotifyWhite.f48fb565.png"
   },
   "entrypoints": [
     "static/js/runtime-main.65b664e7.js",
     "static/js/2.d7448164.chunk.js",
-    "static/css/main.31e10030.chunk.css",
-    "static/js/main.cb033036.chunk.js"
+    "static/css/main.42b891d4.chunk.css",
+    "static/js/main.d27cc0ba.chunk.js"
   ]
 }

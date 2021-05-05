@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import matchistador from '../core/matchistador';
 import Tracksboard from './Tracksboard';
+import iconM from '../img/logo-m.png';
 
 const Matchboard = ({ matchs }) => {
   const [matchedTracks, setMatchedTracks] = useState([]);
@@ -54,7 +55,7 @@ const Matchboard = ({ matchs }) => {
           >
             <div className="item">
               <span className="logo-m shadow">
-                <img src="/img/logo-m.png" alt="" />
+                <img src={iconM} alt="" />
               </span>
 
               <div className="item-title">{match.matchuser.name}</div>

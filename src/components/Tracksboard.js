@@ -1,4 +1,6 @@
 import React from 'react';
+import iconM from '../img/logo-m.png';
+import iconCancel from '../img/cancel-white.png';
 
 const closeTracksboard = () => {
   const tracksboard = document.getElementById('tracksboard');
@@ -11,12 +13,12 @@ const Tracksboard = ({ matchName, matchedTracks }) => {
         <div className="tracksboard-title">
           <div>
             <div className="logo-m">
-              <img src="/img/logo-m.png" alt="" />
+              <img src={iconM} alt="" />
               {matchName}
             </div>
           </div>
           <div className="closebtn" onClick={closeTracksboard}>
-            <img src="/img/cancel-white.png" alt="" />
+            <img src={iconCancel} alt="" />
           </div>
         </div>
         {matchedTracks.map((track) => {

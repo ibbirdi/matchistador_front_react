@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import matchistador from '../core/matchistador';
+import userImg from '../img/profile-user.png';
 
 const ConnectStatus = ({ username }) => {
   return (
@@ -7,7 +8,7 @@ const ConnectStatus = ({ username }) => {
       <a href="/profil">
         <div className="connecteduser-container" href="/profile">
           <div>{username}</div>
-          <img src="/img/profile-user.png" alt="" />
+          <img src={userImg} alt="" />
         </div>
       </a>
     </div>

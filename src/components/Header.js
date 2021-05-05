@@ -1,12 +1,12 @@
 import ConnectStatus from './ConnectStatus';
-
+import logo from '../img/logodegrade.png';
 function Header({ username }) {
   return (
     <div className="Header">
       <nav className="" role="navigation" aria-label="main navigation">
         <div className="logo">
           <a className="navbar-item" href="/">
-            <img src="/img/logodegrade.png" alt="logo" />
+            <img src={logo} alt="logo" />
           </a>
         </div>
 
