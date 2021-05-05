@@ -3,7 +3,6 @@ import React from 'react';
 const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
   return (
     <div className="Dashboard">
-      <h3>Dashboard</h3>
       <div className="item-row">
         <div className="item">
           <img src="/img/play-button.png" alt="" />

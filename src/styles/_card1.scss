@@ -1,0 +1,39 @@
+.Card1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  background-color: #d9d9d9;
+  background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+  color: $color-dark-1;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  input {
+    display: block;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px;
+    border: 2px solid $color-1;
+    box-shadow: 0 0 10px 2px rgba(123, 123, 123, 0.267);
+  }
+  .button {
+    margin: 10px;
+    color: white;
+    text-align: center;
+    max-width: 100px;
+  }
+
+  .input-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}

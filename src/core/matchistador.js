@@ -1,7 +1,7 @@
-// const front_url = 'http://localhost:3000';
-// const api_url = 'http://localhost:4000';
-const front_url = 'https://www.matchistador.com';
-const api_url = 'https://api.matchistador.com';
+const front_url = 'http://localhost:3000';
+const api_url = 'http://localhost:4000';
+// const front_url = 'https://www.matchistador.com';
+// const api_url = 'https://api.matchistador.com';
 //
 //
 
@@ -46,9 +46,6 @@ const matchistador = {
     return url;
   },
 
-  init: () => {
-    console.log('Bonjour toi');
-  },
   authProcess: async (spotifyAuthCode) => {
     console.log(spotifyAuthCode);
 
@@ -62,6 +59,27 @@ const matchistador = {
 
     localStorage.setItem('isAuth', 'true');
   },
+
+  registerMe: async () => {
+    const userInfo = await matchistador.syncMyInfo();
+    console.log(userInfo);
+    const userInfoToAdd = {
+      name: userInfo.display_name,
+      spotify_login: userInfo.id,
+      email: userInfo.email,
+    };
+    console.log(JSON.stringify(userInfoToAdd));
+
+    const response = await fetch(`${api_url}/user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInfoToAdd),
+    });
+    console.log(await response.json());
+  },
+
   getToken: async (code) => {
     localStorage.clear();
 
@@ -93,7 +111,7 @@ const matchistador = {
     }
   },
 
-  getMyInfo: async () => {
+  getMyInfoFromSpotify: async () => {
     let response = await fetch('https://api.spotify.com/v1/me', {
       method: 'GET',
       headers: {
@@ -102,12 +120,41 @@ const matchistador = {
       },
     });
     response = await response.json();
+    console.log('GMIFS', response);
+    return response;
+  },
 
-    localStorage.setItem('connected_user_name', response.display_name);
+  syncMyInfo: async () => {
+    const response = await matchistador.getMyInfoFromSpotify();
+    let userInfo = await fetch(`${api_url}/user/${response.id}/info`);
+    userInfo = await userInfo.json();
+    localStorage.setItem('connected_user_name', userInfo.name);
     localStorage.setItem('connected_user_login', response.id);
     console.log('Infos: ', response);
     return response;
   },
+
+  getMyInfo: async () => {
+    const response = await matchistador.getMyInfoFromSpotify();
+    let userInfo = await fetch(`${api_url}/user/${response.id}/info`);
+    userInfo = await userInfo.json();
+    return userInfo;
+  },
+
+  changeMyUsername: async (newUserName) => {
+    const username = JSON.stringify({ newusername: newUserName });
+    const spotifyInfo = await matchistador.getMyInfoFromSpotify();
+
+    let response = await fetch(`${api_url}/user/${spotifyInfo.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: username,
+    });
+    return await response.json();
+  },
+
   showMyTracks: async () => {
     const result = await fetch(
       `${api_url}/user/${localStorage.getItem('connected_user_login')}/tracks`
@@ -155,6 +202,7 @@ const matchistador = {
       return console.error(error);
     }
   },
+
   getMyTracks: async () => {
     try {
       //récupère les 50 top tracks de l'user
@@ -209,10 +257,8 @@ const matchistador = {
           syncBtn.classList.toggle('success');
           await matchistador.syncMyTracks(result);
           await matchistador.syncMyMatchs();
-          return result.length;
-          //TODO: Attention syncMyMatch se trouve ici pour l'instant, car impossibilité de le faire exécuter après si à l'exérieur
 
-          //sync le tout à la bdd via l'api
+          return result.length;
         }
       }
       await loop(fetchUrl);
@@ -220,29 +266,10 @@ const matchistador = {
       console.error(error);
     }
   },
-  registerMe: async () => {
-    const userInfo = await matchistador.getMyInfo();
-    console.log(userInfo);
-    const userInfoToAdd = {
-      name: userInfo.display_name,
-      spotify_login: userInfo.id,
-      email: userInfo.email,
-    };
-    console.log(JSON.stringify(userInfoToAdd));
-
-    const response = await fetch(`${api_url}/user`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userInfoToAdd),
-    });
-    console.log(await response.json());
-  },
 
   syncMyTracks: async (tracks) => {
     // s'exécute à la fin de getMyTracks()
-    const userInfo = await matchistador.getMyInfo();
+    const userInfo = await matchistador.syncMyInfo();
     const spotify_login = userInfo.id;
     let response = await fetch(`${api_url}/user/${spotify_login}/tracks`, {
       method: 'POST',
@@ -253,13 +280,15 @@ const matchistador = {
     });
     return console.log(await response.json());
   },
+
   syncMyMatchs: async () => {
     // s'exécute à la fin de getMyTracks()
-    const userInfo = await matchistador.getMyInfo();
+    const userInfo = await matchistador.syncMyInfo();
     const spotify_login = userInfo.id;
     let response = await fetch(`${api_url}/user/${spotify_login}/syncmatchs`);
     console.log(await response.json());
   },
+
   getMatchedTracks: async (matchuser) => {
     let matchedTracks = await fetch(
       `${api_url}/user/${localStorage.getItem(
@@ -269,7 +298,5 @@ const matchistador = {
     return await matchedTracks.json();
   },
 };
-
-document.addEventListener('DOMContentLoaded', matchistador.init);
 
 export default matchistador;

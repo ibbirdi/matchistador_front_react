@@ -8,14 +8,14 @@ const Tracksboard = ({ matchName, matchedTracks }) => {
   return (
     <div className="Tracksboard hidden" id="tracksboard">
       <div className="trackslist">
-        <div className="tracksboard-title" onClick={closeTracksboard}>
+        <div className="tracksboard-title">
           <div>
             <div className="logo-m">
               <img src="/img/logo-m.png" alt="" />
+              {matchName}
             </div>
-            {matchName}
           </div>
-          <div className="closebtn">
+          <div className="closebtn" onClick={closeTracksboard}>
             <img src="/img/cancel-white.png" alt="" />
           </div>
         </div>

@@ -1,18 +1,17 @@
 import ConnectStatus from './ConnectStatus';
 
-function Header({ connectedUser }) {
+function Header({ username }) {
   return (
     <div className="Header">
       <nav className="" role="navigation" aria-label="main navigation">
         <div className="logo">
           <a className="navbar-item" href="/">
-            <img src="/img/logodegrade.png" />
+            <img src="/img/logodegrade.png" alt="logo" />
           </a>
         </div>
 
         <div className="connected-user">
-          <ConnectStatus connectedUser={connectedUser} />
-          <img src="/img/profile-user.png" alt="" />
+          <ConnectStatus username={username} />
         </div>
       </nav>
     </div>

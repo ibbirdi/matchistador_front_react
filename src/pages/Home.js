@@ -6,21 +6,25 @@ import Tracksboard from '../components/Tracksboard';
 import matchistador from '../core/matchistador';
 
 const Home = () => {
-  const [username, setUsername] = useState('Chargement...');
   const [title, setTitle] = useState('Chargement...');
   const [tracks, setTracks] = useState([]);
   const [matchs, setMatchs] = useState([]);
+  const [username, setUsername] = useState('Chargement...');
   const [matchedTracks, setMatchedTracks] = useState([]);
   const [runOnce, setRunOnce] = useState(true);
 
   const syncThenReload = async () => {
     try {
+      setTitle('Synchronisation en cours...');
       await matchistador.getMyTracks();
       const tracks = await matchistador.showMyTracks();
       const matchs = await matchistador.showMyMatchs();
       setTracks(tracks);
       setMatchs(matchs);
-      console.log('SET EXECUTE');
+      setTitle('Terminé !');
+      setTimeout(() => {
+        setTitle('Hello');
+      }, 2000);
     } catch (error) {
       console.error(error);
     }
@@ -43,10 +47,10 @@ const Home = () => {
 
         const tracks = await matchistador.showMyTracks();
         const matchs = await matchistador.showMyMatchs();
-
-        setUsername(localStorage.getItem('connected_user_name'));
+        const info = await matchistador.getMyInfo();
         setTracks(tracks);
         setMatchs(matchs);
+        setUsername(info.name);
         setTitle('Hello');
         setRunOnce(false);
       }
@@ -56,8 +60,8 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <Header connectedUser={username} />
-      <div className="home-container">
+      <Header username={username} />
+      <div className="main-container">
         <h2>{title}</h2>
 
         <Dashboard

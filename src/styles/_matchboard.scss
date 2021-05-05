@@ -1,20 +1,32 @@
 .Matchboard {
   width: 100%;
   max-width: 500px;
+  // max-height: 500px;
+  // overflow-y: auto;
+  // overflow-x: hidden;
   background-color: #d9d9d9;
   background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
   color: $color-dark-1;
-  margin: 20px;
+  margin: 10px;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   font-size: 0.8rem;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-1;
+    border-radius: 10px;
+  }
   .title-container {
     display: flex;
     justify-content: space-between;
   }
   .searchInput {
     display: block;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 5px;
     border: 2px solid $color-1;
     box-shadow: 0 0 10px 2px rgba(123, 123, 123, 0.267);
@@ -39,6 +51,9 @@
     &:hover .item-desc {
       color: white !important;
     }
+    &:hover .logo-m {
+      box-shadow: 0 0 50px 10px $color-2;
+    }
     .item {
       display: flex;
       justify-content: center;
@@ -53,6 +68,7 @@
         height: 40px;
         // border: 2px solid #fd4b5d;
         text-align: center;
+        transition: 200ms;
       }
       img {
         margin-right: 10px;
@@ -62,6 +78,7 @@
       .item-title {
         font-size: 0.8rem;
         font-weight: 600;
+        z-index: 100;
       }
     }
     .item-desc--container {
@@ -79,12 +96,6 @@
         font-weight: normal;
         color: $color-1;
       }
-    }
-    .button {
-      padding: 5px 10px;
-      border-radius: 5px;
-      background: $color-1;
-      color: white;
     }
   }
 }

@@ -1,4 +1,5 @@
 .Tracksboard {
+  z-index: 101;
   opacity: 1;
   position: fixed;
   top: 0;
@@ -9,16 +10,24 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: 1s;
-  .logo-m img {
-    width: 20px;
-    margin-right: 10px;
+  .logo-m {
+    display: flex;
+    align-items: center;
+    img {
+      background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+      padding: 5px;
+      border-radius: 50%;
+      width: 30px;
+      margin-right: 10px;
+    }
   }
   .trackslist {
-    position: fixed;
-    padding: 10px;
+    position: relative;
+    padding: 0 10px 10px 10px;
     overflow-y: auto;
     border-radius: 10px;
     max-width: 550px;
+    max-height: 500px;
     margin: 10vh auto;
     top: 0;
     left: 0;
@@ -26,15 +35,28 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.881);
     box-shadow: 0 0px 20px 10px #000000cb;
-
     color: white;
     font-size: 1rem;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $color-2;
+      border-radius: 10px;
+    }
   }
   .tracksboard-title {
+    box-shadow: 0 0px 20px 10px #000000cb;
+
     display: flex;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
     align-items: center;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 10px;
     justify-content: space-between;
     background: $color-2;
@@ -61,6 +83,7 @@
     align-items: center;
     padding: 5px;
     justify-content: space-between;
+
     &:nth-child(2n) {
       background: rgba(28, 75, 71, 0.144);
     }
