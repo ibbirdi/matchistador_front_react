@@ -1,4 +1,7 @@
 .Tracksboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 101;
   opacity: 1;
   position: fixed;
@@ -89,6 +92,7 @@
     }
     .artist {
       font-weight: 600;
+      margin-right: 20px;
     }
     .track {
       text-align: right;

@@ -7,6 +7,8 @@ $color-3: #f2aa2d;
 $color-dark-1: #232729;
 $color-4: rgb(32, 35, 42);
 
+$transition-short: 200ms;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,6 +24,18 @@ body {
 input,
 select {
   font-size: 100%;
+  display: block;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  border: 2px solid $color-1;
+  box-shadow: 0 0 10px 2px rgba(123, 123, 123, 0.267);
+  transition: $transition-short;
+
+  &:focus {
+    border: 2px solid $color-2;
+    outline: none;
+  }
 }
 li {
   list-style-type: none;
@@ -37,9 +51,11 @@ a:visited {
 
 h1 {
   font-size: 2.5rem;
+  font-weight: 400;
 }
 
 h2 {
+  font-weight: 700;
 }
 
 h3 {
@@ -50,7 +66,7 @@ h3 {
 
 .hidden {
   opacity: 0;
-  display: none;
+  display: none !important;
 }
 
 .shadow {
@@ -58,14 +74,21 @@ h3 {
 }
 
 .button {
-  padding: 5px 10px;
+  padding: 5px 15px;
   border-radius: 10px;
-  border: none;
+  min-width: 100px;
+  border: 2px solid rgba(255, 255, 255, 0.37);
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
   background: $color-1;
   color: white;
-  cursor: pointer;
-  transition: 200ms;
+  text-shadow: 0 0px 5px #00000057;
+  box-shadow: 0 0 40px #ffffffa8;
+  transition: $transition-short;
+
   &:hover {
     background: $color-2;
+    box-shadow: 0 0 80px #ffffffa8;
   }
 }

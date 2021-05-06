@@ -32,7 +32,7 @@ const Matchboard = ({ matchs }) => {
   return (
     <div className="Matchboard">
       <div className="title-container">
-        <h3>Mes Matchs</h3>
+        <h3>Matchs</h3>
 
         <input
           className="searchInput"

@@ -6,6 +6,7 @@ import Tracksboard from '../components/Tracksboard';
 import matchistador from '../core/matchistador';
 
 const Home = () => {
+  const [isAuth, setIsAuth] = useState(true);
   const [title, setTitle] = useState('Chargement...');
   const [tracks, setTracks] = useState([]);
   const [matchs, setMatchs] = useState([]);
@@ -43,18 +44,25 @@ const Home = () => {
 
         if (spotifyAuthCode && localStorage.getItem('isAuth') !== 'true') {
           await matchistador.authProcess(spotifyAuthCode);
+          setRunOnce(false);
         }
-
-        const tracks = await matchistador.showMyTracks();
-        const matchs = await matchistador.showMyMatchs();
-        const info = await matchistador.getMyInfo();
-        setTracks(tracks);
-        setMatchs(matchs);
-        setUsername(info.name);
-        setTitle('Hello');
-        setRunOnce(false);
       }
+      const info = await matchistador.getMyInfo();
+      if (!info) {
+        setIsAuth(false);
+        console.log('pas auth');
+      }
+      const tracks = await matchistador.showMyTracks();
+      const matchs = await matchistador.showMyMatchs();
+
+      setIsAuth(true);
+      setTracks(tracks);
+      setMatchs(matchs);
+      setUsername(info.name);
+      setTitle('Hello ' + info.name);
+      console.log('info!');
     };
+
     signInAndSyncView();
   }, [runOnce]);
 
@@ -62,15 +70,27 @@ const Home = () => {
     <div className="Home">
       <Header username={username} />
       <div className="main-container">
-        <h2>{title}</h2>
+        {isAuth && (
+          <>
+            <h2>{title}</h2>
 
-        <Dashboard
-          tracksCount={tracks.length}
-          matchsCount={matchs.length}
-          btnFunction={syncThenReload}
-        />
-        <Matchboard matchs={matchs} clickFunction={showMatchedTracks} />
-        <Tracksboard matchedTracks={matchedTracks} />
+            <Dashboard
+              tracksCount={tracks.length}
+              matchsCount={matchs.length}
+              btnFunction={syncThenReload}
+            />
+            <Matchboard matchs={matchs} clickFunction={showMatchedTracks} />
+            <Tracksboard matchedTracks={matchedTracks} />
+          </>
+        )}
+        {!isAuth && (
+          <>
+            <h2>Vous êtes déconnecté</h2>
+            <a href="/">
+              <div className="button">Par ici !</div>
+            </a>
+          </>
+        )}
       </div>
     </div>
   );

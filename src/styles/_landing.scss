@@ -15,7 +15,7 @@
 
   h1 {
     color: white;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 2rem;
     text-shadow: 0 0 20px #000000c8;
   }
@@ -33,7 +33,7 @@
     justify-content: center;
     background: linear-gradient(
       180deg,
-      $color-dark-1 15%,
+      rgba(31, 31, 31, 1) 0%,
       rgba(31, 31, 31, 0.194) 100%
     );
   }
@@ -48,12 +48,18 @@
     padding: 10px 20px;
     margin: 20px;
     border-radius: 10px;
-    font-weight: 600;
+    border: 3px solid rgba(255, 255, 255, 0.37);
+    font-weight: 400;
     font-size: 1rem;
-    border: none;
     background: $color-1;
     color: white;
     text-shadow: 0 0px 5px #00000057;
-    box-shadow: 0 0 20px #000000c8;
+    box-shadow: 0 0 40px #ffffffa8;
+    transition: $transition-short;
+
+    &:hover {
+      background: $color-2;
+      box-shadow: 0 0 80px #ffffffa8;
+    }
   }
 }

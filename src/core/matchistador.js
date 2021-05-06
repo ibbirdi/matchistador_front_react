@@ -56,8 +56,6 @@ const matchistador = {
     if (localStorage.getItem('access_token')) {
       await matchistador.registerMe();
     }
-
-    localStorage.setItem('isAuth', 'true');
   },
 
   registerMe: async () => {
@@ -126,19 +124,31 @@ const matchistador = {
 
   syncMyInfo: async () => {
     const response = await matchistador.getMyInfoFromSpotify();
-    let userInfo = await fetch(`${api_url}/user/${response.id}/info`);
-    userInfo = await userInfo.json();
-    localStorage.setItem('connected_user_name', userInfo.name);
-    localStorage.setItem('connected_user_login', response.id);
-    console.log('Infos: ', response);
-    return response;
+    if (response) {
+      let userInfo = await fetch(`${api_url}/user/${response.id}/info`);
+      userInfo = await userInfo.json();
+      localStorage.setItem('connected_user_name', userInfo.name);
+      localStorage.setItem('connected_user_login', response.id);
+      localStorage.setItem('isAuth', true);
+      console.log('Infos: ', response);
+      return response;
+    }
   },
 
   getMyInfo: async () => {
-    const response = await matchistador.getMyInfoFromSpotify();
-    let userInfo = await fetch(`${api_url}/user/${response.id}/info`);
-    userInfo = await userInfo.json();
-    return userInfo;
+    try {
+      const response = await matchistador.getMyInfoFromSpotify();
+      if (response.id) {
+        console.log('Connect status : ok');
+      } else return;
+      let userInfo = await fetch(`${api_url}/user/${response.id}/info`);
+      userInfo = await userInfo.json();
+      return userInfo;
+    } catch (error) {
+      console.log('Connect status : error');
+      localStorage.setItem('isAuth', false);
+      return;
+    }
   },
 
   changeMyUsername: async (newUserName) => {
