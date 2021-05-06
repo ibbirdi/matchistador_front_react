@@ -80,32 +80,35 @@ const matchistador = {
 
   getToken: async (code) => {
     localStorage.clear();
+    try {
+      const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        body:
+          'grant_type=authorization_code&code=' +
+          code +
+          '&redirect_uri=' +
+          matchistador.redirectUri,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization:
+            'Basic ' +
+            btoa(matchistador.clientId + ':' + matchistador.clientSecret),
+        },
+      });
+      const spotifyAuthData = await response.json();
+      console.log(spotifyAuthData);
+      if (spotifyAuthData) {
+        const access_token = spotifyAuthData.access_token;
+        const refresh_token = spotifyAuthData.refresh_token;
+        localStorage.setItem('access_token', access_token);
+        localStorage.setItem('refresh_token', refresh_token);
 
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      body:
-        'grant_type=authorization_code&code=' +
-        code +
-        '&redirect_uri=' +
-        matchistador.redirectUri,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization:
-          'Basic ' +
-          btoa(matchistador.clientId + ':' + matchistador.clientSecret),
-      },
-    });
-    const spotifyAuthData = await response.json();
-    console.log(spotifyAuthData);
-    if (spotifyAuthData) {
-      const access_token = spotifyAuthData.access_token;
-      const refresh_token = spotifyAuthData.refresh_token;
-      localStorage.setItem('access_token', access_token);
-      localStorage.setItem('refresh_token', refresh_token);
-
-      console.log(localStorage);
-    } else {
-      console.log(`Erreur d'authentification`);
+        console.log(localStorage);
+      } else {
+        return console.log(`Erreur d'authentification`);
+      }
+    } catch (error) {
+      return console.error(error);
     }
   },
 
