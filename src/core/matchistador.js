@@ -80,7 +80,7 @@ const matchistador = {
       body: JSON.stringify(userInfoToAdd),
     });
     console.log(await response.json());
-    return await matchistador.syncMyInfo();
+    await matchistador.syncMyInfo();
   },
 
   getToken: async (code) => {
@@ -174,17 +174,16 @@ const matchistador = {
   },
 
   showMyTracks: async () => {
-    const result = await fetch(
-      `${api_url}/user/${localStorage.getItem('connected_user_login')}/tracks`
-    );
+    const spotifyInfo = await matchistador.getMyInfoFromSpotify();
+
+    const result = await fetch(`${api_url}/user/${spotifyInfo.id}/tracks`);
     const tracks = await result.json();
     return tracks;
   },
 
   showMyMatchs: async () => {
-    const result = await fetch(
-      `${api_url}/user/${localStorage.getItem('connected_user_login')}/matchs`
-    );
+    const spotifyInfo = await matchistador.getMyInfoFromSpotify();
+    const result = await fetch(`${api_url}/user/${spotifyInfo.id}/matchs`);
     const matchs = await result.json();
     return matchs;
   },
