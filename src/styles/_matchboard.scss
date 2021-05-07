@@ -86,6 +86,8 @@
     .item-desc--container {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       padding: 10px;
       border-radius: 10px;
 
@@ -99,6 +101,7 @@
         font-size: 0.8rem;
         text-align: right;
         font-weight: normal;
+        text-align: center;
         background: rgba(0, 0, 0, 0.199);
         border: 2px solid white;
         box-shadow: 0 0px 10px #2c2c2c57;
