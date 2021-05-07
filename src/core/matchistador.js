@@ -286,9 +286,8 @@ const matchistador = {
 
   syncMyTracks: async (tracks) => {
     // s'exécute à la fin de getMyTracks()
-    const userInfo = await matchistador.syncMyInfo();
-    const spotify_login = userInfo.id;
-    let response = await fetch(`${api_url}/user/${spotify_login}/tracks`, {
+    const spotifyInfo = await matchistador.getMyInfoFromSpotify();
+    let response = await fetch(`${api_url}/user/${spotifyInfo.id}/tracks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
