@@ -1,9 +1,13 @@
-// const front_url = 'http://localhost:3000';
-// const api_url = 'http://localhost:4000';
-const front_url = 'https://www.matchistador.com';
-const api_url = 'https://api.matchistador.com';
+let front_url = 'https://www.matchistador.com';
+let api_url = 'https://api.matchistador.com';
 //
 //
+const dev = false;
+
+if (dev) {
+  front_url = 'http://localhost:3000';
+  api_url = 'http://localhost:4000';
+}
 
 const matchistador = {
   clientId: 'cd47067c9a6743619eb7c24d6b1e4c3d',

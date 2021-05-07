@@ -6,7 +6,7 @@
   margin: 10px;
   border-radius: 20px;
   border: 2px solid rgba(255, 255, 255, 0.886);
-
+  overflow: hidden;
   font-size: 0.8rem;
 
   &::-webkit-scrollbar {
@@ -45,10 +45,11 @@
       background: #ffffff27;
     }
     &:hover {
-      background: $color-1;
+      background: rgba(0, 0, 0, 0.553);
       color: white;
-      box-shadow: 0 0 30px 10px $color-1;
-      transform: scale(1.05);
+      box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.553);
+      border-radius: 20px;
+      // transform: scale(1.05);
     }
     &:hover .item-desc {
       // color: $color-light-3 !important;
