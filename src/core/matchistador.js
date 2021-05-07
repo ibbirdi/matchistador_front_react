@@ -63,7 +63,7 @@ const matchistador = {
   },
 
   registerMe: async () => {
-    const userInfo = await matchistador.syncMyInfo();
+    const userInfo = await matchistador.getMyInfoFromSpotify();
     console.log(userInfo);
     const userInfoToAdd = {
       name: userInfo.display_name,
@@ -80,6 +80,7 @@ const matchistador = {
       body: JSON.stringify(userInfoToAdd),
     });
     console.log(await response.json());
+    return await matchistador.syncMyInfo();
   },
 
   getToken: async (code) => {
