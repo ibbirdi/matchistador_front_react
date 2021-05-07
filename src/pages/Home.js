@@ -23,7 +23,7 @@ const Home = () => {
       setMatchs(matchs);
       setTitle('Terminé !');
       setTimeout(() => {
-        setTitle('Hello');
+        setTitle(title);
       }, 2000);
     } catch (error) {
       console.error(error);
