@@ -272,7 +272,7 @@ const matchistador = {
           syncBtn.classList.toggle('wait');
           syncBtn.classList.toggle('success');
 
-          result.length = 1000;
+          result.length = 3000;
           await matchistador.syncMyTracks(result);
           await matchistador.syncMyMatchs();
 
