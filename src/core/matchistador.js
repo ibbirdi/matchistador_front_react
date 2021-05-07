@@ -214,7 +214,6 @@ const matchistador = {
         });
       });
       console.log('top tracks: ', result);
-      result.length = 1000;
       return result;
     } catch (error) {
       return console.error(error);
@@ -269,6 +268,8 @@ const matchistador = {
         if (response.next) {
           return loop(response.next);
         } else {
+          result.length = 1000;
+
           syncBtn.textContent = `Et voilà !`;
           syncBtn.classList.toggle('wait');
 
