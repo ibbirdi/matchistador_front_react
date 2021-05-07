@@ -214,6 +214,7 @@ const matchistador = {
         });
       });
       console.log('top tracks: ', result);
+      result.length = 1000;
       return result;
     } catch (error) {
       return console.error(error);
