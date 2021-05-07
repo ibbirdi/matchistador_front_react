@@ -62,9 +62,7 @@ const Matchboard = ({ matchs }) => {
             </div>
             <div className="item-desc--container">
               <div className="score">{match.score} points</div>
-              <div className="item-desc">
-                {match.tracksQty} titres en commun
-              </div>
+              <div className="item-desc">{match.tracksQty} titres</div>
             </div>
           </div>
         );
