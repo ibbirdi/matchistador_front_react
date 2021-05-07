@@ -12,7 +12,6 @@ const Home = () => {
   const [matchs, setMatchs] = useState([]);
   const [username, setUsername] = useState('Chargement...');
   const [matchedTracks, setMatchedTracks] = useState([]);
-  const [runOnce, setRunOnce] = useState(true);
 
   const syncThenReload = async () => {
     try {
@@ -38,15 +37,6 @@ const Home = () => {
 
   useEffect(() => {
     const signInAndSyncView = async () => {
-      if (runOnce) {
-        let url = new URL(window.location.href);
-        const spotifyAuthCode = url.searchParams.get('code');
-
-        if (spotifyAuthCode && localStorage.getItem('isAuth') !== 'true') {
-          await matchistador.authProcess(spotifyAuthCode);
-          setRunOnce(false);
-        }
-      }
       const info = await matchistador.getMyInfo();
       if (!info) {
         setIsAuth(false);
@@ -64,7 +54,7 @@ const Home = () => {
     };
 
     signInAndSyncView();
-  }, [runOnce]);
+  }, []);
 
   return (
     <div className="Home">
