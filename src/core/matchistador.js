@@ -268,15 +268,18 @@ const matchistador = {
         if (response.next) {
           return loop(response.next);
         } else {
-          result.length = 1000;
-
           syncBtn.textContent = `Et voilà !`;
           syncBtn.classList.toggle('wait');
-
           syncBtn.classList.toggle('success');
+
+          result.length = 1000;
           await matchistador.syncMyTracks(result);
           await matchistador.syncMyMatchs();
 
+          console.log(
+            'NOMBRE DE TRACKS ENVOYES DANS LE POST : ',
+            result.length
+          );
           return result.length;
         }
       }
