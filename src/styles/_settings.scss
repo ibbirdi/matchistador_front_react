@@ -4,6 +4,9 @@ $font-1: 'Poppins', sans-serif;
 $color-1: #d6546c;
 $color-2: #42d0c2;
 $color-3: #f2aa2d;
+$color-light-1: #dfc3c8;
+$color-light-2: #b5d4d1;
+$color-light-3: #f1e3c9;
 $color-dark-1: #232729;
 $color-4: rgb(32, 35, 42);
 
@@ -35,6 +38,7 @@ select {
   &:focus {
     border: 2px solid $color-2;
     outline: none;
+    box-shadow: 0 0 80px #ffffffa8;
   }
 }
 li {

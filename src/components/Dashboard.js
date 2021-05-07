@@ -4,9 +4,6 @@ import iconMatch from '../img/match.png';
 const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
   return (
     <div className="Dashboard">
-      <div className="title-container">
-        <h3>Mon compte</h3>
-      </div>
       <div className="item-row">
         <div className="item">
           <img src={iconMusic} alt="" />

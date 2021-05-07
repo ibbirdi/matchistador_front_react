@@ -8,7 +8,7 @@ const api_url = 'https://api.matchistador.com';
 const matchistador = {
   clientId: 'cd47067c9a6743619eb7c24d6b1e4c3d',
   clientSecret: '3d65254b4e1d4f06ad6e77471fc7a613',
-  redirectUri: `${front_url}/auth`,
+  redirectUri: `${front_url}/home`,
   spotifyAuthCode: '',
   scopes: [
     'ugc-image-upload',
