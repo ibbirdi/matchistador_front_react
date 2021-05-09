@@ -19,6 +19,13 @@
     font-size: 2rem;
     text-shadow: 0 0 20px #000000c8;
   }
+  h2 {
+    color: white;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-top: 2rem;
+    text-shadow: 0 0 20px #000000c8;
+  }
   .logo {
     max-width: 300px;
     position: absolute;
@@ -37,14 +44,19 @@
       rgba(31, 31, 31, 0.194) 100%
     );
   }
+
+  .btn-container {
+    display: flex;
+  }
   .spotify-connect--img {
     width: 100px;
-    margin-left: 10px;
   }
 
   .spotify-connect--btn {
     display: flex;
     align-items: center;
+    justify-content: center;
+    height: 60px;
     padding: 10px 20px;
     margin: 20px;
     border-radius: 10px;

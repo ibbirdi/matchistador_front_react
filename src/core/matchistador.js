@@ -10,11 +10,11 @@ if (dev) {
 }
 
 const matchistador = {
-  clientId: 'cd47067c9a6743619eb7c24d6b1e4c3d',
-  clientSecret: '3d65254b4e1d4f06ad6e77471fc7a613',
-  redirectUri: `${front_url}/auth`,
-  spotifyAuthCode: '',
-  scopes: [
+  spotify_clientId: 'cd47067c9a6743619eb7c24d6b1e4c3d',
+  spotify_clientSecret: '3d65254b4e1d4f06ad6e77471fc7a613',
+  spotify_redirectUri: `${front_url}/auth`,
+  spotify_authCode: '',
+  spotify_scopes: [
     'ugc-image-upload',
     'user-read-playback-state',
     'user-modify-playback-state',
@@ -36,30 +36,62 @@ const matchistador = {
     'user-follow-modify',
   ],
 
+  deezer_clientId: '478182',
+  deezer_clientSecret: '8408fde493d3080da7404dc0b054f059',
+  deezer_redirectUri: `${front_url}/authdeezer`,
+  deezer_authCode: '',
+  deezer_scopes: 'basic_access,email,listening_history',
+
+  makeDeezerConnectUrl: () => {
+    const url = `https://connect.deezer.com/oauth/auth.php?app_id=${matchistador.deezer_clientId}&redirect_uri=${matchistador.deezer_redirectUri}&perms=${matchistador.deezer_scopes}`;
+    return url;
+  },
+
   makeSpotifyConnectUrl: () => {
     const url =
       'https://accounts.spotify.com/authorize' +
       '?response_type=code' +
       '&client_id=' +
-      matchistador.clientId +
-      (matchistador.scopes
-        ? '&scope=' + encodeURIComponent(matchistador.scopes)
+      matchistador.spotify_clientId +
+      (matchistador.spotify_scopes
+        ? '&scope=' + encodeURIComponent(matchistador.spotify_scopes)
         : '') +
       '&redirect_uri=' +
-      encodeURIComponent(matchistador.redirectUri);
+      encodeURIComponent(matchistador.spotify_redirectUri);
     return url;
   },
 
-  authProcess: async (spotifyAuthCode) => {
-    console.log(spotifyAuthCode);
+  spotify_authProcess: async (code) => {
+    console.log(code);
 
     console.log('authProcess');
 
     //récupération du token de spotify avec le code et des infos de l'user
-    await matchistador.getToken(spotifyAuthCode);
+    await matchistador.spotify_getToken(code);
     if (localStorage.getItem('access_token')) {
       await matchistador.registerMe();
     }
+  },
+  deezer_authProcess: async (code) => {
+    console.log(code);
+
+    console.log('authProcess');
+
+    //récupération du token de spotify avec le code et des infos de l'user
+    const response = await fetch(
+      `https://connect.deezer.com/oauth/access_token.php?app_id=${matchistador.deezer_clientId}&secret=${matchistador.deezer_clientSecret}&code=${code}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
+    const deezerData = response;
+    console.log(deezerData);
+    // if (localStorage.getItem('access_token')) {
+    //   // await matchistador.registerMe();
+    // }
   },
 
   registerMe: async () => {
@@ -83,7 +115,7 @@ const matchistador = {
     await matchistador.syncMyInfo();
   },
 
-  getToken: async (code) => {
+  spotify_getToken: async (code) => {
     localStorage.clear();
     try {
       const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -92,12 +124,16 @@ const matchistador = {
           'grant_type=authorization_code&code=' +
           code +
           '&redirect_uri=' +
-          matchistador.redirectUri,
+          matchistador.spotify_redirectUri,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           Authorization:
             'Basic ' +
-            btoa(matchistador.clientId + ':' + matchistador.clientSecret),
+            btoa(
+              matchistador.spotify_clientId +
+                ':' +
+                matchistador.spotify_clientSecret
+            ),
         },
       });
       const spotifyAuthData = await response.json();

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Auth from './pages/Auth';
+import Authdeezer from './pages/Authdeezer';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
 
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Landing} />
           <Route path="/auth" exact component={Auth} />
+          <Route path="/authdeezer" exact component={Authdeezer} />
           <Route path="/home" exact component={Home} />
           <Route path="/profil" exact component={Profile} />
           <Route component={NotFound} />

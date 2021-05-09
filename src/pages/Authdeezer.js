@@ -3,22 +3,21 @@ import { useHistory } from 'react-router-dom';
 import matchistador from '../core/matchistador';
 import logoMatchistador from '../img/logodegrade.png';
 
-const Auth = () => {
+const Authdeezer = () => {
   const history = useHistory();
-  //   const [authError, setAuthError] = useState(true);
+  const [authError, setAuthError] = useState(true);
 
   useEffect(() => {
     let url = new URL(window.location.href);
-    const spotifyAuthCode = url.searchParams.get('code');
+    const deezerAuthCode = url.searchParams.get('code');
     console.log('bonjour');
-    const spotifyAuth = async () => {
+    const deezerAuth = async () => {
       console.log('AUTH EN COURS');
-      await matchistador.spotify_authProcess(spotifyAuthCode);
-      //   setAuthError(false);
-      history.push('/home');
+      await matchistador.deezer_authProcess(deezerAuthCode);
+      // history.push('/home');
     };
-    if (spotifyAuthCode) {
-      spotifyAuth();
+    if (deezerAuthCode) {
+      deezerAuth();
     }
   }, [history]);
 
@@ -32,4 +31,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Authdeezer;
