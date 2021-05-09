@@ -268,18 +268,14 @@ const matchistador = {
         if (response.next) {
           return loop(response.next);
         } else {
-          syncBtn.textContent = `Et voilà !`;
-          syncBtn.classList.toggle('wait');
-          syncBtn.classList.toggle('success');
-
-          // result.length = 3000;
-          await matchistador.syncMyTracks(result);
-          await matchistador.syncMyMatchs();
+          syncBtn.textContent = `Synchronisation...`;
 
           console.log(
             'NOMBRE DE TRACKS ENVOYES DANS LE POST : ',
             result.length
           );
+          await matchistador.syncMyTracks(result);
+          await matchistador.syncMyMatchs();
           return result.length;
         }
       }
@@ -290,33 +286,45 @@ const matchistador = {
   },
 
   syncMyTracks: async (tracks) => {
-    // s'exécute à la fin de getMyTracks()
-    const spotifyInfo = await matchistador.getMyInfoFromSpotify();
-    let response = await fetch(`${api_url}/user/${spotifyInfo.id}/tracks`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(tracks),
-    });
-    return console.log(await response.json());
+    try {
+      // s'exécute à la fin de getMyTracks()
+      const spotifyInfo = await matchistador.getMyInfoFromSpotify();
+      let response = await fetch(`${api_url}/user/${spotifyInfo.id}/tracks`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(tracks),
+      });
+      return console.log(await response.json());
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   syncMyMatchs: async () => {
-    // s'exécute à la fin de getMyTracks()
-    const userInfo = await matchistador.syncMyInfo();
-    const spotify_login = userInfo.id;
-    let response = await fetch(`${api_url}/user/${spotify_login}/syncmatchs`);
-    console.log(await response.json());
+    try {
+      // s'exécute à la fin de getMyTracks()
+      const userInfo = await matchistador.syncMyInfo();
+      const spotify_login = userInfo.id;
+      let response = await fetch(`${api_url}/user/${spotify_login}/syncmatchs`);
+      console.log(await response.json());
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   getMatchedTracks: async (matchuser) => {
-    let matchedTracks = await fetch(
-      `${api_url}/user/${localStorage.getItem(
-        'connected_user_login'
-      )}/matchedtracks/${matchuser}`
-    );
-    return await matchedTracks.json();
+    try {
+      let matchedTracks = await fetch(
+        `${api_url}/user/${localStorage.getItem(
+          'connected_user_login'
+        )}/matchedtracks/${matchuser}`
+      );
+      return await matchedTracks.json();
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 

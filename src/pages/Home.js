@@ -15,13 +15,19 @@ const Home = () => {
 
   const syncThenReload = async () => {
     try {
+      let syncBtn = document.getElementById('sync-btn');
       setTitle('Synchronisation en cours...');
       await matchistador.getMyTracks();
       const tracks = await matchistador.showMyTracks();
       const matchs = await matchistador.showMyMatchs();
       setTracks(tracks);
       setMatchs(matchs);
+
       setTitle('Terminé !');
+      syncBtn.textContent = 'Terminé !';
+      syncBtn.classList.toggle('wait');
+      syncBtn.classList.toggle('success');
+
       setTimeout(() => {
         setTitle(title);
       }, 2000);
