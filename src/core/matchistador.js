@@ -62,7 +62,7 @@ const matchistador = {
   },
 
   buildCorsFreeUrl: (url) => {
-    return `https://cors.bridged.cc/<${url}>`;
+    return `https://cors.bridged.cc/${url}`;
   },
 
   spotify_authProcess: async (code) => {
