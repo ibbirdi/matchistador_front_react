@@ -1,5 +1,3 @@
-import fetchJsonp from 'fetch-jsonp';
-
 let front_url = 'https://www.matchistador.com';
 let api_url = 'https://api.matchistador.com';
 //
@@ -81,31 +79,26 @@ const matchistador = {
     console.log('authProcess');
 
     //récupération du token de deezer avec le code récupéré
-    try {
-      const response = await fetchJsonp(
-        matchistador.corsAnywhereUrl +
-          `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
-            matchistador.deezer_clientId
-          )}&secret=${encodeURIComponent(
-            matchistador.deezer_clientSecret
-          )}&code=${encodeURIComponent(code)}&output=jsonp`,
-        {
-          jsonpCallback: 'jsoncallback',
-        }
-      );
-      const deezerData = await response.json();
 
-      if (deezerData.access_token) {
-        localStorage.setItem('access_token', deezerData.access_token);
-        console.log('access token reçu de deezer');
-        await matchistador.getMyInfoFromDeezer();
-        localStorage.setItem('platform', 'deezer');
-      }
-      if (localStorage.getItem('access_token')) {
-        await matchistador.registerMe();
-      }
-    } catch (error) {
-      console.error(error);
+    const response = await fetch(
+      matchistador.corsAnywhereUrl +
+        `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
+          matchistador.deezer_clientId
+        )}&secret=${encodeURIComponent(
+          matchistador.deezer_clientSecret
+        )}&code=${encodeURIComponent(code)}&response_type=token&output=json`
+    );
+
+    const deezerData = await response.json();
+
+    if (deezerData.access_token) {
+      localStorage.setItem('access_token', deezerData.access_token);
+      console.log('access token reçu de deezer');
+      await matchistador.getMyInfoFromDeezer();
+      localStorage.setItem('platform', 'deezer');
+    }
+    if (localStorage.getItem('access_token')) {
+      await matchistador.registerMe();
     }
 
     // if (localStorage.getItem('access_token')) {
