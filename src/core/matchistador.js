@@ -83,7 +83,7 @@ const matchistador = {
         matchistador.deezer_clientId
       )}&secret=${encodeURIComponent(
         matchistador.deezer_clientSecret
-      )}&code=${encodeURIComponent(code)}&response_type=token`
+      )}&code=${encodeURIComponent(code)}&response_type=token&output=json`
     );
     // const deezerData = await response.json();
     console.log(response);
