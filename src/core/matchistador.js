@@ -39,7 +39,6 @@ const matchistador = {
   deezer_clientId: '478182',
   deezer_clientSecret: '8408fde493d3080da7404dc0b054f059',
   deezer_redirectUri: `${front_url}/authdeezer`,
-  deezer_authCode: '',
   deezer_scopes: 'basic_access,email,listening_history',
 
   makeDeezerConnectUrl: () => {
