@@ -330,6 +330,7 @@ const matchistador = {
         )}`
       );
       tracks = await tracks.json();
+      console.log(tracks);
       const data = tracks.data.map((track) => ({
         artist: track.artist.name,
         track: track.title,
