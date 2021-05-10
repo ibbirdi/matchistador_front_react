@@ -44,6 +44,7 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
+    <div id="root"></div>
     <div id="dz-root"></div>
     <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
     <script>
@@ -51,8 +52,21 @@
         appId: '478182',
         channelUrl: 'https://www.matchistador.com/index.html',
       });
+      DZ.login(
+        function (response) {
+          if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            DZ.api('/user/me', function (response) {
+              console.log('Good to see you, ' + response.name + '.');
+            });
+          } else {
+            console.log('User cancelled login or did not fully authorize.');
+          }
+        },
+        { perms: 'basic_access,email' }
+      );
     </script>
-    <div id="root"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
