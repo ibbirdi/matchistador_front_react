@@ -22,11 +22,11 @@ const Landing = () => {
               <img className="spotify-connect--img" src={logoSpotify} alt="" />
             </div>
           </a>
-          {/* <a href={deezerUrl}>
+          <a href={deezerUrl}>
             <div className="spotify-connect--btn">
               <img className="spotify-connect--img" src={logoDeezer} alt="" />
             </div>
-          </a> */}
+          </a>
         </div>
       </div>
     </div>

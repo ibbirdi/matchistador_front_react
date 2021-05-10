@@ -79,16 +79,14 @@ const matchistador = {
 
     //récupération du token de spotify avec le code et des infos de l'user
     const response = await fetch(
-      `https://connect.deezer.com/oauth/access_token.php?app_id=${matchistador.deezer_clientId}&secret=${matchistador.deezer_clientSecret}&code=${code}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      }
+      `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
+        matchistador.deezer_clientId
+      )}&secret=${encodeURIComponent(
+        matchistador.deezer_clientSecret
+      )}&code=${encodeURIComponent(code)}&response_type=token`
     );
-    const deezerData = response;
-    console.log(deezerData);
+    // const deezerData = await response.json();
+    console.log(response);
     // if (localStorage.getItem('access_token')) {
     //   // await matchistador.registerMe();
     // }
