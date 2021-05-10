@@ -319,9 +319,11 @@ const matchistador = {
   getMyTracksFromDeezer: async () => {
     try {
       let result = [];
-      let fetchUrl = `https://api.deezer.com/user/me/tracks&access_token=${localStorage.getItem(
-        'access_token'
-      )}`;
+      let fetchUrl = matchistador.buildCorsFreeUrl(
+        `https://api.deezer.com/user/me/tracks&access_token=${localStorage.getItem(
+          'access_token'
+        )}`
+      );
 
       async function loop(url) {
         let response = await fetch(url);
@@ -349,7 +351,7 @@ const matchistador = {
           });
         });
         if (response.next) {
-          return loop(response.next);
+          return loop(matchistador.buildCorsFreeUrl(response.next));
         } else {
           syncBtn.textContent = `Synchronisation...`;
 
