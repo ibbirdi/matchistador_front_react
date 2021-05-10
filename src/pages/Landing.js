@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import matchistador from '../core/matchistador';
 import logoSpotify from '../img/spotifyWhite.png';
 import logoMatchistador from '../img/logodegrade.png';
 import logoDeezer from '../img/deezerWhite.png';
+import Quotes from '../components/Quotes';
 
 const Landing = () => {
   const spotifyUrl = matchistador.makeSpotifyConnectUrl();
@@ -14,6 +15,7 @@ const Landing = () => {
     <div className="landing-page">
       <div className="connexion">
         <img className="logo" src={logoMatchistador} alt="" />
+        <Quotes />
         <h1>Bienvenue !</h1>
         <h2>Se connecter avec :</h2>
         <div className="btn-container">

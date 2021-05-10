@@ -1,0 +1,22 @@
+.Quotes {
+  position: absolute;
+  margin: 10px;
+  text-align: center;
+  top: 70px;
+  color: white;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1rem;
+  text-shadow: 0 1px 2px #00000057;
+
+  .symbol {
+    font-size: 1.2rem;
+    transform: translate(-50px);
+  }
+
+  .author {
+    color: $color-2;
+    font-style: normal;
+    font-size: 0.8rem;
+  }
+}
