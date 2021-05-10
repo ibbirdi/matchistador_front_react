@@ -36,8 +36,8 @@ const matchistador = {
     'user-follow-modify',
   ],
 
-  deezer_clientId: '478182',
-  deezer_clientSecret: '8408fde493d3080da7404dc0b054f059',
+  deezer_clientId: '478322',
+  deezer_clientSecret: '781de75409e815239f8c9497ee7fb06f',
   deezer_redirectUri: `${front_url}/authdeezer`,
   deezer_scopes: 'basic_access,email,listening_history',
   corsAnywhereUrl: '',
