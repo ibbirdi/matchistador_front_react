@@ -1,5 +1,3 @@
-import fetchJsonp from 'fetch-jsonp';
-
 let front_url = 'https://www.matchistador.com';
 let api_url = 'https://api.matchistador.com';
 //
@@ -82,7 +80,7 @@ const matchistador = {
 
     //récupération du token de deezer avec le code récupéré
 
-    const response = await fetchJsonp(
+    const response = await fetch(
       matchistador.corsAnywhereUrl +
         `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
           matchistador.deezer_clientId
