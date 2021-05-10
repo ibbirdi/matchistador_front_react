@@ -322,28 +322,51 @@ const matchistador = {
 
   getMyTracksFromDeezer: async () => {
     try {
-      let tracks = await fetch(
-        `${
-          matchistador.corsAnywhereUrl
-        }https://api.deezer.com/user/me/tracks&access_token=${localStorage.getItem(
-          'access_token'
-        )}`
-      );
-      tracks = await tracks.json();
-      console.log(tracks);
-      const data = tracks.data.map((track) => ({
-        artist: track.artist.name,
-        track: track.title,
-        album: track.album.title,
-        popularity: Math.floor(track.rank / 10000),
-        spotify_id: track.id,
-        spotify_url: track.link,
-        spotify_img_url: '',
-        spotify_preview_url: '',
-      }));
-      console.log(data);
-      await matchistador.syncMyTracks(data);
-      await matchistador.syncMyMatchs();
+      let result = [];
+      let fetchUrl = `https://api.deezer.com/user/me/tracks&access_token=${localStorage.getItem(
+        'access_token'
+      )}`;
+
+      async function loop(url) {
+        let response = await fetch(url);
+        response = await response.json();
+
+        let syncBtn = document.getElementById('sync-btn');
+        let avancement = Math.floor((result.length / response.total) * 100);
+        syncBtn.setAttribute('disabled', 'disabled');
+        syncBtn.textContent = avancement + '%';
+        syncBtn.classList.add('wait');
+
+        console.log(avancement + '%');
+
+        response.data.forEach((track) => {
+          //ajoute dans [result] chaque track
+          result.push({
+            artist: track.artist.name,
+            track: track.title,
+            album: track.album.title,
+            popularity: Math.floor(track.rank / 10000),
+            spotify_id: track.id,
+            spotify_url: track.link,
+            spotify_img_url: '',
+            spotify_preview_url: '',
+          });
+        });
+        if (response.next) {
+          return loop(response.next);
+        } else {
+          syncBtn.textContent = `Synchronisation...`;
+
+          console.log(
+            'NOMBRE DE TRACKS ENVOYES DANS LE POST : ',
+            result.length
+          );
+          await matchistador.syncMyTracks(result);
+          await matchistador.syncMyMatchs();
+          return result.length;
+        }
+      }
+      await loop(fetchUrl);
     } catch (error) {
       console.error(error);
     }
