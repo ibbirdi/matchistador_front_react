@@ -86,7 +86,7 @@ const matchistador = {
         )}&secret=${encodeURIComponent(
           matchistador.deezer_clientSecret
         )}&code=${encodeURIComponent(code)}&response_type=token&output=json`,
-      { mode: 'cors' }
+      { mode: 'cors', Origin: 'https://www.matchistador.com' }
     );
 
     const deezerData = await response.json();
