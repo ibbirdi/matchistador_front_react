@@ -88,7 +88,7 @@ const matchistador = {
           matchistador.deezer_clientId
         )}&secret=${encodeURIComponent(
           matchistador.deezer_clientSecret
-        )}&code=${encodeURIComponent(code)}&response_type=token&output=jsonp`,
+        )}&code=${encodeURIComponent(code)}&output=jsonp`,
       {
         jsonpCallback: 'jsoncallback',
       }
