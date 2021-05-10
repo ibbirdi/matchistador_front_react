@@ -180,16 +180,11 @@ const matchistador = {
 
   getMyInfoFromDeezer: async () => {
     let response = await fetch(
-      matchistador.corsAnywhereUrl +
+      matchistador.buildCorsFreeUrl(
         `https://api.deezer.com/user/me?access_token=${localStorage.getItem(
           'access_token'
-        )}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+        )}`
+      )
     );
     response = await response.json();
     console.log('GMIFD', response);
