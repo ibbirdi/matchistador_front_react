@@ -61,6 +61,10 @@ const matchistador = {
     return url;
   },
 
+  buildCorsFreeUrl: (url) => {
+    return `https://cors.bridged.cc/<${url}>`;
+  },
+
   spotify_authProcess: async (code) => {
     console.log(code);
 
@@ -81,12 +85,13 @@ const matchistador = {
     //récupération du token de deezer avec le code récupéré
 
     const response = await fetch(
-      matchistador.corsAnywhereUrl +
+      matchistador.buildCorsFreeUrl(
         `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
           matchistador.deezer_clientId
         )}&secret=${encodeURIComponent(
           matchistador.deezer_clientSecret
         )}&code=${encodeURIComponent(code)}&response_type=token&output=json`
+      )
     );
 
     const deezerData = await response.json();
@@ -100,10 +105,6 @@ const matchistador = {
     if (localStorage.getItem('access_token')) {
       await matchistador.registerMe();
     }
-
-    // if (localStorage.getItem('access_token')) {
-    //   // await matchistador.registerMe();
-    // }
   },
 
   registerMe: async () => {
