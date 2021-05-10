@@ -91,7 +91,6 @@ const matchistador = {
         )}&code=${encodeURIComponent(code)}&response_type=token&output=jsonp`,
       {
         jsonpCallback: 'jsoncallback',
-        timeout: 3000,
       }
     );
 
