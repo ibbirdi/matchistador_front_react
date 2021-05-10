@@ -252,6 +252,7 @@ const matchistador = {
     let response = await fetch(`${api_url}/user/${data.spotify_login}`, {
       method: 'PATCH',
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: username,
