@@ -14,7 +14,7 @@ const Authdeezer = () => {
     const deezerAuth = async () => {
       console.log('AUTH EN COURS');
       await matchistador.deezer_authProcess(deezerAuthCode);
-      // history.push('/home');
+      history.push('/home');
     };
     if (deezerAuthCode) {
       deezerAuth();

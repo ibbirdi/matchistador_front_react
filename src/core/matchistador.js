@@ -5,7 +5,7 @@ let api_url = 'https://api.matchistador.com';
 const dev = false;
 
 if (dev) {
-  front_url = 'http://localhost:3000';
+  front_url = 'http://127.0.0.1:3000';
   api_url = 'http://localhost:4000';
 }
 
@@ -40,6 +40,7 @@ const matchistador = {
   deezer_clientSecret: '8408fde493d3080da7404dc0b054f059',
   deezer_redirectUri: `${front_url}/authdeezer`,
   deezer_scopes: 'basic_access,email,listening_history',
+  corsAnywhereUrl: '',
 
   makeDeezerConnectUrl: () => {
     const url = `https://connect.deezer.com/oauth/auth.php?app_id=${matchistador.deezer_clientId}&redirect_uri=${matchistador.deezer_redirectUri}&perms=${matchistador.deezer_scopes}`;
@@ -71,42 +72,49 @@ const matchistador = {
       await matchistador.registerMe();
     }
   },
+
   deezer_authProcess: async (code) => {
     console.log(code);
 
     console.log('authProcess');
 
-    //récupération du token de spotify avec le code et des infos de l'user
+    //récupération du token de deezer avec le code récupéré
     const response = await fetch(
-      `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
-        matchistador.deezer_clientId
-      )}&secret=${encodeURIComponent(
-        matchistador.deezer_clientSecret
-      )}&code=${encodeURIComponent(code)}&response_type=token&output=json`
+      matchistador.corsAnywhereUrl +
+        `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
+          matchistador.deezer_clientId
+        )}&secret=${encodeURIComponent(
+          matchistador.deezer_clientSecret
+        )}&code=${encodeURIComponent(code)}&response_type=token&output=json`
     );
-    // const deezerData = await response.json();
-    console.log(response);
+
+    const deezerData = await response.json();
+
+    if (deezerData.access_token) {
+      localStorage.setItem('access_token', deezerData.access_token);
+      console.log('access token reçu de deezer');
+      await matchistador.getMyInfoFromDeezer();
+      localStorage.setItem('platform', 'deezer');
+    }
+    if (localStorage.getItem('access_token')) {
+      await matchistador.registerMe();
+    }
+
     // if (localStorage.getItem('access_token')) {
     //   // await matchistador.registerMe();
     // }
   },
 
   registerMe: async () => {
-    const userInfo = await matchistador.getMyInfoFromSpotify();
-    console.log(userInfo);
-    const userInfoToAdd = {
-      name: userInfo.display_name,
-      spotify_login: userInfo.id,
-      email: userInfo.email,
-    };
-    console.log(JSON.stringify(userInfoToAdd));
+    const data = await matchistador.getMyInfoFromPlatformAuto();
+    console.log(data);
 
     const response = await fetch(`${api_url}/user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userInfoToAdd),
+      body: JSON.stringify(data),
     });
     console.log(await response.json());
     await matchistador.syncMyInfo();
@@ -140,7 +148,7 @@ const matchistador = {
         const refresh_token = spotifyAuthData.refresh_token;
         localStorage.setItem('access_token', access_token);
         localStorage.setItem('refresh_token', refresh_token);
-
+        localStorage.setItem('platform', 'spotify');
         console.log(localStorage);
       } else {
         return console.log(`Erreur d'authentification`);
@@ -160,29 +168,74 @@ const matchistador = {
     });
     response = await response.json();
     console.log('GMIFS', response);
+    const data = {
+      name: response.display_name,
+      spotify_login: response.id,
+      email: response.email,
+    };
+    return data;
+  },
+
+  getMyInfoFromDeezer: async () => {
+    let response = await fetch(
+      matchistador.corsAnywhereUrl +
+        `https://api.deezer.com/user/me?access_token=${localStorage.getItem(
+          'access_token'
+        )}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    response = await response.json();
+    console.log('GMIFD', response);
+    const data = {
+      name: response.name,
+      spotify_login: response.name,
+      email: response.email,
+    };
+    return data;
+  },
+
+  getMyInfoFromPlatformAuto: async () => {
+    let response;
+    if (localStorage.getItem('platform') === 'spotify') {
+      console.log('récup info spotify auto');
+      response = await matchistador.getMyInfoFromSpotify();
+    } else if (localStorage.getItem('platform') === 'deezer') {
+      console.log('récup info deezer auto');
+
+      response = await matchistador.getMyInfoFromDeezer();
+    }
     return response;
   },
 
   syncMyInfo: async () => {
-    const response = await matchistador.getMyInfoFromSpotify();
+    const response = await matchistador.getMyInfoFromPlatformAuto();
     if (response) {
-      let userInfo = await fetch(`${api_url}/user/${response.id}/info`);
+      let userInfo = await fetch(
+        `${api_url}/user/${response.spotify_login}/info`
+      );
       userInfo = await userInfo.json();
       localStorage.setItem('connected_user_name', userInfo.name);
-      localStorage.setItem('connected_user_login', response.id);
+      localStorage.setItem('connected_user_login', response.spotify_login);
       localStorage.setItem('isAuth', true);
       console.log('Infos: ', response);
       return response;
     }
   },
 
-  getMyInfo: async () => {
+  getMyInfoFromMatchistador: async () => {
     try {
-      const response = await matchistador.getMyInfoFromSpotify();
-      if (response.id) {
+      const response = await matchistador.getMyInfoFromPlatformAuto();
+      if (response.spotify_login) {
         console.log('Connect status : ok');
       } else return;
-      let userInfo = await fetch(`${api_url}/user/${response.id}/info`);
+      let userInfo = await fetch(
+        `${api_url}/user/${response.spotify_login}/info`
+      );
       userInfo = await userInfo.json();
       return userInfo;
     } catch (error) {
@@ -194,9 +247,9 @@ const matchistador = {
 
   changeMyUsername: async (newUserName) => {
     const username = JSON.stringify({ newusername: newUserName });
-    const spotifyInfo = await matchistador.getMyInfoFromSpotify();
+    const data = await matchistador.getMyInfoFromPlatformAuto();
 
-    let response = await fetch(`${api_url}/user/${spotifyInfo.id}`, {
+    let response = await fetch(`${api_url}/user/${data.spotify_login}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -207,21 +260,25 @@ const matchistador = {
   },
 
   showMyTracks: async () => {
-    const spotifyInfo = await matchistador.getMyInfoFromSpotify();
+    const response = await matchistador.getMyInfoFromPlatformAuto();
 
-    const result = await fetch(`${api_url}/user/${spotifyInfo.id}/tracks`);
+    const result = await fetch(
+      `${api_url}/user/${response.spotify_login}/tracks`
+    );
     const tracks = await result.json();
     return tracks;
   },
 
   showMyMatchs: async () => {
-    const spotifyInfo = await matchistador.getMyInfoFromSpotify();
-    const result = await fetch(`${api_url}/user/${spotifyInfo.id}/matchs`);
+    const response = await matchistador.getMyInfoFromPlatformAuto();
+    const result = await fetch(
+      `${api_url}/user/${response.spotify_login}/matchs`
+    );
     const matchs = await result.json();
     return matchs;
   },
 
-  getMyTopTracks: async (term) => {
+  getMyTopTracksFromSpotify: async (term) => {
     let result = [];
     let fetchUrl = `https://api.spotify.com/v1/me/top/tracks?time_range=${term}&limit=50`;
     try {
@@ -254,11 +311,53 @@ const matchistador = {
   },
 
   getMyTracks: async () => {
+    if (localStorage.getItem('platform') === 'spotify') {
+      await matchistador.getMyTracksFromSpotify();
+    } else if (localStorage.getItem('platform') === 'deezer') {
+      await matchistador.getMyTracksFromDeezer();
+    }
+  },
+
+  getMyTracksFromDeezer: async () => {
+    try {
+      let tracks = await fetch(
+        `${
+          matchistador.corsAnywhereUrl
+        }https://api.deezer.com/user/me/tracks&access_token=${localStorage.getItem(
+          'access_token'
+        )}`
+      );
+      tracks = await tracks.json();
+      const data = tracks.data.map((track) => ({
+        artist: track.artist.name,
+        track: track.title,
+        album: track.album.title,
+        popularity: Math.floor(track.rank / 10000),
+        spotify_id: track.id,
+        spotify_url: track.link,
+        spotify_img_url: '',
+        spotify_preview_url: '',
+      }));
+      console.log(data);
+      await matchistador.syncMyTracks(data);
+      await matchistador.syncMyMatchs();
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  getMyTracksFromSpotify: async () => {
     try {
       //récupère les 50 top tracks de l'user
-      const topTracks_LT = await matchistador.getMyTopTracks('long_term');
-      const topTracks_MT = await matchistador.getMyTopTracks('medium_term');
-      const topTracks_ST = await matchistador.getMyTopTracks('short_term');
+      const topTracks_LT = await matchistador.getMyTopTracksFromSpotify(
+        'long_term'
+      );
+      const topTracks_MT = await matchistador.getMyTopTracksFromSpotify(
+        'medium_term'
+      );
+      const topTracks_ST = await matchistador.getMyTopTracksFromSpotify(
+        'short_term'
+      );
       let result = [];
       result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
       console.log('top tracks RESULT :', result.length);
@@ -321,14 +420,17 @@ const matchistador = {
   syncMyTracks: async (tracks) => {
     try {
       // s'exécute à la fin de getMyTracks()
-      const spotifyInfo = await matchistador.getMyInfoFromSpotify();
-      let response = await fetch(`${api_url}/user/${spotifyInfo.id}/tracks`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(tracks),
-      });
+      const data = await matchistador.getMyInfoFromPlatformAuto();
+      let response = await fetch(
+        `${api_url}/user/${data.spotify_login}/tracks`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(tracks),
+        }
+      );
       return console.log(await response.json());
     } catch (error) {
       console.error(error);
@@ -338,8 +440,8 @@ const matchistador = {
   syncMyMatchs: async () => {
     try {
       // s'exécute à la fin de getMyTracks()
-      const userInfo = await matchistador.syncMyInfo();
-      const spotify_login = userInfo.id;
+      const data = await matchistador.syncMyInfo();
+      const spotify_login = data.spotify_login;
       let response = await fetch(`${api_url}/user/${spotify_login}/syncmatchs`);
       console.log(await response.json());
     } catch (error) {

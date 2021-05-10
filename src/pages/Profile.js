@@ -11,7 +11,7 @@ const Profile = () => {
   const [message, setMessage] = useState('');
 
   const showInfo = async () => {
-    setUserinfo(await matchistador.getMyInfo());
+    setUserinfo(await matchistador.getMyInfoFromPlatformAuto());
   };
 
   const handleSubmit = async () => {

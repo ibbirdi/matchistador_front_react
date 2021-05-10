@@ -43,7 +43,7 @@ const Home = () => {
 
   useEffect(() => {
     const signInAndSyncView = async () => {
-      const info = await matchistador.getMyInfo();
+      const info = await matchistador.getMyInfoFromMatchistador();
       if (!info) {
         setIsAuth(false);
         console.log('pas auth');
