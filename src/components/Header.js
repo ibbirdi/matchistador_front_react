@@ -1,13 +1,14 @@
 import ConnectStatus from './ConnectStatus';
 import logo from '../img/logodegrade.png';
+import { Link } from 'react-router-dom';
 function Header({ username }) {
   return (
     <div className="Header">
       <nav className="" role="navigation" aria-label="main navigation">
         <div className="logo">
-          <a className="navbar-item" href="/">
+          <Link className="navbar-item" to="/">
             <img src={logo} alt="logo" />
-          </a>
+          </Link>
         </div>
 
         <div className="connected-user">

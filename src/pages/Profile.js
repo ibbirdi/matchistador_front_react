@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import matchistador from '../core/matchistador';
 import { SkipBack } from 'react-feather';
 import { Edit } from 'react-feather';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const [userInfo, setUserinfo] = useState('Chargement...');
@@ -11,7 +12,7 @@ const Profile = () => {
   const [message, setMessage] = useState('');
 
   const showInfo = async () => {
-    setUserinfo(await matchistador.getMyInfoFromPlatformAuto());
+    setUserinfo(await matchistador.getMyInfoFromMatchistador());
   };
 
   const handleSubmit = async () => {
@@ -53,9 +54,10 @@ const Profile = () => {
             </button>
           </div>
           <h4>{message}</h4>
-          <a href="/home" className="button">
+
+          <Link to="/home" className="button">
             <SkipBack /> Retour
-          </a>
+          </Link>
         </Card1>
       </div>
     </div>

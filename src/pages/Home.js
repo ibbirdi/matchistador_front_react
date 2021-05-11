@@ -12,6 +12,7 @@ const Home = () => {
   const [matchs, setMatchs] = useState([]);
   const [username, setUsername] = useState('Chargement...');
   const [matchedTracks, setMatchedTracks] = useState([]);
+  const [runOnce, setRunOnce] = useState(true);
 
   const syncThenReload = async () => {
     try {
@@ -57,10 +58,12 @@ const Home = () => {
       setUsername(info.name);
       setTitle('Hello ' + info.name);
       console.log('info!');
+      setRunOnce(false);
     };
-
-    signInAndSyncView();
-  }, []);
+    if (runOnce) {
+      signInAndSyncView();
+    }
+  }, [runOnce]);
 
   return (
     <div className="Home">
