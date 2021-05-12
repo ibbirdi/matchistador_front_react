@@ -85,12 +85,13 @@ const matchistador = {
     //récupération du token de deezer avec le code récupéré
 
     const response = await fetch(
-      `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
-        matchistador.deezer_clientId
-      )}&secret=${encodeURIComponent(
-        matchistador.deezer_clientSecret
-      )}&code=${encodeURIComponent(code)}&response_type=token&output=json`,
-      { credentials: 'same-origin', mode: 'same-origin' }
+      matchistador.buildCorsFreeUrl(
+        `https://connect.deezer.com/oauth/access_token.php?app_id=${encodeURIComponent(
+          matchistador.deezer_clientId
+        )}&secret=${encodeURIComponent(
+          matchistador.deezer_clientSecret
+        )}&code=${encodeURIComponent(code)}&response_type=token&output=json`
+      )
     );
 
     const deezerData = await response.json();
