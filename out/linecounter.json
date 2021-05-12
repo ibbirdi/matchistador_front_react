@@ -1,0 +1,977 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "/Users/jonathanluquet/Library/Mobile Documents/com~apple~CloudDocs/CODE/matchistador_front_react",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2021-05-12 09:03:58",
+            "filesum": 69,
+            "codesum": 40219,
+            "commentsum": 114,
+            "blanksum": 245,
+            "statistics": {
+                ".js": {
+                    "code": 940,
+                    "comment": 20,
+                    "blank": 111
+                },
+                ".scss": {
+                    "code": 578,
+                    "comment": 3,
+                    "blank": 44
+                },
+                ".json": {
+                    "code": 38512,
+                    "comment": 0,
+                    "blank": 12
+                },
+                ".html": {
+                    "code": 42,
+                    "comment": 24,
+                    "blank": 5
+                },
+                ".txt": {
+                    "code": 6,
+                    "comment": 47,
+                    "blank": 5
+                },
+                ".example": {
+                    "code": 4,
+                    "comment": 0,
+                    "blank": 1
+                },
+                "": {
+                    "code": 97,
+                    "comment": 7,
+                    "blank": 35
+                },
+                ".md": {
+                    "code": 39,
+                    "comment": 12,
+                    "blank": 32
+                },
+                ".css": {
+                    "code": 1,
+                    "comment": 1,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".env"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".env.example"
+                },
+                {
+                    "blank": 34,
+                    "code": 93,
+                    "comment": 7,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 1,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "build/asset-manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/deezerchannel.html"
+                },
+                {
+                    "filename": "build/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "build/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "build/robots.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build/static/css/main.4c743778.chunk.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build/static/js/2.9071488c.chunk.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 0,
+                    "comment": 45,
+                    "filename": "build/static/js/2.9071488c.chunk.js.LICENSE.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/static/js/main.525ecdfb.chunk.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/static/js/runtime-main.65b664e7.js"
+                },
+                {
+                    "filename": "build/static/media/fond7.8d5fcbe7.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build/static/media/logodegrade.4f015992.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build/static/media/match.08a17514.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build/static/media/play-button.2690d0d4.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build/static/media/spotifyWhite.f48fb565.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 8,
+                    "code": 38434,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "public/deezerchannel.html"
+                },
+                {
+                    "filename": "public/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 39,
+                    "comment": 24,
+                    "filename": "public/index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public/robots.txt"
+                },
+                {
+                    "blank": 32,
+                    "code": 38,
+                    "comment": 12,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "README.old.md"
+                },
+                {
+                    "blank": 3,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src/App.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/components/Card1.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/components/ConnectStatus.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "src/components/Dashboard.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/components/Header.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "src/components/Matchboard.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "src/components/Quotes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "src/components/Tracksboard.js"
+                },
+                {
+                    "blank": 52,
+                    "code": 421,
+                    "comment": 16,
+                    "filename": "src/core/matchistador.js"
+                },
+                {
+                    "filename": "src/img/cancel-white.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/deezerWhite.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/flash.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/fond7.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/logo-m.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/logodegrade.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/match.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/music-note.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/play-button.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/profile-user.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/spotify.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/spotifyWhite.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/user.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 29,
+                    "comment": 2,
+                    "filename": "src/pages/Auth.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/pages/Authdeezer.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 88,
+                    "comment": 0,
+                    "filename": "src/pages/Home.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "src/pages/Landing.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/pages/NotFound.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "src/pages/Profile.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "src/styles/_card1.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/styles/_connectstatus.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "src/styles/_dashboard.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/styles/_header.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/styles/_home.scss"
+                },
+                {
+                    "blank": 5,
+                    "code": 72,
+                    "comment": 0,
+                    "filename": "src/styles/_landing.scss"
+                },
+                {
+                    "blank": 8,
+                    "code": 104,
+                    "comment": 2,
+                    "filename": "src/styles/_matchboard.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/styles/_quotes.scss"
+                },
+                {
+                    "blank": 12,
+                    "code": 95,
+                    "comment": 0,
+                    "filename": "src/styles/_settings.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 97,
+                    "comment": 1,
+                    "filename": "src/styles/_tracksboard.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/styles/index.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "test.js"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2021-05-12 09:23:19",
+            "filesum": 67,
+            "codesum": 1745,
+            "commentsum": 114,
+            "blanksum": 234,
+            "statistics": {
+                ".js": {
+                    "code": 940,
+                    "comment": 20,
+                    "blank": 111
+                },
+                ".scss": {
+                    "code": 578,
+                    "comment": 3,
+                    "blank": 44
+                },
+                ".txt": {
+                    "code": 6,
+                    "comment": 47,
+                    "blank": 5
+                },
+                ".json": {
+                    "code": 38,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".html": {
+                    "code": 42,
+                    "comment": 24,
+                    "blank": 5
+                },
+                ".css": {
+                    "code": 1,
+                    "comment": 1,
+                    "blank": 0
+                },
+                "": {
+                    "code": 97,
+                    "comment": 7,
+                    "blank": 35
+                },
+                ".example": {
+                    "code": 4,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".md": {
+                    "code": 39,
+                    "comment": 12,
+                    "blank": 32
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".env"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".env.example"
+                },
+                {
+                    "blank": 34,
+                    "code": 93,
+                    "comment": 7,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 1,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "build/asset-manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/deezerchannel.html"
+                },
+                {
+                    "filename": "build/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "build/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "build/robots.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build/static/css/main.4c743778.chunk.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build/static/js/2.9071488c.chunk.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 0,
+                    "comment": 45,
+                    "filename": "build/static/js/2.9071488c.chunk.js.LICENSE.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/static/js/main.525ecdfb.chunk.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/static/js/runtime-main.65b664e7.js"
+                },
+                {
+                    "filename": "build/static/media/fond7.8d5fcbe7.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build/static/media/logodegrade.4f015992.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build/static/media/match.08a17514.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build/static/media/play-button.2690d0d4.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build/static/media/spotifyWhite.f48fb565.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "public/deezerchannel.html"
+                },
+                {
+                    "filename": "public/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 39,
+                    "comment": 24,
+                    "filename": "public/index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public/robots.txt"
+                },
+                {
+                    "blank": 32,
+                    "code": 38,
+                    "comment": 12,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "README.old.md"
+                },
+                {
+                    "blank": 3,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src/App.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/components/Card1.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/components/ConnectStatus.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "src/components/Dashboard.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/components/Header.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "src/components/Matchboard.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "src/components/Quotes.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "src/components/Tracksboard.js"
+                },
+                {
+                    "blank": 52,
+                    "code": 421,
+                    "comment": 16,
+                    "filename": "src/core/matchistador.js"
+                },
+                {
+                    "filename": "src/img/cancel-white.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/deezerWhite.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/flash.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/fond7.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/logo-m.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/logodegrade.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/match.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/music-note.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/play-button.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/profile-user.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/spotify.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/spotifyWhite.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src/img/user.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 29,
+                    "comment": 2,
+                    "filename": "src/pages/Auth.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/pages/Authdeezer.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 88,
+                    "comment": 0,
+                    "filename": "src/pages/Home.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "src/pages/Landing.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/pages/NotFound.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "src/pages/Profile.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "src/styles/_card1.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/styles/_connectstatus.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "src/styles/_dashboard.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/styles/_header.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/styles/_home.scss"
+                },
+                {
+                    "blank": 5,
+                    "code": 72,
+                    "comment": 0,
+                    "filename": "src/styles/_landing.scss"
+                },
+                {
+                    "blank": 8,
+                    "code": 104,
+                    "comment": 2,
+                    "filename": "src/styles/_matchboard.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/styles/_quotes.scss"
+                },
+                {
+                    "blank": 12,
+                    "code": 95,
+                    "comment": 0,
+                    "filename": "src/styles/_settings.scss"
+                },
+                {
+                    "blank": 4,
+                    "code": 97,
+                    "comment": 1,
+                    "filename": "src/styles/_tracksboard.scss"
+                },
+                {
+                    "blank": 1,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/styles/index.scss"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "test.js"
+                }
+            ]
+        }
+    ]
+}

@@ -31,7 +31,7 @@ const Quotes = () => {
     return () => {
       clearInterval(int);
     };
-  });
+  }, []);
 
   return (
     <>
