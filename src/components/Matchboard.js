@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import matchistador from '../core/matchistador';
 import Tracksboard from './Tracksboard';
 import iconM from '../img/logo-m.png';
+import Loading from './Loading';
 
-const Matchboard = ({ matchs }) => {
+const Matchboard = ({ matchs, loading }) => {
   const [matchedTracks, setMatchedTracks] = useState([]);
   const [matchName, setMatchName] = useState('');
   const [matchsToDisplay, setMatchsToDisplay] = useState([]);
+  const [matchsDisplayAll, setMatchsDisplayAll] = useState(false);
 
   const showMatchedTracks = async (matchname, matchuser) => {
     let tracks = await matchistador.getMatchedTracks(matchuser);
@@ -17,7 +19,13 @@ const Matchboard = ({ matchs }) => {
   };
 
   useEffect(() => {
-    setMatchsToDisplay(matchs);
+    if (matchsDisplayAll === false) {
+      const filteredMatchs = matchs.filter((match) => match.score > 0);
+
+      setMatchsToDisplay(filteredMatchs);
+    } else {
+      setMatchsToDisplay(matchs);
+    }
   }, [matchs]);
 
   const searchMatch = (e) => {
@@ -41,6 +49,7 @@ const Matchboard = ({ matchs }) => {
           onChange={searchMatch}
         />
       </div>
+      {loading && <Loading />}
       {matchsToDisplay.map((match) => {
         return (
           <div

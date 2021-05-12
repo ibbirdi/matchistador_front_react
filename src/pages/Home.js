@@ -10,9 +10,11 @@ const Home = () => {
   const [title, setTitle] = useState('Chargement...');
   const [tracks, setTracks] = useState([]);
   const [matchs, setMatchs] = useState([]);
+  const [filteredMatchs, setFilteredMatchs] = useState([]);
   const [username, setUsername] = useState('Chargement...');
   const [matchedTracks, setMatchedTracks] = useState([]);
   const [runOnce, setRunOnce] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const syncThenReload = async () => {
     try {
@@ -37,11 +39,6 @@ const Home = () => {
     }
   };
 
-  const showMatchedTracks = async (matchuser) => {
-    const matchedTracks = matchistador.getMatchedTracks(matchuser);
-    setMatchedTracks(matchedTracks);
-  };
-
   useEffect(() => {
     const signInAndSyncView = async () => {
       const info = await matchistador.getMyInfoFromMatchistador();
@@ -51,6 +48,7 @@ const Home = () => {
       }
       const tracks = await matchistador.showMyTracks();
       const matchs = await matchistador.showMyMatchs();
+      setFilteredMatchs(matchs.filter((match) => match.score > 0));
 
       setIsAuth(true);
       setTracks(tracks);
@@ -59,6 +57,7 @@ const Home = () => {
       setTitle('Hello ' + info.name);
       console.log('info!');
       setRunOnce(false);
+      setLoading(false);
     };
     if (runOnce) {
       signInAndSyncView();
@@ -75,10 +74,10 @@ const Home = () => {
 
             <Dashboard
               tracksCount={tracks.length}
-              matchsCount={matchs.length}
+              matchsCount={filteredMatchs.length}
               btnFunction={syncThenReload}
             />
-            <Matchboard matchs={matchs} clickFunction={showMatchedTracks} />
+            <Matchboard matchs={matchs} loading={loading} />
             <Tracksboard matchedTracks={matchedTracks} />
           </>
         )}
