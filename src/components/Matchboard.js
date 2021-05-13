@@ -5,6 +5,7 @@ import iconM from '../img/logo-m.png';
 import Loading from './Loading';
 import logoSpotify from '../img/spotifyWhite.png';
 import logoDeezer from '../img/deezerWhite.png';
+import Flip from 'react-reveal/Flip';
 
 const Matchboard = ({ matchs, loading }) => {
   const [matchedTracks, setMatchedTracks] = useState([]);
@@ -41,48 +42,51 @@ const Matchboard = ({ matchs, loading }) => {
   return (
     <div className="Matchboard">
       <div className="title-container">
-        <h3>Mes Matchs</h3>
-
-        <input
-          className="searchInput"
-          type="text"
-          placeholder="Rechercher..."
-          onChange={searchMatch}
-        />
+        <Flip top cascade>
+          <h3>Mes Matchs</h3>
+          <input
+            className="searchInput"
+            type="text"
+            placeholder="Rechercher..."
+            onChange={searchMatch}
+          />
+        </Flip>
       </div>
       {loading && <Loading />}
       {matchsToDisplay.map((match) => {
         return (
-          <div
-            key={match.matchuser.spotify_login}
-            className="item-row"
-            onClick={() => {
-              showMatchedTracks(
-                match.matchuser.name,
-                match.matchuser.spotify_login
-              );
-            }}
-          >
-            <div className="item">
-              <span className="logo-m shadow">
-                <img src={iconM} alt="" />
-              </span>
+          <Flip top cascade>
+            <div
+              key={match.matchuser.spotify_login}
+              className="item-row"
+              onClick={() => {
+                showMatchedTracks(
+                  match.matchuser.name,
+                  match.matchuser.spotify_login
+                );
+              }}
+            >
+              <div className="item">
+                <span className="logo-m shadow">
+                  <img src={iconM} alt="" />
+                </span>
 
-              <div className="item-title">
-                {match.matchuser.name}{' '}
-                {match.matchuser.streaming_platform === 'spotify' && (
-                  <img src={logoSpotify} alt="logo spotify" />
-                )}
-                {match.matchuser.streaming_platform === 'deezer' && (
-                  <img src={logoDeezer} alt="logo deezer" />
-                )}
+                <div className="item-title">
+                  {match.matchuser.name}{' '}
+                  {match.matchuser.streaming_platform === 'spotify' && (
+                    <img src={logoSpotify} alt="logo spotify" />
+                  )}
+                  {match.matchuser.streaming_platform === 'deezer' && (
+                    <img src={logoDeezer} alt="logo deezer" />
+                  )}
+                </div>
+              </div>
+              <div className="item-desc--container">
+                <div className="score">{match.score} points</div>
+                <div className="item-desc">{match.tracksQty} titres</div>
               </div>
             </div>
-            <div className="item-desc--container">
-              <div className="score">{match.score} points</div>
-              <div className="item-desc">{match.tracksQty} titres</div>
-            </div>
-          </div>
+          </Flip>
         );
       })}
       <Tracksboard matchedTracks={matchedTracks} matchName={matchName} />

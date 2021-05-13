@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Matchboard from '../components/Matchboard';
 import Tracksboard from '../components/Tracksboard';
 import matchistador from '../core/matchistador';
+import LightSpeed from 'react-reveal/LightSpeed';
 
 const Home = () => {
   const [isAuth, setIsAuth] = useState(true);
@@ -71,7 +72,6 @@ const Home = () => {
         {isAuth && (
           <>
             <h2>{title}</h2>
-
             <Dashboard
               tracksCount={tracks.length}
               matchsCount={filteredMatchs.length}
@@ -88,7 +88,7 @@ const Home = () => {
               <div className="button">Par ici !</div>
             </a>
           </>
-        )}
+        )}{' '}
       </div>
     </div>
   );

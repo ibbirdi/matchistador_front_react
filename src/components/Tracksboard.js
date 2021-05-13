@@ -1,6 +1,7 @@
 import React from 'react';
 import iconM from '../img/logo-m.png';
 import iconCancel from '../img/cancel-white.png';
+import Flip from 'react-reveal/Flip';
 
 const closeTracksboard = () => {
   const tracksboard = document.getElementById('tracksboard');
@@ -23,12 +24,12 @@ const Tracksboard = ({ matchName, matchedTracks }) => {
         </div>
         {matchedTracks.map((track) => {
           return (
-            <div key={track.id} className="track-container">
-              <div className="artist">{track.artist}</div>
-              <div className="track">
-                {track.track} ({track.popularity})
+            <Flip top cascade>
+              <div key={track.id} className="track-container">
+                <div className="artist">{track.artist}</div>
+                <div className="track">{track.track}</div>
               </div>
-            </div>
+            </Flip>
           );
         })}
         <div>Total : {matchedTracks.length}</div>

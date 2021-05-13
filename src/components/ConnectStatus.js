@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import userImg from '../img/profile-user.png';
-
+import Fade from 'react-reveal/Fade';
 const ConnectStatus = ({ username }) => {
   return (
     <div className="connectstatus">

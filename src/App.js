@@ -16,6 +16,7 @@ function App() {
           <Route path="/" exact component={Landing} />
           <Route path="/auth" exact component={Auth} />
           <Route path="/authdeezer" exact component={Authdeezer} />
+
           <Route path="/home" exact component={Home} />
           <Route path="/profil" exact component={Profile} />
           <Route component={NotFound} />

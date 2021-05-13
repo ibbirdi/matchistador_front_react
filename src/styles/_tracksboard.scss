@@ -52,7 +52,7 @@
   }
   .tracksboard-title {
     box-shadow: 0 0px 20px 10px #000000cb;
-
+    z-index: 1000;
     display: flex;
     position: -webkit-sticky;
     position: sticky;
