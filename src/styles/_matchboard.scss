@@ -81,6 +81,11 @@
         font-size: 0.8rem;
         font-weight: 600;
         z-index: 100;
+
+        img {
+          width: 60px;
+          filter: drop-shadow(0 0 2px rgba(43, 43, 43, 0.817));
+        }
       }
     }
     .item-desc--container {

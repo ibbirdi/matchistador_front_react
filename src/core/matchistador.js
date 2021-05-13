@@ -174,6 +174,7 @@ const matchistador = {
       name: response.display_name,
       spotify_login: response.id,
       email: response.email,
+      streaming_platform: 'deezer',
     };
     return data;
   },
@@ -192,6 +193,7 @@ const matchistador = {
       name: response.name,
       spotify_login: response.name,
       email: response.email,
+      streaming_platform: 'deezer',
     };
     return data;
   },

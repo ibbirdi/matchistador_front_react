@@ -3,6 +3,8 @@ import matchistador from '../core/matchistador';
 import Tracksboard from './Tracksboard';
 import iconM from '../img/logo-m.png';
 import Loading from './Loading';
+import logoSpotify from '../img/spotifyWhite.png';
+import logoDeezer from '../img/deezerWhite.png';
 
 const Matchboard = ({ matchs, loading }) => {
   const [matchedTracks, setMatchedTracks] = useState([]);
@@ -18,24 +20,23 @@ const Matchboard = ({ matchs, loading }) => {
     setMatchName(matchname);
   };
 
-  useEffect(() => {
-    if (matchsDisplayAll === false) {
-      const filteredMatchs = matchs.filter((match) => match.score > 0);
-
-      setMatchsToDisplay(filteredMatchs);
-    } else {
-      setMatchsToDisplay(matchs);
-    }
-  }, [matchs]);
-
   const searchMatch = (e) => {
     const filteredMatchs = matchs.filter((match) =>
       match.matchuser.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setMatchsToDisplay(filteredMatchs);
-
     console.log(filteredMatchs);
   };
+
+  useEffect(() => {
+    if (matchsDisplayAll === false) {
+      const filteredMatchs = matchs.filter((match) => match.score > 0);
+      console.log(matchsToDisplay);
+      setMatchsToDisplay(filteredMatchs);
+    } else {
+      setMatchsToDisplay(matchs);
+    }
+  }, [matchs]);
 
   return (
     <div className="Matchboard">
@@ -67,7 +68,15 @@ const Matchboard = ({ matchs, loading }) => {
                 <img src={iconM} alt="" />
               </span>
 
-              <div className="item-title">{match.matchuser.name}</div>
+              <div className="item-title">
+                {match.matchuser.name}{' '}
+                {match.matchuser.streaming_platform === 'spotify' && (
+                  <img src={logoSpotify} alt="logo spotify" />
+                )}
+                {match.matchuser.streaming_platform === 'deezer' && (
+                  <img src={logoDeezer} alt="logo deezer" />
+                )}
+              </div>
             </div>
             <div className="item-desc--container">
               <div className="score">{match.score} points</div>
