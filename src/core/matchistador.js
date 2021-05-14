@@ -174,7 +174,7 @@ const matchistador = {
       name: response.display_name,
       spotify_login: response.id,
       email: response.email,
-      streaming_platform: 'deezer',
+      streaming_platform: 'spotify',
     };
     return data;
   },
