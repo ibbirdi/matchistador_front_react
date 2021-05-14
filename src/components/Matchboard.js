@@ -41,59 +41,57 @@ const Matchboard = ({ matchs, loading }) => {
   }, [matchs]);
 
   return (
-    <Fade>
-      <div className="Matchboard">
-        <div className="title-container">
+    <div className="Matchboard">
+      <div className="title-container">
+        <Flip top cascade>
+          <h3>Mes Matchs</h3>
+          <input
+            className="searchInput"
+            type="text"
+            placeholder="Rechercher..."
+            onChange={searchMatch}
+          />
+        </Flip>
+      </div>
+      {loading && <Loading />}
+      {matchsToDisplay.map((match) => {
+        return (
           <Flip top cascade>
-            <h3>Mes Matchs</h3>
-            <input
-              className="searchInput"
-              type="text"
-              placeholder="Rechercher..."
-              onChange={searchMatch}
-            />
-          </Flip>
-        </div>
-        {loading && <Loading />}
-        {matchsToDisplay.map((match) => {
-          return (
-            <Flip top cascade>
-              <div
-                key={match.matchuser.spotify_login}
-                className="item-row"
-                onClick={() => {
-                  showMatchedTracks(
-                    match.matchuser.name,
-                    match.matchuser.spotify_login
-                  );
-                }}
-              >
-                <div className="item">
-                  <span className="logo-m shadow">
-                    <img src={iconM} alt="" />
-                  </span>
+            <div
+              key={match.matchuser.spotify_login}
+              className="item-row"
+              onClick={() => {
+                showMatchedTracks(
+                  match.matchuser.name,
+                  match.matchuser.spotify_login
+                );
+              }}
+            >
+              <div className="item">
+                <span className="logo-m shadow">
+                  <img src={iconM} alt="" />
+                </span>
 
-                  <div className="item-title">
-                    {match.matchuser.name}{' '}
-                    {match.matchuser.streaming_platform === 'spotify' && (
-                      <img src={logoSpotify} alt="logo spotify" />
-                    )}
-                    {match.matchuser.streaming_platform === 'deezer' && (
-                      <img src={logoDeezer} alt="logo deezer" />
-                    )}
-                  </div>
-                </div>
-                <div className="item-desc--container">
-                  <div className="score">{match.score} points</div>
-                  <div className="item-desc">{match.tracksQty} titres</div>
+                <div className="item-title">
+                  {match.matchuser.name}{' '}
+                  {match.matchuser.streaming_platform === 'spotify' && (
+                    <img src={logoSpotify} alt="logo spotify" />
+                  )}
+                  {match.matchuser.streaming_platform === 'deezer' && (
+                    <img src={logoDeezer} alt="logo deezer" />
+                  )}
                 </div>
               </div>
-            </Flip>
-          );
-        })}
-        <Tracksboard matchedTracks={matchedTracks} matchName={matchName} />
-      </div>
-    </Fade>
+              <div className="item-desc--container">
+                <div className="score">{match.score} points</div>
+                <div className="item-desc">{match.tracksQty} titres</div>
+              </div>
+            </div>
+          </Flip>
+        );
+      })}
+      <Tracksboard matchedTracks={matchedTracks} matchName={matchName} />
+    </div>
   );
 };
 
