@@ -11,17 +11,19 @@ const Tracksboard = ({ matchName, matchedTracks }) => {
   return (
     <div className="Tracksboard hidden" id="tracksboard">
       <div className="trackslist">
-        <div className="tracksboard-title">
-          <div>
-            <div className="logo-m">
-              <img src={iconM} alt="" />
-              {matchName}
+        <Flip top>
+          <div className="tracksboard-title">
+            <div>
+              <div className="logo-m">
+                <img src={iconM} alt="" />
+                {matchName}
+              </div>
+            </div>
+            <div className="closebtn" onClick={closeTracksboard}>
+              <img src={iconCancel} alt="" />
             </div>
           </div>
-          <div className="closebtn" onClick={closeTracksboard}>
-            <img src={iconCancel} alt="" />
-          </div>
-        </div>
+        </Flip>
         {matchedTracks.map((track) => {
           return (
             <Flip top cascade>

@@ -4,7 +4,7 @@ import iconMatch from '../img/match.png';
 import Fade from 'react-reveal/Fade';
 const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
   return (
-    <Fade cascade>
+    <Fade>
       <div className="Dashboard">
         <div className="item-row">
           <div className="item">

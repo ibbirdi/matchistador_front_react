@@ -35,7 +35,7 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    transition: 200ms;
+    transition-duration: 500ms;
     border-radius: 5px;
     color: white;
     text-shadow: 0 0px 5px #2c2c2c9d;
@@ -47,9 +47,9 @@
       background: rgba(0, 0, 0, 0.553);
       color: white;
       box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.553);
-      border-radius: 20px;
-      margin: 0 10px;
-      // transform: scale(1.05);
+      border-radius: 10px;
+      transition-duration: 200ms;
+      transform: scale(0.95);
     }
     &:hover .item-desc {
       background: $color-1 !important;

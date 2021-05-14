@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import matchistador from '../core/matchistador';
 import logoMatchistador from '../img/logodegrade.png';
+import Flip from 'react-reveal/Flip';
 
 const Auth = () => {
   const history = useHistory();
@@ -26,7 +27,9 @@ const Auth = () => {
     <div className="landing-page">
       <div className="connexion">
         <img className="logo" src={logoMatchistador} alt="" />
-        <h1>Authentification en cours</h1>
+        <Flip top cascade>
+          <h1>Authentification en cours</h1>
+        </Flip>
       </div>
     </div>
   );
