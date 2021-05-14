@@ -59,6 +59,7 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0px;
+
     align-items: center;
     cursor: pointer;
     margin-bottom: 10px;
@@ -97,6 +98,8 @@
       margin-right: 20px;
     }
     .track {
+      color: $color-2;
+
       text-align: right;
       font-size: 0.8rem;
     }

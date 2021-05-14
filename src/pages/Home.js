@@ -90,7 +90,7 @@ const Home = () => {
               <div className="button">Par ici !</div>
             </a>
           </>
-        )}{' '}
+        )}
       </div>
     </div>
   );
