@@ -28,7 +28,7 @@ const Authdeezer = () => {
         <img className="logo" src={logoMatchistador} alt="" />
         <Flip top cascade>
           <h1>Authentification...</h1>
-        </Flip>{' '}
+        </Flip>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const Auth = () => {
       <div className="connexion">
         <img className="logo" src={logoMatchistador} alt="" />
         <Flip top cascade>
-          <h1>Authentification en cours</h1>
+          <h1>Authentification...</h1>
         </Flip>
       </div>
     </div>
