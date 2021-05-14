@@ -5,9 +5,11 @@ import Matchboard from '../components/Matchboard';
 import Tracksboard from '../components/Tracksboard';
 import matchistador from '../core/matchistador';
 
+import Fade from 'react-reveal/Fade';
+
 const Home = () => {
   const [isAuth, setIsAuth] = useState(true);
-  const [title, setTitle] = useState('Chargement...');
+  const [title, setTitle] = useState('');
   const [tracks, setTracks] = useState([]);
   const [matchs, setMatchs] = useState([]);
   const [filteredMatchs, setFilteredMatchs] = useState([]);
@@ -40,6 +42,7 @@ const Home = () => {
 
   useEffect(() => {
     const signInAndSyncView = async () => {
+      setTitle('Chargement...');
       const info = await matchistador.getMyInfoFromMatchistador();
       if (!info) {
         setIsAuth(false);
@@ -69,7 +72,9 @@ const Home = () => {
       <div className="main-container">
         {isAuth && (
           <>
-            <h2>{title}</h2>
+            <Fade top spy={title}>
+              <h2>{title}</h2>
+            </Fade>
             <Dashboard
               tracksCount={tracks.length}
               matchsCount={filteredMatchs.length}
