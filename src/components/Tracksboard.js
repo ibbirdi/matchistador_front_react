@@ -24,12 +24,10 @@ const Tracksboard = ({ matchName, matchedTracks }) => {
         </div>
         {matchedTracks.map((track) => {
           return (
-            <Flip top cascade>
-              <div key={track.id} className="track-container">
-                <div className="artist">{track.artist}</div>
-                <div className="track">{track.track}</div>
-              </div>
-            </Flip>
+            <div key={track.id} className="track-container">
+              <div className="artist">{track.artist}</div>
+              <div className="track">{track.track}</div>
+            </div>
           );
         })}
         <div>Total : {matchedTracks.length}</div>
