@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Fade from 'react-reveal/Fade';
 
 const Quotes = () => {
   const [citationIndex, setCitationIndex] = useState(0);
@@ -22,24 +23,31 @@ const Quotes = () => {
   ];
 
   useEffect(() => {
-    const quotesLength = citations.length;
-    const int = setInterval(() => {
-      citationIndex < quotesLength - 1
-        ? setCitationIndex(citationIndex + 1)
-        : setCitationIndex(0);
-    }, 5000);
+    const randQuote = () => {
+      if (citationIndex < citations.length - 1) {
+        setCitationIndex(citationIndex + 1);
+      } else {
+        setCitationIndex(0);
+      }
+    };
+    const int = setInterval(randQuote, 7000);
     return () => {
       clearInterval(int);
     };
-  }, []);
+  }, [citationIndex, citations.length]);
 
   return (
     <>
-      <div className="Quotes">
-        <span className="symbol">“ </span>
-        {citations[citationIndex].quote} <span className="symbol">”</span>
-        <div className="author">{citations[citationIndex].author}</div>
-      </div>
+      <Fade>
+        <div className="Quotes">
+          <Fade top cascade spy={citationIndex}>
+            {citations[citationIndex].quote}
+          </Fade>
+          <Fade bottom cascade spy={citationIndex}>
+            <div className="author">{citations[citationIndex].author}</div>
+          </Fade>
+        </div>
+      </Fade>
     </>
   );
 };

@@ -1,5 +1,7 @@
 .Quotes {
   position: absolute;
+  left: 0;
+  right: 0;
   margin: 10px;
   text-align: center;
   top: 70px;
@@ -8,11 +10,6 @@
   font-style: italic;
   font-size: 1rem;
   text-shadow: 0 1px 2px #00000057;
-
-  .symbol {
-    font-size: 1.2rem;
-    transform: translate(-50px);
-  }
 
   .author {
     color: $color-2;

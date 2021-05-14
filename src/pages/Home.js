@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import Matchboard from '../components/Matchboard';
 import Tracksboard from '../components/Tracksboard';
 import matchistador from '../core/matchistador';
-import LightSpeed from 'react-reveal/LightSpeed';
 
 const Home = () => {
   const [isAuth, setIsAuth] = useState(true);
@@ -13,7 +12,6 @@ const Home = () => {
   const [matchs, setMatchs] = useState([]);
   const [filteredMatchs, setFilteredMatchs] = useState([]);
   const [username, setUsername] = useState('Chargement...');
-  const [matchedTracks, setMatchedTracks] = useState([]);
   const [runOnce, setRunOnce] = useState(true);
   const [loading, setLoading] = useState(true);
 
@@ -78,7 +76,6 @@ const Home = () => {
               btnFunction={syncThenReload}
             />
             <Matchboard matchs={matchs} loading={loading} />
-            <Tracksboard matchedTracks={matchedTracks} />
           </>
         )}
         {!isAuth && (
