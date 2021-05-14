@@ -9,10 +9,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.749);
+  background: rgba(0, 0, 0, 0.849);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: 1s;
   .logo-m {
     display: flex;
     align-items: center;
@@ -37,6 +36,8 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.881);
+    // border-bottom: 1px solid $color-2;
+    // border-top: 1px solid $color-2;
     box-shadow: 0 0px 20px 10px #000000cb;
     color: white;
     font-size: 1rem;
@@ -59,16 +60,16 @@
     top: 0px;
     align-items: center;
     cursor: pointer;
-    border-radius: 10px;
     margin-bottom: 10px;
     justify-content: space-between;
-    background: $color-2;
+    background: rgba(0, 0, 0, 0.951);
     padding: 10px;
     font-size: 1.2rem;
     text-shadow: 0 1px 2px #00000057;
     font-weight: 600;
   }
   .closebtn {
+    margin-left: 20px;
     border-radius: 50%;
     transition: 200ms;
     // border: 2px solid $color-dark-1;
