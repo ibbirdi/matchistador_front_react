@@ -72,7 +72,7 @@ const Home = () => {
       <div className="main-container">
         {isAuth && (
           <>
-            <Fade top spy={title}>
+            <Fade spy={title}>
               <h2>{title}</h2>
             </Fade>
             <Dashboard
