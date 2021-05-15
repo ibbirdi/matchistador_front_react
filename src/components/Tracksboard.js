@@ -13,14 +13,16 @@ const Tracksboard = ({ matchName, matchedTracks }) => {
       <div className="trackslist">
         <Flip top>
           <div className="tracksboard-title">
-            <div>
-              <div className="logo-m">
-                <img src={iconM} alt="" />
-                {matchName}
-              </div>
+            <div className="logo-m">
+              <img src={iconM} alt="" />
+              {matchName}
             </div>
-            <div className="closebtn" onClick={closeTracksboard}>
-              <img src={iconCancel} alt="" />
+
+            <div className="subtitle">
+              {matchedTracks.length} titres en commun{' '}
+              <div className="closebtn" onClick={closeTracksboard}>
+                <img src={iconCancel} alt="" />
+              </div>
             </div>
           </div>
         </Flip>
@@ -29,12 +31,14 @@ const Tracksboard = ({ matchName, matchedTracks }) => {
             <Flip top cascade>
               <div key={track.id} className="track-container">
                 <div className="artist">{track.artist}</div>
-                <div className="track">{track.track}</div>
+                <div className="track">
+                  <div>{track.track}</div>
+                  <img src={track.spotify_img_url} alt="" />
+                </div>
               </div>
             </Flip>
           );
         })}
-        <div>Total : {matchedTracks.length}</div>
       </div>
     </div>
   );

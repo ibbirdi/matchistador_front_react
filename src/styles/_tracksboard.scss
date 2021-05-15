@@ -27,8 +27,8 @@
   }
   .trackslist {
     position: relative;
-    padding: 0 10px 10px 10px;
     overflow-y: auto;
+    overflow-x: hidden;
     border-radius: 5px;
     max-width: 550px;
     max-height: 500px;
@@ -42,6 +42,7 @@
     box-shadow: 0 0px 20px 10px #00000067;
     color: white;
     font-size: 1rem;
+    text-align: center;
 
     &::-webkit-scrollbar {
       width: 5px;
@@ -52,6 +53,12 @@
       border-radius: 10px;
     }
   }
+  .subtitle {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 10px;
+  }
   .tracksboard-title {
     // box-shadow: 0 0px 20px 10px #000000cb;
     z-index: 1000;
@@ -61,7 +68,6 @@
     top: 0px;
 
     align-items: center;
-    cursor: pointer;
     margin-bottom: 10px;
     justify-content: space-between;
     background: rgba(0, 0, 0, 0.951);
@@ -74,6 +80,8 @@
     margin-left: 20px;
     border-radius: 50%;
     transition: 200ms;
+    cursor: pointer;
+
     // border: 2px solid $color-dark-1;
     img {
       width: 25px;
@@ -85,23 +93,34 @@
     }
   }
   .track-container {
+    padding: 10px;
     display: flex;
     align-items: center;
-    padding: 5px;
     justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.048);
+    text-align: left;
 
     &:nth-child(2n) {
-      background: rgba(28, 75, 71, 0.144);
+      background: rgba(28, 75, 71, 0.044);
     }
     .artist {
       font-weight: 600;
       margin-right: 20px;
     }
     .track {
+      display: flex;
+      align-items: center;
       color: $color-2;
 
       text-align: right;
       font-size: 0.8rem;
+
+      img {
+        margin-left: 10px;
+        display: block;
+        width: 50px;
+        border-radius: 50%;
+      }
     }
   }
 }

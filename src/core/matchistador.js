@@ -2,7 +2,7 @@ let front_url = 'https://www.matchistador.com';
 let api_url = 'https://api.matchistador.com';
 //
 //
-const dev = false;
+const dev = true;
 
 if (dev) {
   front_url = 'http://127.0.0.1:3000';
@@ -419,7 +419,7 @@ const matchistador = {
             popularity: item.track.popularity,
             spotify_id: item.track.id,
             spotify_url: item.track.uri,
-            spotify_img_url: '',
+            spotify_img_url: item.track.album.images[1].url,
             spotify_preview_url: item.track.preview_url,
           });
         });

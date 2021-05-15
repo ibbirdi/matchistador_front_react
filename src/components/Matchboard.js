@@ -53,7 +53,7 @@ const Matchboard = ({ matchs, loading }) => {
           />
         </Flip>
       </div>
-      {loading && <Loading />}
+      <Fade>{loading && <Loading />}</Fade>
       {matchsToDisplay.map((match) => {
         return (
           <Flip top cascade>

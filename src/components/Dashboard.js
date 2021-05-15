@@ -11,7 +11,7 @@ const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
             <img src={iconMusic} alt="" />
             <div className="item-desc--container">
               <div className="item-title">Ma musique</div>
-              <Fade when={tracksCount}>
+              <Fade spy={tracksCount}>
                 <div className="item-desc">
                   {`${tracksCount} titres` || 'Aucun titre synchronisé'}
                 </div>
@@ -27,7 +27,7 @@ const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
             <img src={iconMatch} alt="" />
             <div className="item-desc--container">
               <div className="item-title">Mes Matchs</div>
-              <Fade when={matchsCount}>
+              <Fade spy={matchsCount}>
                 <div className="item-desc">{`${matchsCount} Matchs`}</div>
               </Fade>
             </div>

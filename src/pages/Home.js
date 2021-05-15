@@ -26,6 +26,7 @@ const Home = () => {
       const matchs = await matchistador.showMyMatchs();
       setTracks(tracks);
       setMatchs(matchs);
+      setFilteredMatchs(matchs.filter((match) => match.score > 0));
 
       setTitle('Terminé !');
       syncBtn.textContent = 'Terminé !';
