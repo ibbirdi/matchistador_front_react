@@ -2,7 +2,7 @@ let front_url = 'https://www.matchistador.com';
 let api_url = 'https://api.matchistador.com';
 //
 //
-const dev = true;
+const dev = false;
 
 if (dev) {
   front_url = 'http://127.0.0.1:3000';
