@@ -175,6 +175,7 @@ const matchistador = {
       spotify_login: response.id,
       email: response.email,
       streaming_platform: 'spotify',
+      token: localStorage.getItem('access_token'),
     };
     return data;
   },
@@ -194,6 +195,7 @@ const matchistador = {
       spotify_login: response.name,
       email: response.email,
       streaming_platform: 'deezer',
+      token: localStorage.getItem('access_token'),
     };
     return data;
   },
@@ -211,31 +213,30 @@ const matchistador = {
     return response;
   },
 
-  syncMyInfo: async () => {
+  checkConnectionFromMatchistador: async () => {
     const response = await matchistador.getMyInfoFromPlatformAuto();
-    if (response) {
-      let userInfo = await fetch(
-        `${api_url}/user/${response.spotify_login}/info`
-      );
-      userInfo = await userInfo.json();
-      localStorage.setItem('connected_user_name', userInfo.name);
-      localStorage.setItem('connected_user_login', response.spotify_login);
-      localStorage.setItem('isAuth', true);
-      console.log('Infos: ', response);
-      return response;
-    }
+    if (response.spotify_login && response.token) {
+      console.log('Connect status : ok', response.token);
+    } else return;
+    let userInfo = await fetch(
+      `${api_url}/user/${response.spotify_login}/info?token=${response.token}`
+    );
+    userInfo = await userInfo.json();
+    return userInfo;
+  },
+
+  syncMyInfo: async () => {
+    const userInfo = await matchistador.checkConnectionFromMatchistador();
+    localStorage.setItem('connected_user_name', userInfo.name);
+    localStorage.setItem('connected_user_login', userInfo.spotify_login);
+    localStorage.setItem('isAuth', true);
+    console.log('Infos: ', userInfo);
+    return userInfo;
   },
 
   getMyInfoFromMatchistador: async () => {
     try {
-      const response = await matchistador.getMyInfoFromPlatformAuto();
-      if (response.spotify_login) {
-        console.log('Connect status : ok');
-      } else return;
-      let userInfo = await fetch(
-        `${api_url}/user/${response.spotify_login}/info`
-      );
-      userInfo = await userInfo.json();
+      const userInfo = await matchistador.checkConnectionFromMatchistador();
       return userInfo;
     } catch (error) {
       console.log('Connect status : error');
@@ -346,10 +347,10 @@ const matchistador = {
             track: track.title,
             album: track.album.title,
             popularity: Math.floor(track.rank / 10000),
-            spotify_id: track.id,
-            spotify_url: track.link,
-            spotify_img_url: '',
-            spotify_preview_url: '',
+            // deezer_id: track.id,
+            // deezer_url: track.link,
+            // deezer_img_url: '',
+            // deezer_preview_url: '',
           });
         });
         if (response.next) {
@@ -386,6 +387,7 @@ const matchistador = {
       );
       let result = [];
       result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
+
       console.log('top tracks RESULT :', result.length);
       const topTracksLength = result.length;
       let fetchUrl = 'https://api.spotify.com/v1/me/tracks?limit=50';
@@ -483,6 +485,62 @@ const matchistador = {
         )}/matchedtracks/${matchuser}`
       );
       return await matchedTracks.json();
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  makePlaylist: async (name, desc, tracks) => {
+    try {
+      const userInfo = await matchistador.checkConnectionFromMatchistador();
+
+      if (userInfo.streaming_platform === 'spotify') {
+        //CREATION DE LA PLAYLIST
+        const data = {
+          name: name,
+          description: desc,
+        };
+
+        let newPlaylist = await fetch(
+          `https://api.spotify.com/v1/users/${userInfo.spotify_login}/playlists`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+            },
+            body: JSON.stringify(data),
+          }
+        );
+        newPlaylist = await newPlaylist.json();
+        const playlistId = newPlaylist.id;
+        console.log(newPlaylist);
+
+        //AJOUT DES TRACKS DANS LA PLAYLIST
+
+        let tracksUri = tracks.map((track) => track.spotify_url);
+        console.log('tracks uri array : ', tracksUri);
+
+        tracksUri = tracksUri.filter((track) => !track.includes('deezer'));
+
+        while (tracksUri.length > 0) {
+          const splicedTracks = tracksUri.splice(0, 100);
+          const addTracksData = {
+            uris: splicedTracks,
+          };
+          console.log(addTracksData);
+          await fetch(
+            ` https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+              },
+              body: JSON.stringify(addTracksData),
+            }
+          );
+        }
+      }
     } catch (error) {
       console.error(error);
     }

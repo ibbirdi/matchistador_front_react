@@ -13,6 +13,13 @@
   border-radius: 20px;
   font-size: 0.8rem;
 
+  form {
+    display: flex;
+  }
+
+  .message {
+    margin: 10px;
+  }
   .title-container {
     text-align: center;
     width: 100%;

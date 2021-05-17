@@ -36,11 +36,11 @@
         flex-direction: column;
         .item-title {
           font-size: 1rem;
-          font-weight: bold;
+          font-weight: 600;
         }
         .item-desc {
           font-size: 0.8rem;
-          font-weight: normal;
+          font-weight: 600;
           color: $color-1;
         }
       }

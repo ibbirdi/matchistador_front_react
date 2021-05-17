@@ -13,6 +13,8 @@ const Matchboard = ({ matchs, loading }) => {
   const [matchName, setMatchName] = useState('');
   const [matchsToDisplay, setMatchsToDisplay] = useState([]);
   const [matchsDisplayAll, setMatchsDisplayAll] = useState(false);
+  const [addPlaylistMessage, setAddPlaylistMessage] = useState('');
+  const [addPlaylistBtnIsActive, setAddPlaylistBtnIsActive] = useState(false);
 
   const showMatchedTracks = async (matchname, matchuser) => {
     let tracks = await matchistador.getMatchedTracks(matchuser);
@@ -20,6 +22,7 @@ const Matchboard = ({ matchs, loading }) => {
     tracksboard.classList.remove('hidden');
     setMatchedTracks(tracks);
     setMatchName(matchname);
+    console.log(tracks);
   };
 
   const searchMatch = (e) => {
@@ -30,7 +33,22 @@ const Matchboard = ({ matchs, loading }) => {
     console.log(filteredMatchs);
   };
 
+  const makeMatchsPlaylist = async () => {
+    await matchistador.makePlaylist(
+      `Matchistador avec ${matchName}`,
+      'Playlist générée automatiquement par Matchistador en fonction de vos titres communs',
+      matchedTracks
+    );
+    setAddPlaylistMessage(
+      'Terminé, playlist créée dans votre bitliothèque musicale'
+    );
+
+    setAddPlaylistBtnIsActive(false);
+  };
+
   useEffect(() => {
+    if (localStorage.getItem('platform') === 'spotify')
+      setAddPlaylistBtnIsActive(true);
     if (matchsDisplayAll === false) {
       const filteredMatchs = matchs.filter((match) => match.score > 0);
       console.log(matchsToDisplay);
@@ -56,9 +74,8 @@ const Matchboard = ({ matchs, loading }) => {
       <Fade>{loading && <Loading />}</Fade>
       {matchsToDisplay.map((match) => {
         return (
-          <Flip top cascade>
+          <Flip top cascade key={match.matchuser.spotify_login}>
             <div
-              key={match.matchuser.spotify_login}
               className="item-row"
               onClick={() => {
                 showMatchedTracks(
@@ -90,7 +107,13 @@ const Matchboard = ({ matchs, loading }) => {
           </Flip>
         );
       })}
-      <Tracksboard matchedTracks={matchedTracks} matchName={matchName} />
+      <Tracksboard
+        matchedTracks={matchedTracks}
+        matchName={matchName}
+        addPlaylistFunc={makeMatchsPlaylist}
+        addPlaylistMessage={addPlaylistMessage}
+        addPlaylistBtnIsActive={addPlaylistBtnIsActive}
+      />
     </div>
   );
 };

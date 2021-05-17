@@ -16,7 +16,8 @@ const Profile = () => {
     setUserinfo(await matchistador.getMyInfoFromMatchistador());
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!usernameToPost) {
       setMessage('Username invalide');
     } else {
@@ -41,22 +42,21 @@ const Profile = () => {
           <h2>Profil</h2>
           <Card1 title={userInfo.name}>
             <div className="input-container">
-              <input
-                className="input-left"
-                type="text"
-                placeholder="Changer de pseudo"
-                onChange={(e) => setUsernameToPost(e.target.value)}
-              />
-              <button
-                className="button button-right"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Ok
-              </button>
+              <form onSubmit={handleSubmit}>
+                <input
+                  className="input-left"
+                  type="text"
+                  placeholder="Changer de pseudo"
+                  onChange={(e) => setUsernameToPost(e.target.value)}
+                />
+                <button className="button button-right" type="submit">
+                  Ok
+                </button>
+              </form>
             </div>
-            <h4>{message}</h4>
-
+            <Fade spy={message}>
+              <div className="message">{message}</div>
+            </Fade>
             <Link to="/home" className="button">
               <SkipBack /> Retour
             </Link>
