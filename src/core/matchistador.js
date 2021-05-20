@@ -2,7 +2,7 @@ let front_url = 'https://www.matchistador.com';
 let api_url = 'https://api.matchistador.com';
 //
 //
-const dev = false;
+const dev = true;
 
 if (dev) {
   front_url = 'http://127.0.0.1:3000';
@@ -237,6 +237,8 @@ const matchistador = {
   getMyInfoFromMatchistador: async () => {
     try {
       const userInfo = await matchistador.checkConnectionFromMatchistador();
+      console.log('GMIFM', userInfo);
+
       return userInfo;
     } catch (error) {
       console.log('Connect status : error');
