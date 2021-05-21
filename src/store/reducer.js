@@ -30,9 +30,9 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    //TODO: commencer par créer GET_USER_INFO_SUCCESS et _ERROR
     case actions.GET_USER_INFO:
-      const userInfo = matchistador.getMyInfoFromMatchistador();
-      console.log('reducer : GET_USER_INFO', userInfo);
+      const userInfo = { name: 'youpi' };
       return {
         ...state,
         userInfo: userInfo,

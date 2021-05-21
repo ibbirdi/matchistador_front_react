@@ -231,6 +231,7 @@ const matchistador = {
     localStorage.setItem('connected_user_login', userInfo.spotify_login);
     localStorage.setItem('isAuth', true);
     console.log('Infos: ', userInfo);
+
     return userInfo;
   },
 
@@ -243,6 +244,7 @@ const matchistador = {
     } catch (error) {
       console.log('Connect status : error');
       localStorage.setItem('isAuth', false);
+
       return;
     }
   },

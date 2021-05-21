@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import matchistador from '../core/matchistador';
 import logoMatchistador from '../img/logodegrade.png';
@@ -6,7 +6,6 @@ import Flip from 'react-reveal/Flip';
 
 const Auth = () => {
   const history = useHistory();
-  //   const [authError, setAuthError] = useState(true);
 
   useEffect(() => {
     let url = new URL(window.location.href);
@@ -15,7 +14,6 @@ const Auth = () => {
     const spotifyAuth = async () => {
       console.log('AUTH EN COURS');
       await matchistador.spotify_authProcess(spotifyAuthCode);
-      //   setAuthError(false);
       history.push('/home');
     };
     if (spotifyAuthCode) {
