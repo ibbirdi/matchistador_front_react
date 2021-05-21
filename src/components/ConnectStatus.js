@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import userImg from '../img/profile-user.png';
 import Fade from 'react-reveal/Fade';
 import { connect } from 'react-redux';
-import actions from '../store/actions';
+import { GET_USER_INFO } from '../store/actions';
 
 const ConnectStatus = ({ userInfo, getUserInfo }) => {
   useEffect(() => {
@@ -26,7 +26,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getUserInfo: () => dispatch({ type: actions.GET_USER_INFO }),
+  getUserInfo: () => dispatch({ type: GET_USER_INFO }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectStatus);

@@ -1,5 +1,5 @@
 import matchistador from '../core/matchistador';
-import actions from './actions';
+import { GET_USER_INFO } from './actions';
 
 const initialState = {
   isAuth: false,
@@ -31,7 +31,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     //TODO: commencer par créer GET_USER_INFO_SUCCESS et _ERROR
-    case actions.GET_USER_INFO:
+    case GET_USER_INFO:
       const userInfo = { name: 'youpi' };
       return {
         ...state,
