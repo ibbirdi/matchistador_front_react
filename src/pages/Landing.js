@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import matchistador from '../core/matchistador';
+
 import logoSpotify from '../img/spotifyWhite.png';
 import logoMatchistador from '../img/logodegrade.png';
 import logoDeezer from '../img/deezerWhite.png';
@@ -7,8 +8,7 @@ import Quotes from '../components/Quotes';
 import Pulse from 'react-reveal/Pulse';
 
 const Landing = () => {
-  const spotifyUrl = matchistador.makeSpotifyConnectUrl();
-  const deezerUrl = matchistador.makeDeezerConnectUrl();
+  const btnUrls = matchistador.makePlatformsConnectUrls();
   localStorage.clear();
   console.log(localStorage);
 
@@ -20,8 +20,8 @@ const Landing = () => {
         <h1>Bienvenue</h1>
         <h2>Se connecter avec</h2>
         <div className="btn-container">
-          <Pulse forever="true">
-            <a href={spotifyUrl}>
+          <Pulse duration={3000} forever={true}>
+            <a href={btnUrls.spotifyUrl}>
               <div className="spotify-connect--btn">
                 <img
                   className="spotify-connect--img"
@@ -31,8 +31,8 @@ const Landing = () => {
               </div>
             </a>
           </Pulse>
-          <Pulse forever="true" wait="200">
-            <a href={deezerUrl}>
+          <Pulse duration={3000} forever={true} delay={1500}>
+            <a href={btnUrls.deezerUrl}>
               <div className="spotify-connect--btn">
                 <img className="spotify-connect--img" src={logoDeezer} alt="" />
               </div>

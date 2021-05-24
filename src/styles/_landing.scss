@@ -9,7 +9,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-image: url('../img/fond7.jpg');
+  background-image: url('../img/fond5.jpg');
   background-position: center center;
   background-size: cover;
 
@@ -60,21 +60,20 @@
     height: 60px;
     padding: 10px 20px;
     margin: 20px;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.27);
+    border-radius: 50px;
     font-weight: 400;
     font-size: 1rem;
     background: $color-1;
     color: white;
     text-shadow: 0 0px 5px #00000057;
-    box-shadow: 0 0 40px #ffffffa8;
+    box-shadow: 0 0 40px #0000005e;
     transition: $transition-short;
     img {
       filter: drop-shadow(0 0 2px rgba(43, 43, 43, 0.617));
     }
     &:hover {
       background: $color-2;
-      box-shadow: 0 0 80px #ffffffa8;
+      box-shadow: 0 0 80px $color-2;
     }
   }
 }

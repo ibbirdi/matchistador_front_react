@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import matchistador from '../core/matchistador';
+import deezer from '../core/deezer';
 import logoMatchistador from '../img/logodegrade.png';
 import Flip from 'react-reveal/Flip';
 
 const Authdeezer = () => {
   const history = useHistory();
-  const [authError, setAuthError] = useState(true);
 
   useEffect(() => {
     let url = new URL(window.location.href);
@@ -14,7 +13,7 @@ const Authdeezer = () => {
     console.log('bonjour');
     const deezerAuth = async () => {
       console.log('AUTH EN COURS');
-      await matchistador.deezer_authProcess(deezerAuthCode);
+      await deezer.authProcess(deezerAuthCode);
       history.push('/home');
     };
     if (deezerAuthCode) {

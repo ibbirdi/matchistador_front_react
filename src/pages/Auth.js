@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import matchistador from '../core/matchistador';
+import spotify from '../core/spotify';
 import logoMatchistador from '../img/logodegrade.png';
 import Flip from 'react-reveal/Flip';
 
@@ -13,7 +13,7 @@ const Auth = () => {
     console.log('bonjour');
     const spotifyAuth = async () => {
       console.log('AUTH EN COURS');
-      await matchistador.spotify_authProcess(spotifyAuthCode);
+      await spotify.authProcess(spotifyAuthCode);
       history.push('/home');
     };
     if (spotifyAuthCode) {

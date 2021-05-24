@@ -8,7 +8,7 @@ const initialState = {
   filteredMatchs: [],
   userInfo: {},
   home: {
-    title: 'Chargement...',
+    title: '',
     syncBtnText: 'Synchroniser',
     syncBtnState: '',
   },
