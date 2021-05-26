@@ -142,8 +142,8 @@
       margin-right: 10px;
     }
     &:hover {
-      background: $color-2;
-      box-shadow: 0 0 80px #ffffffa8;
+      color: $color-2;
+      transform: scale(1.1);
     }
   }
 }
