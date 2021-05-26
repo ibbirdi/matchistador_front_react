@@ -49,16 +49,18 @@ const reducer = (state = initialState, action) => {
     case GET_MY_DATA_START:
       return {
         ...state,
+        matchs: [],
+        filteredMatchs: [],
         matchBoard: { ...state.matchBoard, isLoading: true },
       };
     case GET_MY_DATA_SUCCESS:
       return {
         ...state,
+        matchBoard: { ...state.matchBoard, isLoading: false },
         tracks: action.tracks,
         matchs: action.matchs,
         dataIsSync: true,
         filteredMatchs: action.matchs,
-        matchBoard: { ...state.matchBoard, isLoading: false },
       };
     case DISCONNECT:
       return {
