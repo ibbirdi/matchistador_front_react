@@ -1,19 +1,23 @@
-import matchistador from '../core/matchistador';
-import { GET_USER_INFO } from './actions';
+import {
+  GET_USER_INFO_SUCCESS,
+  GET_MY_DATA_START,
+  GET_MY_DATA_SUCCESS,
+  DISCONNECT,
+} from './actions';
 
 const initialState = {
   isAuth: false,
   tracks: [],
   matchs: [],
   filteredMatchs: [],
-  userInfo: {},
+  userInfo: { name: 'Chargement' },
   home: {
-    title: '',
+    title: 'Chargement...',
     syncBtnText: 'Synchroniser',
     syncBtnState: '',
   },
   matchBoard: {
-    isLoading: true,
+    isLoading: false,
     filterInput: '',
     matchedTracks: [],
     matchName: '',
@@ -30,12 +34,29 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    //TODO: commencer par créer GET_USER_INFO_SUCCESS et _ERROR
-    case GET_USER_INFO:
-      const userInfo = { name: 'youpi' };
+    case GET_USER_INFO_SUCCESS:
       return {
         ...state,
-        userInfo: userInfo,
+        userInfo: action.userInfo,
+        isAuth: true,
+        home: { ...state.home, title: 'Bonjour ' + action.userInfo.name },
+      };
+    case GET_MY_DATA_START:
+      return {
+        ...state,
+        matchBoard: { ...state.matchBoard, isLoading: true },
+      };
+    case GET_MY_DATA_SUCCESS:
+      return {
+        ...state,
+        tracks: action.tracks,
+        matchs: action.matchs,
+        matchBoard: { ...state.matchBoard, isLoading: false },
+      };
+    case DISCONNECT:
+      return {
+        ...state,
+        isAuth: false,
       };
     default:
       return state;

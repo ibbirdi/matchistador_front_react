@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import matchistador from '../core/matchistador';
 import Tracksboard from './Tracksboard';
 import iconM from '../img/logo-m.png';
@@ -8,7 +10,13 @@ import logoDeezer from '../img/deezerWhite.png';
 import Flip from 'react-reveal/Flip';
 import Fade from 'react-reveal/Fade';
 
-const Matchboard = ({ matchs, loading }) => {
+const mapStateToProps = (state) => ({
+  state: state,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+const Matchboard = ({ state }) => {
   const [matchedTracks, setMatchedTracks] = useState([]);
   const [matchName, setMatchName] = useState('');
   const [matchsToDisplay, setMatchsToDisplay] = useState([]);
@@ -25,13 +33,13 @@ const Matchboard = ({ matchs, loading }) => {
     console.log(tracks);
   };
 
-  const searchMatch = (e) => {
-    const filteredMatchs = matchs.filter((match) =>
-      match.matchuser.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setMatchsToDisplay(filteredMatchs);
-    console.log(filteredMatchs);
-  };
+  // const searchMatch = (e) => {
+  //   const filteredMatchs = matchs.filter((match) =>
+  //     match.matchuser.name.toLowerCase().includes(e.target.value.toLowerCase())
+  //   );
+  //   setMatchsToDisplay(filteredMatchs);
+  //   console.log(filteredMatchs);
+  // };
 
   const makeMatchsPlaylist = async () => {
     await matchistador.makePlaylist(
@@ -49,14 +57,14 @@ const Matchboard = ({ matchs, loading }) => {
   useEffect(() => {
     if (localStorage.getItem('platform') === 'spotify')
       setAddPlaylistBtnIsActive(true);
-    if (matchsDisplayAll === false) {
-      const filteredMatchs = matchs.filter((match) => match.score > 0);
-      console.log(matchsToDisplay);
-      setMatchsToDisplay(filteredMatchs);
-    } else {
-      setMatchsToDisplay(matchs);
-    }
-  }, [matchs]);
+    // if (matchsDisplayAll === false) {
+    //   const filteredMatchs = matchs.filter((match) => match.score > 0);
+    //   console.log(matchsToDisplay);
+    //   setMatchsToDisplay(filteredMatchs);
+    // } else {
+    //   setMatchsToDisplay(matchs);
+    // }
+  }, []);
 
   return (
     <div className="Matchboard">
@@ -67,12 +75,12 @@ const Matchboard = ({ matchs, loading }) => {
             className="searchInput"
             type="text"
             placeholder="Rechercher..."
-            onChange={searchMatch}
+            onChange={null}
           />
         </Flip>
       </div>
-      <Fade>{loading && <Loading />}</Fade>
-      {matchsToDisplay.map((match) => {
+      <Fade>{state.matchBoard.isLoading && <Loading />}</Fade>
+      {state.matchs.map((match) => {
         return (
           <Flip top cascade key={match.matchuser.spotify_login}>
             <div
@@ -118,4 +126,4 @@ const Matchboard = ({ matchs, loading }) => {
   );
 };
 
-export default Matchboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Matchboard);

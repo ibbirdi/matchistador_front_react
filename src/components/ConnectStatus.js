@@ -9,14 +9,8 @@ const mapStateToProps = (state) => ({
   userInfo: state.userInfo,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getUserInfo: () => dispatch(getUserInfo()),
-});
-
-const ConnectStatus = ({ userInfo, getUserInfo }) => {
-  useEffect(() => {
-    getUserInfo();
-  }, []);
+const ConnectStatus = ({ userInfo }) => {
+  useEffect(() => {}, []);
   return (
     <div className="connectstatus">
       <Link to="/profil">
@@ -29,4 +23,4 @@ const ConnectStatus = ({ userInfo, getUserInfo }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConnectStatus);
+export default connect(mapStateToProps)(ConnectStatus);
