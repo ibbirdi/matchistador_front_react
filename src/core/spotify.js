@@ -160,13 +160,13 @@ const spotify = {
         });
         response = await response.json();
 
-        let syncBtn = document.getElementById('sync-btn');
+        // let syncBtn = document.getElementById('sync-btn');
         let avancement = Math.floor(
           (result.length / (response.total + topTracksLength)) * 100
         );
-        syncBtn.setAttribute('disabled', 'disabled');
-        syncBtn.textContent = avancement + '%';
-        syncBtn.classList.add('wait');
+        // syncBtn.setAttribute('disabled', 'disabled');
+        // syncBtn.textContent = avancement + '%';
+        // syncBtn.classList.add('wait');
 
         console.log(avancement + '%');
 
@@ -186,7 +186,7 @@ const spotify = {
         if (response.next) {
           return loop(response.next);
         } else {
-          syncBtn.textContent = `Synchronisation...`;
+          // syncBtn.textContent = `Synchronisation...`;
 
           console.log(
             'NOMBRE DE TRACKS ENVOYES DANS LE POST : ',

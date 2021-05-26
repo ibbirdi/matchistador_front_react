@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Matchboard from '../components/Matchboard';
 import matchistador from '../core/matchistador';
 import { connect } from 'react-redux';
-import { getUserInfo, getMyData } from '../store/actions';
+import { getUserInfo, getMyData, sync } from '../store/actions';
 
 import Fade from 'react-reveal/Fade';
 
@@ -15,49 +15,13 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getUserInfo: () => dispatch(getUserInfo()),
   getMyData: () => dispatch(getMyData()),
+  sync: () => dispatch(sync()),
 });
 
-const Home = ({ state, getUserInfo, getMyData }) => {
-  const syncThenReload = async () => {
-    // try {
-    //   let syncBtn = document.getElementById('sync-btn');
-    //   setTitle('Synchronisation en cours...');
-    //   await matchistador.getMyTracks();
-    //   const tracks = await matchistador.showMyTracks();
-    //   const matchs = await matchistador.showMyMatchs();
-    //   setFilteredMatchs(matchs.filter((match) => match.score > 0));
-    //   setTitle('Terminé !');
-    //   syncBtn.textContent = 'Terminé !';
-    //   syncBtn.classList.toggle('wait');
-    //   syncBtn.classList.toggle('success');
-    //   setTimeout(() => {
-    //     setTitle('TODO');
-    //   }, 2000);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-  };
-
+const Home = ({ state, getUserInfo, getMyData, sync }) => {
   useEffect(() => {
     getUserInfo();
     getMyData();
-    // const signInAndSyncView = async () => {
-    //   setTitle('Chargement...');
-    //   const info = await matchistador.getMyInfoFromMatchistador();
-    //   if (!info) {
-    //     setIsAuth(false);
-    //     console.log('pas auth');
-    //   }
-
-    //   setUsername(info.name);
-    //   setTitle('Hello ' + info.name);
-    //   console.log('info!');
-    //   setRunOnce(false);
-    //   setLoading(false);
-    // };
-    // if (runOnce) {
-    //   signInAndSyncView();
-    // }
   }, []);
 
   return (
@@ -72,7 +36,9 @@ const Home = ({ state, getUserInfo, getMyData }) => {
             <Dashboard
               tracksCount={state.tracks.length}
               matchsCount={state.matchs.length}
-              btnFunction={syncThenReload}
+              btnFunction={sync}
+              btnText={state.home.syncBtnText}
+              btnIsActive={state.home.syncBtnIsActive}
             />
             <Matchboard />
           </>

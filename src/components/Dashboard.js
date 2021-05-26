@@ -1,8 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { sync } from '../store/actions';
+
 import iconMusic from '../img/play-button.png';
 import iconMatch from '../img/match.png';
 import Fade from 'react-reveal/Fade';
-const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
+
+const mapStateToProps = (state) => ({
+  tracks: state.tracks,
+  matchs: state.matchs,
+  syncBtnText: state.home.syncBtnText,
+  syncBtnIsActive: state.home.syncBtnIsActive,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  sync: () => dispatch(sync()),
+});
+
+const Dashboard = ({ tracks, matchs, sync, syncBtnText, syncBtnIsActive }) => {
   return (
     <Fade>
       <div className="Dashboard">
@@ -11,15 +26,20 @@ const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
             <img src={iconMusic} alt="" />
             <div className="item-desc--container">
               <div className="item-title">Ma musique</div>
-              <Fade spy={tracksCount}>
+              <Fade spy={tracks}>
                 <div className="item-desc">
-                  {`${tracksCount} titres` || 'Aucun titre synchronisé'}
+                  {`${tracks.length} titres` || 'Aucun titre synchronisé'}
                 </div>
               </Fade>
             </div>
           </div>
-          <button id="sync-btn" className="button" onClick={btnFunction}>
-            Synchroniser
+          <button
+            id="sync-btn"
+            className={syncBtnIsActive ? 'button' : 'button wait'}
+            onClick={sync}
+            disabled={!syncBtnIsActive}
+          >
+            {syncBtnText}
           </button>
         </div>
         <div className="item-row">
@@ -27,8 +47,8 @@ const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
             <img src={iconMatch} alt="" />
             <div className="item-desc--container">
               <div className="item-title">Mes Matchs</div>
-              <Fade spy={matchsCount}>
-                <div className="item-desc">{`${matchsCount} Matchs`}</div>
+              <Fade spy={matchs}>
+                <div className="item-desc">{`${matchs.length} Matchs`}</div>
               </Fade>
             </div>
           </div>
@@ -38,4 +58,4 @@ const Dashboard = ({ tracksCount, matchsCount, btnFunction }) => {
   );
 };
 
-export default Dashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

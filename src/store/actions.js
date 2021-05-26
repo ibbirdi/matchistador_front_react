@@ -9,7 +9,12 @@ export const GET_MY_MATCHS = 'GET_MY_MATCHS';
 export const SET_ISAUTH = 'SET_ISAUTH';
 export const DISCONNECT = 'DISCONNECT';
 
+//MATCHISTADOR
+export const SYNC_START = 'SYNC_START';
+export const SYNC_SUCCESS = 'SYNC_SUCCESS';
+
 //MATCHBOARD
+export const CHANGE_FILTER_INPUT_VALUE = 'CHANGE_FILTER_INPUT_VALUE';
 export const FILTER_MATCHS_BY_STR = 'FILTER_MATCHS_BY_STR';
 export const FILTER_MATCHS_BY_SCORE = 'FILTER_MATCHS_BY_SCORE';
 
@@ -67,8 +72,24 @@ export const getMyDataSuccess = (tracks, matchs) => ({
   matchs,
 });
 
+export const sync = () => {
+  return async (dispatch) => {
+    dispatch(syncStart());
+    await matchistador.getMyTracks();
+    dispatch(syncSuccess());
+  };
+};
+
+export const syncStart = () => ({ type: SYNC_START });
+export const syncSuccess = () => ({ type: SYNC_SUCCESS });
+
 export const getMyMatchs = () => ({ type: GET_MY_MATCHS });
 export const setIsAuth = (bool) => ({ type: SET_ISAUTH, isAuth: bool });
+
+export const changeFilterInputValue = (newValue) => ({
+  type: CHANGE_FILTER_INPUT_VALUE,
+  newValue,
+});
 
 export const filterMatchsByStr = (filter) => ({
   type: FILTER_MATCHS_BY_STR,

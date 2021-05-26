@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-
+import { changeFilterInputValue } from '../store/actions';
 import matchistador from '../core/matchistador';
 import Tracksboard from './Tracksboard';
 import iconM from '../img/logo-m.png';
@@ -14,13 +14,14 @@ const mapStateToProps = (state) => ({
   state: state,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  changeFilterInputValue: (e) =>
+    dispatch(changeFilterInputValue(e.target.value)),
+});
 
-const Matchboard = ({ state }) => {
+const Matchboard = ({ state, changeFilterInputValue }) => {
   const [matchedTracks, setMatchedTracks] = useState([]);
   const [matchName, setMatchName] = useState('');
-  const [matchsToDisplay, setMatchsToDisplay] = useState([]);
-  const [matchsDisplayAll, setMatchsDisplayAll] = useState(false);
   const [addPlaylistMessage, setAddPlaylistMessage] = useState('');
   const [addPlaylistBtnIsActive, setAddPlaylistBtnIsActive] = useState(false);
 
@@ -32,14 +33,6 @@ const Matchboard = ({ state }) => {
     setMatchName(matchname);
     console.log(tracks);
   };
-
-  // const searchMatch = (e) => {
-  //   const filteredMatchs = matchs.filter((match) =>
-  //     match.matchuser.name.toLowerCase().includes(e.target.value.toLowerCase())
-  //   );
-  //   setMatchsToDisplay(filteredMatchs);
-  //   console.log(filteredMatchs);
-  // };
 
   const makeMatchsPlaylist = async () => {
     await matchistador.makePlaylist(
@@ -75,12 +68,12 @@ const Matchboard = ({ state }) => {
             className="searchInput"
             type="text"
             placeholder="Rechercher..."
-            onChange={null}
+            onChange={changeFilterInputValue}
           />
         </Flip>
       </div>
       <Fade>{state.matchBoard.isLoading && <Loading />}</Fade>
-      {state.matchs.map((match) => {
+      {state.filteredMatchs.map((match) => {
         return (
           <Flip top cascade key={match.matchuser.spotify_login}>
             <div
