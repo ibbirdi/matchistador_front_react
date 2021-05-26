@@ -21,7 +21,9 @@ const mapDispatchToProps = (dispatch) => ({
 const Home = ({ state, getUserInfo, getMyData, sync }) => {
   useEffect(() => {
     getUserInfo();
-    getMyData();
+    if (!state.dataIsSync) {
+      getMyData();
+    }
   }, []);
 
   return (

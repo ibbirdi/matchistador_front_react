@@ -13,6 +13,7 @@ const initialState = {
   isAuth: true,
   tracks: [],
   matchs: [],
+  dataIsSync: false,
   filteredMatchs: [],
   userInfo: { name: 'Chargement' },
   home: {
@@ -55,6 +56,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         tracks: action.tracks,
         matchs: action.matchs,
+        dataIsSync: true,
         filteredMatchs: action.matchs,
         matchBoard: { ...state.matchBoard, isLoading: false },
       };
