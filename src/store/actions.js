@@ -77,6 +77,7 @@ export const sync = () => {
     dispatch(syncStart());
     await matchistador.getMyTracks();
     dispatch(syncSuccess());
+    dispatch(getMyData());
   };
 };
 
