@@ -5,6 +5,7 @@ import { sync } from '../store/actions';
 import iconMusic from '../img/play-button.png';
 import iconMatch from '../img/match.png';
 import barsSvg from '../img/bars.svg';
+import checkSvg from '../img/check-mark.svg';
 
 import Fade from 'react-reveal/Fade';
 
@@ -49,7 +50,12 @@ const Dashboard = ({
             onClick={sync}
             disabled={!syncBtnIsActive}
           >
-            {syncBtnLoadingAnimation && <img src={barsSvg} alt="" />}
+            {syncBtnLoadingAnimation === 'loading' && (
+              <img src={barsSvg} alt="" />
+            )}
+            {syncBtnLoadingAnimation === 'complete' && (
+              <img src={checkSvg} alt="" />
+            )}
             {syncBtnText}
           </button>
         </div>

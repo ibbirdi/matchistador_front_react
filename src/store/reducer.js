@@ -25,7 +25,7 @@ const initialState = {
     title: 'Chargement...',
     syncBtnText: 'Synchroniser',
     syncBtnIsActive: true,
-    syncBtnLoadingAnimation: false,
+    syncBtnLoadingAnimation: '',
   },
   matchboard: {
     isLoading: false,
@@ -92,8 +92,8 @@ const reducer = (state = initialState, action) => {
         home: {
           ...state.home,
           title: 'Veuillez patienter...',
-          syncBtnText: 'Synchronisation...',
-          syncBtnLoadingAnimation: true,
+          syncBtnText: 'Synchronisation',
+          syncBtnLoadingAnimation: 'loading',
           syncBtnIsActive: false,
         },
       };
@@ -105,7 +105,7 @@ const reducer = (state = initialState, action) => {
           title: 'Bonjour ' + state.userInfo.name,
           syncBtnText: 'Terminé',
           syncBtnIsActive: false,
-          syncBtnLoadingAnimation: false,
+          syncBtnLoadingAnimation: 'complete',
         },
       };
     case CHANGE_FILTER_INPUT_VALUE:
