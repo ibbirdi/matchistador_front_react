@@ -136,9 +136,9 @@ export const setTracksboardAddplaylistBtnActive = (bool) => ({
 export const getMatchedTracks = (matchName, matchLogin) => {
   return async (dispatch) => {
     console.log('getMatchedTracks');
+    dispatch(showTracksboard());
     const tracks = await matchistador.getMatchedTracks(matchLogin);
     dispatch(setTracksboardContent(matchName, matchLogin, tracks));
-    dispatch(showTracksboard());
   };
 };
 

@@ -39,6 +39,7 @@ const initialState = {
   },
   tracksboard: {
     isActive: false,
+    isLoading: false,
     matchName: '',
     matchLogin: '',
     matchedTracks: [],
@@ -144,6 +145,7 @@ const reducer = (state = initialState, action) => {
           matchedTracks: action.tracks,
           matchName: action.matchName,
           matchLogin: action.matchLogin,
+          isLoading: false,
         },
       };
     case SHOW_TRACKSBOARD:
@@ -152,6 +154,7 @@ const reducer = (state = initialState, action) => {
         tracksboard: {
           ...state.tracksboard,
           isActive: true,
+          isLoading: true,
           addPlaylistBtnIsActive: true,
           addPlaylistMessage: '',
         },
@@ -162,6 +165,7 @@ const reducer = (state = initialState, action) => {
         tracksboard: {
           ...state.tracksboard,
           isActive: false,
+          isLoading: false,
         },
       };
     default:
