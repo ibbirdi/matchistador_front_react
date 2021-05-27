@@ -23,6 +23,7 @@ const Home = ({ state, getUserInfo, getMyData, sync }) => {
     getUserInfo();
     if (!state.dataIsSync) {
       getMyData();
+      sync();
     }
   }, []);
 
