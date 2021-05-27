@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { hideTracksboard, createPlaylist } from '../store/actions';
 import iconM from '../img/logo-m.png';
@@ -33,7 +34,7 @@ const Tracksboard = ({
   hideTracksboard,
 }) => {
   return (
-    <div className={isActive ? 'Tracksboard' : 'Tracksboard hidden'}>
+    <div className={classNames('Tracksboard', { hidden: !isActive })}>
       <div className="trackslist">
         {isLoading ? (
           <div className="trackslist--loading">

@@ -36,7 +36,6 @@ const Profile = () => {
   return (
     <Fade>
       <div>
-        <Header username={userInfo.name} />
         <div className="main-container">
           <Edit />
           <h2>Profil</h2>

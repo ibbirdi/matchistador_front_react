@@ -7,14 +7,14 @@ function Header({ username }) {
   return (
     <div className="Header">
       <nav className="" role="navigation" aria-label="main navigation">
-        <Fade left big>
+        <Fade>
           <div className="logo">
             <Link className="navbar-item" to="/">
               <img src={logo} alt="logo" />
             </Link>
           </div>
         </Fade>
-        <Fade right big>
+        <Fade right>
           <div className="connected-user">
             <ConnectStatus username={username} />
           </div>

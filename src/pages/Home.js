@@ -23,13 +23,12 @@ const Home = ({ state, getUserInfo, getMyData, sync }) => {
     getUserInfo();
     if (!state.dataIsSync) {
       getMyData();
-      sync();
+      // sync();
     }
   }, []);
 
   return (
     <div className="Home">
-      <Header />
       <div className="main-container">
         {state.isAuth ? (
           <>

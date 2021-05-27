@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { sync } from '../store/actions';
 
@@ -46,7 +47,10 @@ const Dashboard = ({
           </div>
           <button
             id="sync-btn"
-            className={syncBtnIsActive ? 'button' : 'button wait'}
+            className={classNames('button', {
+              wait: syncBtnLoadingAnimation === 'loading',
+              success: syncBtnLoadingAnimation === 'complete',
+            })}
             onClick={sync}
             disabled={!syncBtnIsActive}
           >
