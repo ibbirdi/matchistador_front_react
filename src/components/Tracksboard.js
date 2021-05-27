@@ -37,9 +37,7 @@ const Tracksboard = ({
     <div className={classNames('Tracksboard', { hidden: !isActive })}>
       <div className="trackslist">
         {isLoading ? (
-          <div className="trackslist--loading">
-            <img src={barsSvg} alt="Chargement" />
-          </div>
+          <img src={barsSvg} alt="Chargement" />
         ) : (
           <>
             <Flip top>
