@@ -179,7 +179,9 @@ const spotify = {
             popularity: item.track.popularity,
             spotify_id: item.track.id,
             spotify_url: item.track.uri,
-            spotify_img_url: item.track.album.images[1].url,
+            spotify_img_url: item.track.album.images[1]
+              ? item.track.album.images[1].url
+              : '',
             spotify_preview_url: item.track.preview_url,
           });
         });
