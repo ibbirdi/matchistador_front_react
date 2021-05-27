@@ -27,10 +27,13 @@ export const CHANGE_USERNAME = 'CHANGE_USERNAME';
 export const SET_USERNAME_RESPONSE_MESSAGE = 'SET_USERNAME_RESPONSE_MESSAGE';
 
 //TRACKSBOARD
+export const SHOW_TRACKSBOARD = 'SHOW_TRACKSBOARD';
+export const HIDE_TRACKSBOARD = 'HIDE_TRACKSBOARD';
 export const SET_TRACKSBOARD_ADDPLAYLIST_MESSAGE =
   'SET_TRACKSBOARD_ADDPLAYLIST_MESSAGE';
 export const SET_TRACKSBOARD_ADDPLAYLISTBTN_ACTIVE =
   'SET_TRACKSBOARD_ADDPLAYLISTBTN_ACTIVE';
+export const SET_TRACKSBOARD_CONTENT = 'SET_TRACKSBOARD_CONTENT';
 
 export const disconnect = () => ({ type: DISCONNECT });
 
@@ -113,6 +116,13 @@ export const setUsernameResponseMessage = (response) => ({
   response: response,
 });
 
+export const showTracksboard = () => ({
+  type: SHOW_TRACKSBOARD,
+});
+export const hideTracksboard = () => ({
+  type: HIDE_TRACKSBOARD,
+});
+
 export const setTracksboardAddplaylistMessage = (message) => ({
   type: SET_TRACKSBOARD_ADDPLAYLIST_MESSAGE,
   message: message,
@@ -122,3 +132,39 @@ export const setTracksboardAddplaylistBtnActive = (bool) => ({
   type: SET_TRACKSBOARD_ADDPLAYLISTBTN_ACTIVE,
   isActive: bool,
 });
+
+export const getMatchedTracks = (matchName, matchLogin) => {
+  return async (dispatch) => {
+    console.log('getMatchedTracks');
+    const tracks = await matchistador.getMatchedTracks(matchLogin);
+    dispatch(setTracksboardContent(matchName, matchLogin, tracks));
+    dispatch(showTracksboard());
+  };
+};
+
+export const setTracksboardContent = (matchName, matchLogin, tracks) => ({
+  type: SET_TRACKSBOARD_CONTENT,
+  matchName,
+  matchLogin,
+  tracks,
+});
+
+export const createPlaylist = () => {
+  return async (dispatch, getState) => {
+    console.log('createPlaylist');
+    dispatch(setTracksboardAddplaylistBtnActive(false));
+    dispatch(setTracksboardAddplaylistMessage('Veuillez patienter...'));
+    const matchName = getState().tracksboard.matchName;
+    const matchedTracks = getState().tracksboard.matchedTracks;
+    await matchistador.makePlaylist(
+      `Matchistador avec ${matchName}`,
+      'Playlist générée automatiquement par Matchistador en fonction de vos titres communs',
+      matchedTracks
+    );
+    dispatch(
+      setTracksboardAddplaylistMessage(
+        'Terminé, playlist créée dans votre bitliothèque musicale'
+      )
+    );
+  };
+};

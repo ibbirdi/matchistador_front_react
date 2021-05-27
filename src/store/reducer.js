@@ -7,6 +7,11 @@ import {
   SYNC_START,
   SYNC_SUCCESS,
   CHANGE_FILTER_INPUT_VALUE,
+  SET_TRACKSBOARD_ADDPLAYLIST_MESSAGE,
+  SET_TRACKSBOARD_ADDPLAYLISTBTN_ACTIVE,
+  SET_TRACKSBOARD_CONTENT,
+  SHOW_TRACKSBOARD,
+  HIDE_TRACKSBOARD,
 } from './actions';
 
 const initialState = {
@@ -21,19 +26,23 @@ const initialState = {
     syncBtnText: 'Synchroniser',
     syncBtnIsActive: true,
   },
-  matchBoard: {
+  matchboard: {
     isLoading: false,
     filterInputValue: '',
-    matchedTracks: [],
-    matchName: '',
     matchsToDisplay: [],
     matchsDisplayAll: false,
-    addPlaylistMessage: '',
-    addPlaylistBtnIsActive: true,
   },
   profile: {
     userNameInput: '',
     message: '',
+  },
+  tracksboard: {
+    isActive: false,
+    matchName: '',
+    matchLogin: '',
+    matchedTracks: [],
+    addPlaylistMessage: '',
+    addPlaylistBtnIsActive: true,
   },
 };
 
@@ -106,6 +115,50 @@ const reducer = (state = initialState, action) => {
         matchboard: {
           ...state.matchboard,
           filterInputValue: action.newValue,
+        },
+      };
+    case SET_TRACKSBOARD_ADDPLAYLIST_MESSAGE:
+      return {
+        ...state,
+        tracksboard: {
+          ...state.tracksboard,
+          addPlaylistMessage: action.message,
+        },
+      };
+    case SET_TRACKSBOARD_ADDPLAYLISTBTN_ACTIVE:
+      return {
+        ...state,
+        tracksboard: {
+          ...state.tracksboard,
+          addPlaylistBtnIsActive: action.bool,
+        },
+      };
+    case SET_TRACKSBOARD_CONTENT:
+      return {
+        ...state,
+        tracksboard: {
+          ...state.tracksboard,
+          matchedTracks: action.tracks,
+          matchName: action.matchName,
+          matchLogin: action.matchLogin,
+        },
+      };
+    case SHOW_TRACKSBOARD:
+      return {
+        ...state,
+        tracksboard: {
+          ...state.tracksboard,
+          isActive: true,
+          addPlaylistBtnIsActive: true,
+          addPlaylistMessage: '',
+        },
+      };
+    case HIDE_TRACKSBOARD:
+      return {
+        ...state,
+        tracksboard: {
+          ...state.tracksboard,
+          isActive: false,
         },
       };
     default:

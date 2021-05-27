@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Dashboard from '../components/Dashboard';
 import Header from '../components/Header';
 import Matchboard from '../components/Matchboard';
-import matchistador from '../core/matchistador';
+import Tracksboard from '../components/Tracksboard';
 import { connect } from 'react-redux';
 import { getUserInfo, getMyData, sync } from '../store/actions';
 
@@ -43,6 +43,7 @@ const Home = ({ state, getUserInfo, getMyData, sync }) => {
               btnIsActive={state.home.syncBtnIsActive}
             />
             <Matchboard />
+            <Tracksboard />
           </>
         ) : (
           <>

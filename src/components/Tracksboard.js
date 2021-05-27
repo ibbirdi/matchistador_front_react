@@ -1,23 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { hideTracksboard, createPlaylist } from '../store/actions';
 import iconM from '../img/logo-m.png';
 import iconCancel from '../img/cancel-white.png';
 import Flip from 'react-reveal/Flip';
 import Spin from 'react-reveal/Spin';
 import plusIcon from '../img/plus.png';
 
-const closeTracksboard = () => {
-  const tracksboard = document.getElementById('tracksboard');
-  tracksboard.classList.add('hidden');
-};
+const mapStateToProps = (state) => ({
+  matchName: state.tracksboard.matchName,
+  matchedTracks: state.tracksboard.matchedTracks,
+  addPlaylistMessage: state.tracksboard.addPlaylistMessage,
+  addPlaylistBtnIsActive: state.tracksboard.addPlaylistBtnIsActive,
+  isActive: state.tracksboard.isActive,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  hideTracksboard: () => dispatch(hideTracksboard()),
+  createPlaylist: () => dispatch(createPlaylist()),
+});
+
 const Tracksboard = ({
   matchName,
   matchedTracks,
-  addPlaylistFunc,
+  createPlaylist,
   addPlaylistMessage,
   addPlaylistBtnIsActive,
+  isActive,
+  hideTracksboard,
 }) => {
   return (
-    <div className="Tracksboard hidden" id="tracksboard">
+    <div className={isActive ? 'Tracksboard' : 'Tracksboard hidden'}>
       <div className="trackslist">
         <Flip top>
           <div className="tracksboard-title">
@@ -27,8 +40,8 @@ const Tracksboard = ({
             </div>
 
             <div className="subtitle">
-              {matchedTracks.length} titres en commun{' '}
-              <div className="closebtn" onClick={closeTracksboard}>
+              {matchedTracks.length} titres en commun
+              <div className="closebtn" onClick={hideTracksboard}>
                 <img src={iconCancel} alt="" />
               </div>
             </div>
@@ -38,14 +51,14 @@ const Tracksboard = ({
           <div>{addPlaylistMessage}</div>
         </Flip>
         {addPlaylistBtnIsActive && (
-          <div className="addbutton" onClick={addPlaylistFunc}>
+          <div className="addbutton" onClick={createPlaylist}>
             <img src={plusIcon} alt="plus" /> Créer la playlist
           </div>
         )}
         {matchedTracks.map((track) => {
           return (
-            <Flip top cascade>
-              <div key={track.id} className="track-container">
+            <Flip top cascade key={track.id}>
+              <div className="track-container">
                 <div className="artist">{track.artist}</div>
                 <div className="track">
                   <div>{track.track}</div>
@@ -64,4 +77,4 @@ const Tracksboard = ({
   );
 };
 
-export default Tracksboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Tracksboard);

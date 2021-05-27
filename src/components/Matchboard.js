@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { changeFilterInputValue } from '../store/actions';
-import matchistador from '../core/matchistador';
-import Tracksboard from './Tracksboard';
+import { changeFilterInputValue, getMatchedTracks } from '../store/actions';
 import iconM from '../img/logo-m.png';
 import Loading from './Loading';
 import logoSpotify from '../img/spotifyWhite.png';
@@ -11,54 +9,23 @@ import Flip from 'react-reveal/Flip';
 import Fade from 'react-reveal/Fade';
 
 const mapStateToProps = (state) => ({
-  state: state,
+  isLoading: state.matchboard.isLoading,
+  filteredMatchs: state.filteredMatchs,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeFilterInputValue: (e) =>
     dispatch(changeFilterInputValue(e.target.value)),
+  getMatchedTracks: (matchName, matchLogin) =>
+    dispatch(getMatchedTracks(matchName, matchLogin)),
 });
 
-const Matchboard = ({ state, changeFilterInputValue }) => {
-  const [matchedTracks, setMatchedTracks] = useState([]);
-  const [matchName, setMatchName] = useState('');
-  const [addPlaylistMessage, setAddPlaylistMessage] = useState('');
-  const [addPlaylistBtnIsActive, setAddPlaylistBtnIsActive] = useState(false);
-
-  const showMatchedTracks = async (matchname, matchuser) => {
-    let tracks = await matchistador.getMatchedTracks(matchuser);
-    const tracksboard = document.getElementById('tracksboard');
-    tracksboard.classList.remove('hidden');
-    setMatchedTracks(tracks);
-    setMatchName(matchname);
-    console.log(tracks);
-  };
-
-  const makeMatchsPlaylist = async () => {
-    await matchistador.makePlaylist(
-      `Matchistador avec ${matchName}`,
-      'Playlist générée automatiquement par Matchistador en fonction de vos titres communs',
-      matchedTracks
-    );
-    setAddPlaylistMessage(
-      'Terminé, playlist créée dans votre bitliothèque musicale'
-    );
-
-    setAddPlaylistBtnIsActive(false);
-  };
-
-  useEffect(() => {
-    if (localStorage.getItem('platform') === 'spotify')
-      setAddPlaylistBtnIsActive(true);
-    // if (matchsDisplayAll === false) {
-    //   const filteredMatchs = matchs.filter((match) => match.score > 0);
-    //   console.log(matchsToDisplay);
-    //   setMatchsToDisplay(filteredMatchs);
-    // } else {
-    //   setMatchsToDisplay(matchs);
-    // }
-  }, []);
-
+const Matchboard = ({
+  isLoading,
+  filteredMatchs,
+  changeFilterInputValue,
+  getMatchedTracks,
+}) => {
   return (
     <div className="Matchboard">
       <div className="title-container">
@@ -72,14 +39,14 @@ const Matchboard = ({ state, changeFilterInputValue }) => {
           />
         </Flip>
       </div>
-      <Fade>{state.matchBoard.isLoading && <Loading />}</Fade>
-      {state.filteredMatchs.map((match) => {
+      <Fade>{isLoading && <Loading />}</Fade>
+      {filteredMatchs.map((match) => {
         return (
           <Flip top cascade key={match.matchuser.spotify_login}>
             <div
               className="item-row"
               onClick={() => {
-                showMatchedTracks(
+                getMatchedTracks(
                   match.matchuser.name,
                   match.matchuser.spotify_login
                 );
@@ -108,13 +75,6 @@ const Matchboard = ({ state, changeFilterInputValue }) => {
           </Flip>
         );
       })}
-      <Tracksboard
-        matchedTracks={matchedTracks}
-        matchName={matchName}
-        addPlaylistFunc={makeMatchsPlaylist}
-        addPlaylistMessage={addPlaylistMessage}
-        addPlaylistBtnIsActive={addPlaylistBtnIsActive}
-      />
     </div>
   );
 };
