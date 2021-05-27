@@ -4,6 +4,8 @@ import { sync } from '../store/actions';
 
 import iconMusic from '../img/play-button.png';
 import iconMatch from '../img/match.png';
+import barsSvg from '../img/bars.svg';
+
 import Fade from 'react-reveal/Fade';
 
 const mapStateToProps = (state) => ({
@@ -11,13 +13,21 @@ const mapStateToProps = (state) => ({
   matchs: state.matchs,
   syncBtnText: state.home.syncBtnText,
   syncBtnIsActive: state.home.syncBtnIsActive,
+  syncBtnLoadingAnimation: state.home.syncBtnLoadingAnimation,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   sync: () => dispatch(sync()),
 });
 
-const Dashboard = ({ tracks, matchs, sync, syncBtnText, syncBtnIsActive }) => {
+const Dashboard = ({
+  tracks,
+  matchs,
+  sync,
+  syncBtnText,
+  syncBtnIsActive,
+  syncBtnLoadingAnimation,
+}) => {
   return (
     <Fade>
       <div className="Dashboard">
@@ -39,6 +49,7 @@ const Dashboard = ({ tracks, matchs, sync, syncBtnText, syncBtnIsActive }) => {
             onClick={sync}
             disabled={!syncBtnIsActive}
           >
+            {syncBtnLoadingAnimation && <img src={barsSvg} alt="" />}
             {syncBtnText}
           </button>
         </div>

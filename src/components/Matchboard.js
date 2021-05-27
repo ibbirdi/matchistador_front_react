@@ -40,6 +40,7 @@ const Matchboard = ({
         </Flip>
       </div>
       <Fade>{isLoading && <Loading />}</Fade>
+
       {filteredMatchs.map((match) => {
         return (
           <Flip top cascade key={match.matchuser.spotify_login}>
@@ -58,7 +59,7 @@ const Matchboard = ({
                 </span>
 
                 <div className="item-title">
-                  {match.matchuser.name}{' '}
+                  {match.matchuser.name}
                   {match.matchuser.streaming_platform === 'spotify' && (
                     <img src={logoSpotify} alt="logo spotify" />
                   )}

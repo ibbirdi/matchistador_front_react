@@ -25,6 +25,7 @@ const initialState = {
     title: 'Chargement...',
     syncBtnText: 'Synchroniser',
     syncBtnIsActive: true,
+    syncBtnLoadingAnimation: false,
   },
   matchboard: {
     isLoading: false,
@@ -60,12 +61,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         matchs: [],
         filteredMatchs: [],
-        matchBoard: { ...state.matchBoard, isLoading: true },
+        matchboard: { ...state.matchBoard, isLoading: true },
       };
     case GET_MY_DATA_SUCCESS:
       return {
         ...state,
-        matchBoard: { ...state.matchBoard, isLoading: false },
+        matchboard: { ...state.matchboard, isLoading: false },
         tracks: action.tracks,
         matchs: action.matchs,
         dataIsSync: true,
@@ -91,6 +92,7 @@ const reducer = (state = initialState, action) => {
           ...state.home,
           title: 'Veuillez patienter...',
           syncBtnText: 'Synchronisation...',
+          syncBtnLoadingAnimation: true,
           syncBtnIsActive: false,
         },
       };
@@ -102,6 +104,7 @@ const reducer = (state = initialState, action) => {
           title: 'Bonjour ' + state.userInfo.name,
           syncBtnText: 'Terminé',
           syncBtnIsActive: false,
+          syncBtnLoadingAnimation: false,
         },
       };
     case CHANGE_FILTER_INPUT_VALUE:
