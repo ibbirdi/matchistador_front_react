@@ -35,54 +35,52 @@ const Tracksboard = ({
 }) => {
   return (
     <div className={classNames('Tracksboard', { hidden: !isActive })}>
-      <div className="trackslist">
-        {isLoading ? (
-          <img src={barsSvg} alt="Chargement" />
-        ) : (
-          <>
-            <Flip top>
-              <div className="tracksboard-title">
-                <div className="logo-m">
-                  <img src={iconM} alt="" />
-                  {matchName}
-                </div>
+      {isLoading ? (
+        <img src={barsSvg} alt="Chargement" />
+      ) : (
+        <div className="trackslist">
+          <Flip top>
+            <div className="tracksboard-title">
+              <div className="logo-m">
+                <img src={iconM} alt="" />
+                {matchName}
+              </div>
 
-                <div className="subtitle">
-                  {matchedTracks.length} titres en commun
-                  <div className="closebtn" onClick={hideTracksboard}>
-                    <img src={iconCancel} alt="" />
-                  </div>
+              <div className="subtitle">
+                {matchedTracks.length} titres en commun
+                <div className="closebtn" onClick={hideTracksboard}>
+                  <img src={iconCancel} alt="" />
                 </div>
               </div>
-            </Flip>
-            <Flip top spy={addPlaylistMessage}>
-              <div>{addPlaylistMessage}</div>
-            </Flip>
-            {addPlaylistBtnIsActive && (
-              <div className="addbutton" onClick={createPlaylist}>
-                <img src={plusIcon} alt="plus" /> Créer la playlist
-              </div>
-            )}
-            {matchedTracks.map((track) => {
-              return (
-                <Flip top cascade key={track.id}>
-                  <div className="track-container">
-                    <div className="artist">{track.artist}</div>
-                    <div className="track">
-                      <div>{track.track}</div>
-                      {track.spotify_img_url && (
-                        <Flip left>
-                          <img src={track.spotify_img_url} alt="" />
-                        </Flip>
-                      )}
-                    </div>
+            </div>
+          </Flip>
+          <Flip top spy={addPlaylistMessage}>
+            <div>{addPlaylistMessage}</div>
+          </Flip>
+          {addPlaylistBtnIsActive && (
+            <div className="addbutton" onClick={createPlaylist}>
+              <img src={plusIcon} alt="plus" /> Créer la playlist
+            </div>
+          )}
+          {matchedTracks.map((track) => {
+            return (
+              <Flip top cascade key={track.id}>
+                <div className="track-container">
+                  <div className="artist">{track.artist}</div>
+                  <div className="track">
+                    <div>{track.track}</div>
+                    {track.spotify_img_url && (
+                      <Flip left>
+                        <img src={track.spotify_img_url} alt="" />
+                      </Flip>
+                    )}
                   </div>
-                </Flip>
-              );
-            })}
-          </>
-        )}
-      </div>
+                </div>
+              </Flip>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
