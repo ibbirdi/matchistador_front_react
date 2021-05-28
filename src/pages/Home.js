@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Dashboard from '../components/Dashboard';
-import Header from '../components/Header';
 import Matchboard from '../components/Matchboard';
 import Tracksboard from '../components/Tracksboard';
 import { connect } from 'react-redux';

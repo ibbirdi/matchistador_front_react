@@ -11,6 +11,7 @@ import Fade from 'react-reveal/Fade';
 const mapStateToProps = (state) => ({
   isLoading: state.matchboard.isLoading,
   filteredMatchs: state.filteredMatchs,
+  filterInputValue: state.matchboard.filterInputValue,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -25,6 +26,7 @@ const Matchboard = ({
   filteredMatchs,
   changeFilterInputValue,
   getMatchedTracks,
+  filterInputValue,
 }) => {
   return (
     <div className="Matchboard">
@@ -36,6 +38,7 @@ const Matchboard = ({
             type="text"
             placeholder="Rechercher..."
             onChange={changeFilterInputValue}
+            value={filterInputValue}
           />
         </Flip>
       </div>

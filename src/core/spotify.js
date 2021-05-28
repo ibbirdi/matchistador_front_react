@@ -143,11 +143,11 @@ const spotify = {
       const topTracks_LT = await spotify.getMyTopTracks('long_term');
       const topTracks_MT = await spotify.getMyTopTracks('medium_term');
       const topTracks_ST = await spotify.getMyTopTracks('short_term');
-      let result = [];
-      result = result.concat(topTracks_LT, topTracks_MT, topTracks_ST);
+      let tracks = [];
+      tracks = tracks.concat(topTracks_LT, topTracks_MT, topTracks_ST);
 
-      console.log('top tracks RESULT :', result.length);
-      const topTracksLength = result.length;
+      console.log('top tracks RESULT :', tracks.length);
+      const topTracksLength = tracks.length;
       let fetchUrl = 'https://api.spotify.com/v1/me/tracks?limit=50';
 
       async function loop(url) {
@@ -162,7 +162,7 @@ const spotify = {
 
         // let syncBtn = document.getElementById('sync-btn');
         let avancement = Math.floor(
-          (result.length / (response.total + topTracksLength)) * 100
+          (tracks.length / (response.total + topTracksLength)) * 100
         );
         // syncBtn.setAttribute('disabled', 'disabled');
         // syncBtn.textContent = avancement + '%';
@@ -171,8 +171,8 @@ const spotify = {
         console.log(avancement + '%');
 
         response.items.forEach((item) => {
-          //ajoute dans [result] chaque track
-          result.push({
+          //ajoute dans [tracks] chaque track
+          tracks.push({
             artist: item.track.artists[0].name,
             track: item.track.name,
             album: item.track.album.name,
@@ -192,11 +192,11 @@ const spotify = {
 
           console.log(
             'NOMBRE DE TRACKS ENVOYES DANS LE POST : ',
-            result.length
+            tracks.length
           );
-          await matchistador.syncMyTracks(result);
+          await matchistador.syncMyTracks(tracks);
           await matchistador.syncMyMatchs();
-          return result.length;
+          return tracks.length;
         }
       }
       await loop(fetchUrl);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import matchistador from '../core/matchistador';
 
 import logoSpotify from '../img/spotifyWhite.png';

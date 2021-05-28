@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Card1 from '../components/Card1';
-import Header from '../components/Header';
+import { connect } from 'react-redux';
 import matchistador from '../core/matchistador';
 import Fade from 'react-reveal/Fade';
 import { SkipBack } from 'react-feather';
 import { Edit } from 'react-feather';
 import { Link } from 'react-router-dom';
+
+const mapStateToProps = (state) => ({
+  state: state,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
 
 const Profile = () => {
   const [userInfo, setUserinfo] = useState('Chargement...');
@@ -66,4 +72,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
