@@ -30,18 +30,32 @@ const Matchboard = ({
 }) => {
   return (
     <div className="Matchboard">
-      <div className="title-container">
-        <Flip top cascade>
-          <h3>Mes Matchs</h3>
-          <input
-            className="searchInput"
-            type="text"
-            placeholder="Rechercher..."
-            onChange={changeFilterInputValue}
-            value={filterInputValue}
-          />
-        </Flip>
-      </div>
+      <Flip top cascade>
+        {filteredMatchs.length != 0 ? (
+          <div className="title-container">
+            <h3>Mes Matchs</h3>
+            <input
+              className="searchInput"
+              type="text"
+              placeholder="Rechercher..."
+              onChange={changeFilterInputValue}
+              value={filterInputValue}
+            />
+          </div>
+        ) : (
+          <div className="title-container">
+            <h3>Aucun Match</h3>
+            <input
+              className="searchInput"
+              type="text"
+              placeholder="Rechercher..."
+              onChange={changeFilterInputValue}
+              value={filterInputValue}
+            />
+          </div>
+        )}
+      </Flip>
+
       <Fade>{isLoading && <Loading />}</Fade>
 
       {filteredMatchs.map((match) => {

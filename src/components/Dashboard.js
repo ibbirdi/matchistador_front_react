@@ -40,7 +40,9 @@ const Dashboard = ({
               <div className="item-title">Ma musique</div>
               <Fade spy={tracks}>
                 <div className="item-desc">
-                  {`${tracks.length} titres` || 'Aucun titre synchronisé'}
+                  {tracks.length !== 0
+                    ? `${tracks.length} titres`
+                    : 'Aucun titre synchronisé'}
                 </div>
               </Fade>
             </div>
