@@ -1,36 +1,27 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import spotify from '../core/spotify';
-import logoMatchistador from '../img/logodegrade.png';
-import Flip from 'react-reveal/Flip';
 
 const Auth = () => {
   const history = useHistory();
 
   useEffect(() => {
     let url = new URL(window.location.href);
-    const spotifyAuthCode = url.searchParams.get('code');
+    const token = url.searchParams.get('token');
+    const platform = url.searchParams.get('platform');
+
     console.log('bonjour');
-    const spotifyAuth = async () => {
-      console.log('AUTH EN COURS');
-      await spotify.authProcess(spotifyAuthCode);
+
+    if (token && platform) {
+      localStorage.setItem('access_token', token);
+      localStorage.setItem('platform', platform);
+      localStorage.setItem('isAuth', 'true');
       history.push('/home');
-    };
-    if (spotifyAuthCode) {
-      spotifyAuth();
+    } else {
+      console.log('Auth error');
     }
   }, [history]);
 
-  return (
-    <div className="landing-page">
-      <div className="connexion">
-        <img className="logo" src={logoMatchistador} alt="" />
-        <Flip top cascade>
-          <h1>Authentification...</h1>
-        </Flip>
-      </div>
-    </div>
-  );
+  return <></>;
 };
 
 export default Auth;

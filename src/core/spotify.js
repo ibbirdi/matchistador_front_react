@@ -4,7 +4,7 @@ import env_vars from './env_vars';
 const spotify = {
   clientId: 'cd47067c9a6743619eb7c24d6b1e4c3d',
   clientSecret: '3d65254b4e1d4f06ad6e77471fc7a613',
-  redirectUri: `${env_vars.front_url}/auth`,
+  redirectUri: `${env_vars.api_url}/spotifylogin`,
   authCode: '',
   scopes: [
     'ugc-image-upload',
@@ -40,15 +40,11 @@ const spotify = {
     return url;
   },
 
-  authProcess: async (code) => {
-    console.log(code);
-
+  authProcess: async (token) => {
     console.log('authProcess');
-
-    //récupération du token de spotify avec le code et des infos de l'user
-    await spotify.getToken(code);
-    if (localStorage.getItem('access_token')) {
-      await matchistador.registerMe();
+    if (token) {
+      localStorage.setItem('access_token', token);
+      await matchistador.syncMyInfo();
     }
   },
 
@@ -97,7 +93,7 @@ const spotify = {
     console.log('GMIFS', response);
     const data = {
       name: response.display_name,
-      spotify_login: response.id,
+      platform_login: response.id,
       email: response.email,
       streaming_platform: 'spotify',
       token: localStorage.getItem('access_token'),
@@ -121,7 +117,7 @@ const spotify = {
       response.items.forEach((item) => {
         result.push({
           artist: item.artists[0].name,
-          track: item.name,
+          name: item.name,
           album: item.album.name,
           popularity: item.popularity,
           spotify_id: item.id,
@@ -174,7 +170,7 @@ const spotify = {
           //ajoute dans [tracks] chaque track
           tracks.push({
             artist: item.track.artists[0].name,
-            track: item.track.name,
+            name: item.track.name,
             album: item.track.album.name,
             popularity: item.track.popularity,
             spotify_id: item.track.id,

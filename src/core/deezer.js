@@ -59,7 +59,7 @@ const deezer = {
     console.log('GMIFD', response);
     const data = {
       name: response.name,
-      spotify_login: response.name,
+      platform_login: response.name,
       email: response.email,
       streaming_platform: 'deezer',
       token: localStorage.getItem('access_token'),
@@ -92,7 +92,7 @@ const deezer = {
           //ajoute dans [result] chaque track
           result.push({
             artist: track.artist.name,
-            track: track.title,
+            name: track.title,
             album: track.album.title,
             popularity: Math.floor(track.rank / 10000),
             // deezer_id: track.id,

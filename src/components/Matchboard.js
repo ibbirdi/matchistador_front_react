@@ -60,13 +60,13 @@ const Matchboard = ({
 
       {filteredMatchs.map((match) => {
         return (
-          <Flip top cascade key={match.matchuser.spotify_login}>
+          <Flip top cascade key={match.matchuser.platform_login}>
             <div
               className="item-row"
               onClick={() => {
                 getMatchedTracks(
                   match.matchuser.name,
-                  match.matchuser.spotify_login
+                  match.matchuser.platform_login
                 );
               }}
             >

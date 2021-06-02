@@ -9,18 +9,17 @@ const matchistador = {
   }),
 
   registerMe: async () => {
-    const data = await matchistador.getMyInfoFromPlatformAuto();
-    console.log(data);
-
-    const response = await fetch(`${env_vars.api_url}/user`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    console.log(await response.json());
-    await matchistador.syncMyInfo();
+    // const data = await matchistador.getMyInfoFromPlatformAuto();
+    // console.log(data);
+    // const response = await fetch(`${env_vars.api_url}/user`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(data),
+    // });
+    // console.log(await response.json());
+    // await matchistador.syncMyInfo();
   },
 
   getMyInfoFromPlatformAuto: async () => {
@@ -38,11 +37,11 @@ const matchistador = {
 
   checkConnectionFromMatchistador: async () => {
     const response = await matchistador.getMyInfoFromPlatformAuto();
-    if (response.spotify_login && response.token) {
+    if (response.platform_login && response.token) {
       console.log('Connect status : ok', response.token);
     } else return;
     let userInfo = await fetch(
-      `${env_vars.api_url}/user/${response.spotify_login}/info?token=${response.token}`
+      `${env_vars.api_url}/user/${response.platform_login}/info?token=${response.token}`
     );
     userInfo = await userInfo.json();
     return userInfo;
@@ -51,7 +50,7 @@ const matchistador = {
   syncMyInfo: async () => {
     const userInfo = await matchistador.checkConnectionFromMatchistador();
     localStorage.setItem('connected_user_name', userInfo.name);
-    localStorage.setItem('connected_user_login', userInfo.spotify_login);
+    localStorage.setItem('connected_user_login', userInfo.platform_login);
     localStorage.setItem('isAuth', true);
     console.log('Infos: ', userInfo);
 
@@ -77,7 +76,7 @@ const matchistador = {
     const data = await matchistador.getMyInfoFromPlatformAuto();
 
     let response = await fetch(
-      `${env_vars.api_url}/user/${data.spotify_login}`,
+      `${env_vars.api_url}/user/${data.platform_login}`,
       {
         method: 'PATCH',
         headers: {
@@ -94,7 +93,7 @@ const matchistador = {
     const response = await matchistador.getMyInfoFromPlatformAuto();
 
     const result = await fetch(
-      `${env_vars.api_url}/user/${response.spotify_login}/tracks`
+      `${env_vars.api_url}/user/${response.platform_login}/tracks`
     );
     const tracks = await result.json();
     return tracks;
@@ -103,7 +102,7 @@ const matchistador = {
   showMyMatchs: async () => {
     const response = await matchistador.getMyInfoFromPlatformAuto();
     const result = await fetch(
-      `${env_vars.api_url}/user/${response.spotify_login}/matchs`
+      `${env_vars.api_url}/user/${response.platform_login}/matchs`
     );
     const matchs = await result.json();
     return matchs;
@@ -122,7 +121,7 @@ const matchistador = {
       // s'exécute à la fin de getMyTracks()
       const data = await matchistador.getMyInfoFromPlatformAuto();
       let response = await fetch(
-        `${env_vars.api_url}/user/${data.spotify_login}/tracks`,
+        `${env_vars.api_url}/user/${data.platform_login}/tracks`,
         {
           method: 'POST',
           headers: {
@@ -141,9 +140,9 @@ const matchistador = {
     try {
       // s'exécute à la fin de getMyTracks()
       const data = await matchistador.syncMyInfo();
-      const spotify_login = data.spotify_login;
+      const platform_login = data.platform_login;
       let response = await fetch(
-        `${env_vars.api_url}/user/${spotify_login}/syncmatchs`
+        `${env_vars.api_url}/user/${platform_login}/syncmatchs`
       );
       console.log(await response.json());
     } catch (error) {
@@ -175,7 +174,7 @@ const matchistador = {
         };
 
         let newPlaylist = await fetch(
-          `https://api.spotify.com/v1/users/${userInfo.spotify_login}/playlists`,
+          `https://api.spotify.com/v1/users/${userInfo.platform_login}/playlists`,
           {
             method: 'POST',
             headers: {
